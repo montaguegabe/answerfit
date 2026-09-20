@@ -82,6 +82,24 @@ function migrate(d: Database.Database) {
   `);
 
   d.exec(`
+    -- Captured answers from the Claude Code Stop hook (live capture loop).
+    CREATE TABLE IF NOT EXISTS feed (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      ts TEXT NOT NULL,
+      session_id TEXT,
+      user_id TEXT NOT NULL DEFAULT 'gabe',
+      answer_hash TEXT NOT NULL UNIQUE,
+      answer TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'pending',  -- pending | done | error
+      gaps_count INTEGER,
+      headline TEXT,
+      result TEXT,               -- PersonalizeResult JSON when done
+      error TEXT,
+      notified INTEGER NOT NULL DEFAULT 0
+    );
+  `);
+
+  d.exec(`
     -- Custom-visualization recurrence log: form_slugs that keep appearing are
     -- candidates for promotion into the fixed renderer vocabulary.
     CREATE TABLE IF NOT EXISTS custom_renders (

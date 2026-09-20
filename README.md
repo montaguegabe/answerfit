@@ -71,3 +71,20 @@ Demo samples are real answers mined from the user's own transcripts (`scripts/mi
 1. Sample "Git merge storm", reader **Gabe (real history)** → Personalize. Merge storm/rebase/DAG get interactive DAG explanations; race condition gets a one-line reminder (provenance: 2018–19 Django race-condition searches); `git rerere` gets a code example.
 2. **⇆ Compare all** → same answer, three radically different plans (git expert sees five concepts suppressed).
 3. Click **Already knew this** on Merge storm → re-run → now suppressed with Jev conf ≈ 0.93. Live state change.
+
+## Live capture loop (Claude Code hook)
+
+A user-level Stop hook (`hooks/answerfit-capture.mjs`, registered in
+`~/.claude/settings.json`) closes the loop on every Claude Code session:
+
+- your typed messages become Jev-judged evidence immediately (same
+  interpretation path as the backfill)
+- each substantive assistant answer is queued and personalized in the
+  background; annotate/render are skipped when the policy finds no gaps
+- the terminal stays SILENT for all-known answers; when real gaps exist the
+  next turn end prints one line: `⚡ AnswerFit: N gaps — <concept> → localhost:3210/?feed=<id>`
+- the web app's **Captured** strip lists recent captures (⚡n = gaps, ✓ = all
+  known); deep links open the fitted rendering
+
+The hook fails silent by design (server down → no-op) and never blocks the
+session. Per-session transcript cursors live in `~/.claude/answerfit-hook-state.json`.

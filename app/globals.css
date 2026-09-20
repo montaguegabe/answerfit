@@ -121,6 +121,9 @@ pre.codeblock {
 
 .timing { color: var(--muted); font-size: 12px; font-family: var(--mono); margin-top: 10px; }
 
+.feed-strip { border-top: 1px dashed var(--border); padding-top: 10px; }
+.chip.pending { opacity: 0.55; cursor: default; }
+
 /* Tier-2 Explanation Plan additions */
 :root { --hedge: #f0883e; }
 .source-answer mark.hedge { color: var(--hedge); border-bottom: 2px dashed var(--hedge); }

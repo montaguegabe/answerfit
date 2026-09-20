@@ -247,13 +247,32 @@ async function decideConcept(userId: string, answer: string, c: ExtractedConcept
   };
 }
 
-export async function personalize(userId: string, answer: string): Promise<PersonalizeResult> {
+const HEAVY = new Set(["example", "diagram", "interactive"]);
+
+export async function personalize(
+  userId: string,
+  answer: string,
+  opts: { skipHeavyIfNoGaps?: boolean } = {}
+): Promise<PersonalizeResult> {
   const t0 = Date.now();
   const concepts = await extractConcepts(answer);
   const t1 = Date.now();
 
   const blocks = await mapConcurrent(concepts, 8, (c) => decideConcept(userId, answer, c));
   const t2 = Date.now();
+
+  // Capture-loop economy (smaller-plan: "decide when NOT to call the expensive
+  // generator"): if Tier-1 found no genuine gaps, skip annotate + render — the
+  // all-known verdict IS the result, and it cost only the cheap Jev fan-out.
+  if (opts.skipHeavyIfNoGaps && !blocks.some((b) => HEAVY.has(b.decision.intervention))) {
+    return {
+      user_id: userId,
+      answer,
+      blocks,
+      plan: { primary_visual: null, caveats: [], coherence_notes: "no gaps found; heavy stages skipped" },
+      timing_ms: { extract: t1 - t0, policy: t2 - t1, annotate: 0, render: 0 },
+    };
+  }
 
   // Tier-2 annotator (PROPOSAL §3.1): resolve independent per-concept decisions
   // into one coherent Explanation Plan. Tier-1 results are features, not verdicts.

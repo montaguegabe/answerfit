@@ -14,6 +14,18 @@ export default function Home() {
   const [results, setResults] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState<Record<string, boolean>>({});
   const [error, setError] = useState("");
+  const [feed, setFeed] = useState<any[]>([]);
+  const [activeFeedId, setActiveFeedId] = useState<number | null>(null);
+
+  async function openFeedItem(id: number) {
+    const row = await fetch(`/api/feed?id=${id}`).then((r) => r.json());
+    if (!row?.result) return;
+    setActiveFeedId(id);
+    setCompare(false);
+    setSelected(row.result.user_id);
+    setAnswer(row.answer);
+    setResults({ [row.result.user_id]: row.result });
+  }
 
   useEffect(() => {
     fetch("/api/users")
@@ -21,8 +33,18 @@ export default function Home() {
       .then((d) => {
         setUsers(d.users);
         setSamples(d.samples);
-        if (d.samples.length) setAnswer(d.samples[0].text);
+        const feedParam = new URLSearchParams(window.location.search).get("feed");
+        if (feedParam) openFeedItem(Number(feedParam));
+        else if (d.samples.length) setAnswer(d.samples[0].text);
       });
+    const poll = () =>
+      fetch("/api/feed")
+        .then((r) => r.json())
+        .then((d) => setFeed(d.items ?? []))
+        .catch(() => {});
+    poll();
+    const t = setInterval(poll, 15000);
+    return () => clearInterval(t);
   }, []);
 
   const targets = useMemo(
@@ -118,6 +140,22 @@ export default function Home() {
           {anyLoading && <span className="status">Fable extracts → Jev judges each concept → Fable resolves the plan → fills content…</span>}
         </div>
         {error && <div className="error">{error}</div>}
+        {feed.length > 0 && (
+          <div className="row feed-strip">
+            <span className="label">Captured</span>
+            {feed.slice(0, 8).map((f) => (
+              <button
+                key={f.id}
+                className={`chip small ${activeFeedId === f.id ? "active" : ""} ${f.status !== "done" ? "pending" : ""}`}
+                title={f.preview}
+                onClick={() => f.status === "done" && openFeedItem(f.id)}
+              >
+                {f.status === "pending" ? "⋯ " : f.gaps_count > 0 ? `⚡${f.gaps_count} ` : "✓ "}
+                {(f.headline ?? f.preview ?? "").slice(0, 34)}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className={`results ${compare ? "compare" : ""}`}>
