@@ -160,6 +160,31 @@ export function Timeline({ timeline }: { timeline: { lanes: { name: string; even
   );
 }
 
+// ---------- custom generated visualization (escape hatch) ----------
+// Model-generated HTML runs in a sandboxed iframe: scripts allowed (the point
+// is interactivity) but no same-origin access, no navigation, no network.
+
+export function CustomViz({ custom }: { custom: { form_slug: string; description: string; html: string; height: number } }) {
+  const doc = `<!doctype html><html><head><style>
+    html,body{margin:0;background:#0a0d12;color:#e6edf3;font-family:ui-monospace,Menlo,monospace;font-size:13px}
+  </style></head><body>${custom.html}</body></html>`;
+  return (
+    <div>
+      <div className="viz" style={{ padding: 0 }}>
+        <iframe
+          sandbox="allow-scripts"
+          srcDoc={doc}
+          style={{ width: "100%", height: Math.min(Math.max(custom.height || 320, 120), 800), border: "none", display: "block" }}
+          title={custom.form_slug}
+        />
+      </div>
+      <div className="caption">
+        {custom.description} <span style={{ opacity: 0.6 }}>· generated form: {custom.form_slug}</span>
+      </div>
+    </div>
+  );
+}
+
 // ---------- sequence diagram ----------
 
 interface SeqMsg { from: string; to: string; label: string; note?: string }

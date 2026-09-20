@@ -118,7 +118,7 @@ ${taxList}`,
 
 export interface PolicyDecision {
   intervention: "none" | "reminder" | "example" | "diagram" | "interactive";
-  representation: "prose" | "code_example" | "git_dag" | "timeline" | "sequence";
+  representation: "prose" | "code_example" | "git_dag" | "timeline" | "sequence" | "custom";
   depth: 1 | 2;
   rationale: string;
 }
@@ -136,7 +136,7 @@ export async function escalatePolicy(state: unknown): Promise<PolicyDecision> {
       required: ["intervention", "representation", "depth", "rationale"],
       properties: {
         intervention: { enum: ["none", "reminder", "example", "diagram", "interactive"] },
-        representation: { enum: ["prose", "code_example", "git_dag", "timeline", "sequence"] },
+        representation: { enum: ["prose", "code_example", "git_dag", "timeline", "sequence", "custom"] },
         depth: { enum: [1, 2] },
         rationale: { type: "string" },
       },
@@ -150,7 +150,7 @@ export async function escalatePolicy(state: unknown): Promise<PolicyDecision> {
 export interface PlanEntry {
   concept_id: string;
   verdict: "suppress" | "hedge" | "reminder" | "example" | "diagram" | "interactive";
-  representation: "prose" | "code_example" | "git_dag" | "timeline" | "sequence";
+  representation: "prose" | "code_example" | "git_dag" | "timeline" | "sequence" | "custom";
   depth: 1 | 2;
   order: number; // teach order: prerequisites before dependents
   rationale: string;
@@ -191,7 +191,7 @@ Verdicts:
 - example / diagram / interactive: genuine gaps, escalating richness.
 
 Coherence rules (these override Tier-1 when they conflict; explain overrides in rationale):
-1. At most ONE 'interactive' verdict, and at most TWO visual representations total (git_dag/timeline/sequence) across the plan. The most central not-known concept gets the primary visual (set primary_visual to its concept_id); other would-be visuals become example or prose. One primary representation per idea — redundant representations add cognitive load.
+1. At most ONE 'interactive' verdict, and at most TWO visual representations total (git_dag/timeline/sequence/custom) across the plan. 'custom' means a bespoke generated visualization — prefer it over a fixed form that fits poorly, but it still counts against the visual budget. The most central not-known concept gets the primary visual (set primary_visual to its concept_id); other would-be visuals become example or prose. One primary representation per idea — redundant representations add cognitive load.
 2. Two concepts must not separately teach overlapping spans; fold the lesser into the more central one's rationale and give it suppress/reminder/hedge.
 3. order: prerequisites before dependents; the primary visual's prerequisites must not come after it.
 4. caveats: list every verbatim warning/imperative span in the answer (data-loss, security, "never…", "don't…"). Caveats must remain visible to every reader regardless of mastery — a concept hosting a caveat may be compressed but its warning must never disappear. Copy quotes EXACTLY from the answer.
@@ -209,7 +209,7 @@ Coherence rules (these override Tier-1 when they conflict; explain overrides in 
             properties: {
               concept_id: { type: "string" },
               verdict: { enum: ["suppress", "hedge", "reminder", "example", "diagram", "interactive"] },
-              representation: { enum: ["prose", "code_example", "git_dag", "timeline", "sequence"] },
+              representation: { enum: ["prose", "code_example", "git_dag", "timeline", "sequence", "custom"] },
               depth: { enum: [1, 2] },
               order: { type: "number" },
               rationale: { type: "string" },
@@ -266,6 +266,12 @@ export interface ConceptContent {
   git_dag?: { nodes: DagNode[]; steps: DagStep[] };
   timeline?: { lanes: { name: string; events: TimelineEvent[] }[]; caption: string };
   sequence?: { actors: string[]; messages: SequenceMessage[]; caption: string };
+  custom?: {
+    form_slug: string; // kebab-case name of the bespoke form, e.g. "request-waterfall" — recurring slugs get promoted into the fixed vocabulary
+    description: string;
+    html: string; // fully self-contained HTML+inline CSS/JS/SVG, no external resources
+    height: number; // px
+  };
 }
 
 export interface RenderRequestItem {
@@ -298,6 +304,7 @@ Representation field requirements:
 - git_dag: body_markdown (1-2 sentences) + git_dag. Nodes form a commit DAG (parents reference node ids; branch groups nodes into lanes). steps is a 3-6 step walkthrough; each step lists which nodes are visible and which are highlighted, telling the story chronologically.
 - timeline: body_markdown (1-2 sentences) + timeline. Lanes are concurrent actors/threads; events positioned t 0-100; mark conflicting/critical events kind=conflict or highlight.
 - sequence: body_markdown (1-2 sentences) + sequence. Actors exchange ordered labeled messages; use note for the key insight message.
+- custom: body_markdown (1-2 sentences) + custom. The escape hatch when no fixed form fits: invent the ideal bespoke visualization. custom.html must be FULLY self-contained (inline CSS/JS/SVG only, no external resources or network requests), render on a dark background (#0a0d12, text #e6edf3), fit width 640px, and set custom.height to its pixel height. Interactivity via inline JS is encouraged (steppers, hover states, drag). form_slug names the general form you invented (kebab-case, e.g. "request-waterfall", "memory-layout") — recurring slugs become first-class renderers later, so name the form, not the concept.
 
 Ground every example in the scenario of the original answer when possible (same branch names, same variables), so the explanation feels native to what the user was reading.`,
     user: `<original_answer>\n${answer}\n</original_answer>\n\nFill content for these concepts:\n${JSON.stringify(items, null, 2)}`,
@@ -404,6 +411,16 @@ Ground every example in the scenario of the original answer when possible (same 
                       },
                     },
                   },
+                },
+              },
+              custom: {
+                type: "object",
+                required: ["form_slug", "description", "html", "height"],
+                properties: {
+                  form_slug: { type: "string" },
+                  description: { type: "string" },
+                  html: { type: "string" },
+                  height: { type: "number" },
                 },
               },
             },

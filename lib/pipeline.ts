@@ -74,7 +74,7 @@ export function finalVerdict(b: ConceptBlock): PlanEntry["verdict"] {
   return b.decision.intervention === "none" ? "suppress" : (b.decision.intervention as PlanEntry["verdict"]);
 }
 
-const VISUAL_REPS = new Set(["git_dag", "timeline", "sequence"]);
+const VISUAL_REPS = new Set(["git_dag", "timeline", "sequence", "custom"]);
 
 /** Code-level backstop for plan rule 1 (≤1 interactive, ≤2 visuals) — the model
  * is told the rule, but a coherence invariant should not depend on obedience. */
@@ -136,6 +136,7 @@ export function policyQuestions(conceptName: string): Record<string, JevQuestion
         git_dag: "Commit-graph (DAG) visualization — best for branch ancestry/topology",
         timeline: "Concurrent-lanes timeline — best for temporal ordering and interleaving",
         sequence: "Sequence diagram — best for multi-party call/message interactions",
+        custom: "None of the fixed forms fits well — a bespoke generated visualization (architecture/topology, state machine, table transformation, memory layout, waterfall, …) would teach this concept better",
       },
     },
   };
@@ -334,9 +335,15 @@ export async function personalize(userId: string, answer: string): Promise<Perso
     });
   const contents = await fillRenderPlan(answer, items);
   const byId = new Map(contents.map((c) => [c.concept_id, c]));
+  const logCustom = db().prepare(
+    "INSERT INTO custom_renders (ts, user_id, concept_id, form_slug, description) VALUES (?, ?, ?, ?, ?)"
+  );
   for (const b of blocks) {
     const content = byId.get(b.concept.id);
     if (content) b.content = content;
+    if (content?.custom) {
+      logCustom.run(new Date().toISOString(), userId, b.concept.id, content.custom.form_slug, content.custom.description);
+    }
   }
   const t4 = Date.now();
 

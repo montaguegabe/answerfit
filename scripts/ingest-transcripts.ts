@@ -43,7 +43,13 @@ function cleanUserText(txt: string): string | null {
   if (!t || t.length < 6) return null;
   if (t.startsWith("<") || t.startsWith("Caveat:")) return null; // system/injected
   if (t.startsWith("/") || t.startsWith("!")) return null; // slash/bang commands
-  if (t.startsWith("[Request interrupted")) return null;
+  if (t.startsWith("[Request interrupted") || t.startsWith("[Conversation context")) return null;
+  // Injected-not-typed content must never become evidence in either direction:
+  // AGENTS.md instruction blobs arrive as user-role markdown ("# AGENTS.md…"),
+  // and harness continuation summaries narrate concepts the user never typed.
+  if (t.startsWith("#")) return null;
+  if (t.startsWith("This session is being continued")) return null;
+  if (/^AGENTS\.md\b/m.test(t.slice(0, 40))) return null;
   return t.slice(0, MAX_USER_LEN);
 }
 

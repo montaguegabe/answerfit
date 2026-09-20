@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Md, CodeBlock, GitDag, Timeline, Sequence } from "./renderers";
+import { Md, CodeBlock, GitDag, Timeline, Sequence, CustomViz } from "./renderers";
 
 const FEEDBACK: { action: string; label: string }[] = [
   { action: "already_knew", label: "Already knew this" },
@@ -79,6 +79,7 @@ export function ConceptCard({ block, userId }: { block: any; userId: string }) {
               {content.git_dag && <GitDag dag={content.git_dag} />}
               {content.timeline && <Timeline timeline={content.timeline} />}
               {content.sequence && <Sequence seq={content.sequence} />}
+              {content.custom && <CustomViz custom={content.custom} />}
             </div>
           )}
           {plan?.rationale && (

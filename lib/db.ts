@@ -81,6 +81,19 @@ function migrate(d: Database.Database) {
     );
   `);
 
+  d.exec(`
+    -- Custom-visualization recurrence log: form_slugs that keep appearing are
+    -- candidates for promotion into the fixed renderer vocabulary.
+    CREATE TABLE IF NOT EXISTS custom_renders (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      ts TEXT NOT NULL,
+      user_id TEXT NOT NULL,
+      concept_id TEXT NOT NULL,
+      form_slug TEXT NOT NULL,
+      description TEXT
+    );
+  `);
+
   // Additive migration: FSRS-style memory dynamics (lib/mastery.ts).
   const cols = (d.prepare("PRAGMA table_info(concept_state)").all() as { name: string }[]).map((c) => c.name);
   if (!cols.includes("stability_days")) d.exec("ALTER TABLE concept_state ADD COLUMN stability_days REAL");
