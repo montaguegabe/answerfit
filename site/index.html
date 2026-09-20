@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AnswerFit — One answer, fitted to what you already know</title>
+<meta name="description" content="AnswerFit re-renders any AI answer for the person reading it. Jargon you already know collapses; what's new to you expands into explanations you'll actually get." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --blue:#1d1ae8;
+  --blue-deep:#1310a6;
+  --blue-soft:#4d4bf2;
+  --paper:#efeee5;
+  --paper-line:#d9d7c6;
+  --ink:#1815c9;
+  --ink-dim:#1815c999;
+  --white:#f4f3ee;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--blue);
+  color:var(--white);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* page frame */
+.frame{position:fixed;inset:9px;border:1.5px solid var(--blue-soft);pointer-events:none;z-index:200;mix-blend-mode:normal}
+@media (max-width:640px){.frame{inset:5px}}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+@media (max-width:640px){.wrap{padding:0 20px}}
+
+.serif{font-family:"Playfair Display",Georgia,serif}
+/* condensed editorial display */
+.display{
+  font-family:"Playfair Display",Georgia,serif;
+  font-weight:900;
+  line-height:.92;
+  letter-spacing:-.01em;
+  transform:scaleX(.86);
+  transform-origin:left;
+}
+.label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+
+a{color:inherit;text-decoration:none}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:150;background:var(--blue);border-bottom:1.5px solid var(--blue-soft)}
+.nav-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:92px;gap:20px}
+.nav-links{display:flex;gap:38px}
+.nav-links.right{justify-content:flex-end}
+.nav-links a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.82;transition:opacity .2s}
+.nav-links a:hover{opacity:1}
+.brand{text-align:center;font-family:"Playfair Display",serif;font-weight:700;letter-spacing:.14em;font-size:19px;line-height:1;transform:scaleY(1.05)}
+.brand small{display:block;font-size:11px;letter-spacing:.42em;opacity:.7;margin-top:5px;font-family:"IBM Plex Mono",monospace;font-weight:400}
+.gh-btn{border:1.5px solid var(--white);padding:11px 18px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:9px;transition:all .2s}
+.gh-btn:hover{background:var(--white);color:var(--blue)}
+.gh-btn svg{width:15px;height:15px;fill:currentColor}
+@media (max-width:880px){.nav-links{display:none}.nav-inner{grid-template-columns:1fr auto;height:72px}.nav-links.right{display:flex}.nav-links.right a:not(.gh-btn){display:none}}
+
+/* ---------- HERO ---------- */
+.hero{padding:70px 0 84px;position:relative}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center}
+.hero-grid>*{min-width:0}
+@media (max-width:940px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+.hero h1{font-size:clamp(44px,6.4vw,104px)}
+.hero .sub{max-width:440px;margin:30px 0 0;font-size:16px;line-height:1.7;opacity:.9}
+.hero .sub b{font-weight:600;opacity:1}
+.cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.btn{padding:15px 24px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--white);transition:all .2s;cursor:pointer;background:none;color:inherit;font-family:inherit}
+.btn.primary{background:var(--white);color:var(--blue);font-weight:600}
+.btn.primary:hover{background:transparent;color:var(--white)}
+.btn.ghost:hover{background:var(--white);color:var(--blue)}
+.btn svg{width:15px;height:15px;fill:currentColor}
+
+/* hero visual panel */
+.hero-panel{border:1.5px solid var(--blue-soft);background:radial-gradient(120% 120% at 50% 45%,#1512b8 0%,#0c0a7a 100%);aspect-ratio:1/1;min-width:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.rays{position:absolute;inset:0;opacity:.6}
+.hero-fit{position:relative;width:80%;z-index:2}
+.hero-fit .doc{background:#0e0c8a;border:1px solid var(--blue-soft);padding:18px 18px 20px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.hero-fit .line{height:8px;border-radius:2px;background:#ffffff26;margin:9px 0}
+.hero-fit .tok{display:inline-block;height:15px;border-radius:3px;padding:0 8px;font-size:10px;line-height:15px;vertical-align:middle;letter-spacing:.04em}
+.tok.known{background:#ffffff1f;color:#ffffff8c;text-decoration:line-through}
+.tok.gap{background:var(--white);color:var(--blue);font-weight:600}
+.hero-fit .card{margin-top:12px;border-left:2px solid var(--white);padding:8px 0 8px 12px}
+.hero-fit .card .t{font-size:11px;font-weight:600;margin-bottom:6px}
+.hero-fit .card .l{height:6px;background:#ffffff33;border-radius:2px;margin:6px 0}
+
+/* ---------- SECTION SHELL ---------- */
+section{padding:96px 0;position:relative}
+.paper{background:var(--paper);color:var(--ink)}
+.paper .label{color:var(--ink)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;border-bottom:1.5px solid currentColor;padding-bottom:22px;margin-bottom:52px}
+.paper .sec-head{border-color:var(--paper-line)}
+.sec-head h2{font-size:clamp(40px,6.4vw,88px)}
+.sec-head .idx{font-size:11px;letter-spacing:.24em;opacity:.6;white-space:nowrap;padding-bottom:12px}
+.eyebrow{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:18px;opacity:.7}
+
+/* ---------- PROBLEM ---------- */
+.prob-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
+@media (max-width:940px){.prob-grid{grid-template-columns:1fr;gap:36px}}
+.terminal{background:#12109c;color:var(--white);border:1.5px solid var(--ink);font-size:13.5px;line-height:1.75}
+.term-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #ffffff2e;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.term-dot{width:9px;height:9px;border-radius:50%;background:#ffffff55}
+.term-body{padding:20px 22px 24px}
+.term-body .prompt{color:#9c9bff;margin-bottom:4px}
+.term-body p{margin:12px 0}
+.j{background:#ffffff1c;border-radius:3px;padding:1px 5px;color:#fff;white-space:nowrap}
+.prob-copy p{font-size:16px;line-height:1.75;margin-bottom:22px}
+.prob-copy .big{font-family:"Playfair Display",serif;font-weight:700;font-size:26px;line-height:1.3;font-style:italic;margin-bottom:26px}
+.who{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--paper-line);border:1px solid var(--paper-line);margin-top:8px}
+.who>div{background:var(--paper);padding:20px}
+.who .role{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;margin-bottom:8px}
+.who .pain{font-size:14.5px;line-height:1.6}
+
+/* ---------- DIAGRAM ---------- */
+.diagram-wrap{border:1.5px solid var(--blue-soft);background:#1512be;position:relative}
+.diag-top{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1.5px solid var(--blue-soft);flex-wrap:wrap;gap:12px}
+.steps{display:flex;gap:10px;flex-wrap:wrap}
+.step-pill{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--blue-soft);opacity:.4;transition:all .45s;display:flex;gap:9px;align-items:center}
+.step-pill .n{width:18px;height:18px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px}
+.step-pill.active{opacity:1;background:var(--white);color:var(--blue);border-color:var(--white)}
+.replay{font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--blue-soft);background:none;color:var(--white);padding:8px 14px;cursor:pointer;font-family:inherit;display:flex;gap:8px;align-items:center;transition:all .2s}
+.replay:hover{background:var(--white);color:var(--blue)}
+
+.stage{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;gap:0;min-height:430px}
+@media (max-width:940px){.stage{grid-template-columns:1fr;min-height:0}.arrow{transform:rotate(90deg);height:44px}}
+.col{padding:28px 24px}
+.col-head{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.65;margin-bottom:20px;min-height:30px}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--blue-soft)}
+.arrow svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.4}
+.col.mid{border-left:1.5px solid var(--blue-soft);border-right:1.5px solid var(--blue-soft);background:#0f0d92}
+@media (max-width:940px){.col.mid{border-left:none;border-right:none;border-top:1.5px solid var(--blue-soft);border-bottom:1.5px solid var(--blue-soft)}}
+
+/* diagram tokens */
+.answer-lines .ln{height:9px;background:#ffffff1c;border-radius:2px;margin:11px 0;width:100%}
+.answer-lines .ln.s{width:62%}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 10px;border-radius:4px;margin:4px 6px 4px 0;transition:all .55s;background:var(--blue);border:1px solid var(--blue-soft);color:#fff;transform:translateY(6px);opacity:0}
+.chip.in{transform:none;opacity:1}
+.chip.tagged{background:var(--white);color:var(--blue);border-color:var(--white);font-weight:600}
+
+/* verdict rows */
+.verdict{opacity:0;transform:translateX(-8px);transition:all .5s;margin-bottom:16px}
+.verdict.in{opacity:1;transform:none}
+.verdict .row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;margin-bottom:6px}
+.verdict .name{font-weight:500}
+.verdict .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.tag.known{background:#3d3bff;color:#fff}
+.tag.gap{background:var(--white);color:var(--blue);font-weight:600}
+.bar{height:5px;background:#ffffff1f;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--blue-soft);transition:width .9s ease .2s}
+.verdict.in .bar i{background:var(--white)}
+.verdict.gaprow.in .bar i{background:var(--blue-soft)}
+.mid-foot{font-size:11px;opacity:.6;margin-top:20px;letter-spacing:.04em;line-height:1.6}
+
+/* output */
+.out-known{margin-bottom:22px}
+.out-lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.5;margin-bottom:10px}
+.out-chip{display:inline-block;font-size:11px;padding:3px 9px;border-radius:3px;margin:3px 5px 3px 0;background:#ffffff17;color:#ffffff7a;text-decoration:line-through;opacity:0;transform:scale(.8);transition:all .5s}
+.out-chip.in{opacity:1;transform:none}
+.out-card{border:1px solid var(--blue-soft);background:var(--blue);padding:0;margin-bottom:14px;overflow:hidden;max-height:0;opacity:0;transition:all .6s ease}
+.out-card.in{max-height:220px;opacity:1}
+.out-card .hd{padding:11px 14px;font-size:12px;font-weight:600;border-bottom:1px solid var(--blue-soft);display:flex;justify-content:space-between}
+.out-card .hd .kind{font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;font-weight:400}
+.out-card .bd{padding:14px}
+.out-card .bd p{font-size:12.5px;line-height:1.6;opacity:.92}
+/* mini dag */
+.dag{display:flex;align-items:center;gap:0;padding:6px 0 2px}
+.node{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--white);flex:0 0 auto}
+.node.fill{background:var(--white)}
+.edge{height:1.5px;background:var(--blue-soft);flex:1}
+.edge.br{align-self:flex-start;margin-top:8px}
+
+/* ---------- HOW STEPS ---------- */
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--blue-soft);border:1.5px solid var(--blue-soft);margin-top:1px}
+@media (max-width:840px){.how-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.how-steps{grid-template-columns:1fr}}
+.how-steps>div{background:var(--blue);padding:26px 22px 30px}
+.how-steps .num{font-family:"Playfair Display",serif;font-weight:700;font-size:34px;opacity:.4;margin-bottom:14px}
+.how-steps h4{font-size:14px;letter-spacing:.04em;margin-bottom:10px;text-transform:uppercase}
+.how-steps p{font-size:13px;line-height:1.65;opacity:.82}
+
+/* ---------- PIPELINE ---------- */
+.pipe-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--paper-line);border:1px solid var(--paper-line)}
+@media (max-width:840px){.pipe-grid{grid-template-columns:1fr}}
+.pipe-grid>div{background:var(--paper);padding:30px 26px 34px}
+.pipe-grid .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.55;margin-bottom:16px}
+.pipe-grid h4{font-family:"Playfair Display",serif;font-weight:700;font-size:23px;margin-bottom:14px;line-height:1.2}
+.pipe-grid p{font-size:14px;line-height:1.7}
+.pipe-grid code{background:#1815c914;padding:1px 5px;border-radius:3px;font-size:12.5px}
+
+.evid{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:64px;align-items:start}
+@media (max-width:840px){.evid{grid-template-columns:1fr;gap:32px}}
+.evid h3{font-family:"Playfair Display",serif;font-weight:700;font-size:30px;margin-bottom:20px;line-height:1.2}
+.evid ul{list-style:none}
+.evid li{border-top:1px solid var(--paper-line);padding:18px 0;display:flex;gap:16px}
+.evid li .en{font-family:"Playfair Display",serif;font-weight:700;font-size:20px;opacity:.4;flex:0 0 26px}
+.evid li b{font-weight:600}
+.evid li p{font-size:14px;line-height:1.6}
+
+/* ---------- FAQ ---------- */
+.faq h2{font-size:clamp(40px,6vw,80px)}
+.faq-item{border-bottom:1.5px solid var(--blue-soft);}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--white);font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(20px,2.6vw,28px);padding:26px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.faq-q .pm{font-family:"IBM Plex Mono",monospace;font-weight:400;font-size:26px;transition:transform .3s;flex:0 0 auto}
+.faq-item.open .pm{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .35s;opacity:0}
+.faq-item.open .faq-a{max-height:320px;opacity:1}
+.faq-a p{padding:0 0 28px;max-width:760px;font-size:15px;line-height:1.75;opacity:.88}
+.faq-a code{background:#ffffff1a;padding:1px 5px;border-radius:3px}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1.5px solid var(--blue-soft);padding:70px 0 50px}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.foot-cta h3{font-size:clamp(34px,5vw,64px);max-width:640px;margin-bottom:28px}
+.foot-links{display:flex;flex-direction:column;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.foot-links a{opacity:.75;transition:opacity .2s}
+.foot-links a:hover{opacity:1}
+.foot-bot{display:flex;justify-content:space-between;margin-top:64px;padding-top:24px;border-top:1px solid var(--blue-soft);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;flex-wrap:wrap;gap:16px}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.seen{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="frame"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <div class="nav-inner">
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#how">How it works</a>
+        <a href="#pipeline">Pipeline</a>
+      </div>
+      <a class="brand" href="#top">ANSWERFIT<small>PERSONALIZED AI ANSWERS</small></a>
+      <div class="nav-links right">
+        <a href="#faq">FAQ</a>
+        <a class="gh-btn" id="ghNav" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">One answer · fitted per reader</span>
+        <h1 class="display">ONE ANSWER,<br>FITTED<br>TO YOU.</h1>
+        <p class="sub">Claude Code and Codex hand everyone the same wall of text. <b>AnswerFit re-renders that answer for the person reading it</b> — the jargon you already know collapses out of the way, and the parts that are new to you bloom into explanations you'll actually get.</p>
+        <div class="cta-row">
+          <a class="btn primary" id="ghHero" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+            View on GitHub
+          </a>
+          <a class="btn ghost" href="#how">See how it works ↓</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <svg class="rays" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+        <div class="hero-fit">
+          <div class="doc">
+            <div class="line" style="width:88%"></div>
+            <div class="line" style="width:100%"></div>
+            <div style="margin:10px 0"><span class="tok known">rebase</span> <span class="tok known">detached&nbsp;HEAD</span> <span class="tok gap">merge&nbsp;storm</span></div>
+            <div class="line" style="width:74%"></div>
+            <div class="card">
+              <div class="t">merge storm → resolved step by step</div>
+              <div class="dag" style="margin-bottom:8px">
+                <span class="node fill"></span><span class="edge"></span><span class="node"></span><span class="edge"></span><span class="node fill"></span>
+              </div>
+              <div class="l" style="width:90%"></div>
+              <div class="l" style="width:60%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM -->
+<section class="paper" id="problem">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="label" style="display:block;margin-bottom:14px">The problem ▦</span>
+        <h2 class="display">THE WALL<br>OF TEXT</h2>
+      </div>
+      <span class="idx">01 / PROBLEM</span>
+    </div>
+    <div class="prob-grid">
+      <div class="terminal reveal">
+        <div class="term-bar"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span style="margin-left:6px">claude code — how do I fix this git mess?</span></div>
+        <div class="term-body">
+          <div class="prompt">▍ assistant</div>
+          <p>You've got a <span class="j">merge storm</span> on your hands. First, abort the in-progress merge, then <span class="j">rebase</span> your feature branch onto <span class="j">main</span> instead of merging — this keeps a linear history and avoids the <span class="j">detached HEAD</span> state you're stuck in.</p>
+          <p>Enable <span class="j">git rerere</span> so the resolutions get recorded and replayed. Watch out for the <span class="j">TOCTOU race</span> in the deploy hook — it re-reads the ref after the check, so an <span class="j">idempotent</span> retry can double-apply. Force-push with <span class="j">--force-with-lease</span>, never plain <span class="j">--force</span>.</p>
+          <p style="opacity:.6">…and 6 more paragraphs, one shape, for everyone who ever asks.</p>
+        </div>
+      </div>
+      <div class="prob-copy reveal">
+        <p class="big">Every reader gets the exact same answer — so it fits almost no one.</p>
+        <p>An AI assistant has no idea who's on the other side of the screen. So it writes for a phantom “average” developer: enough jargon to sound precise, enough hand-holding to be safe. The result is a wall of text that's simultaneously too much and not enough.</p>
+        <div class="who">
+          <div>
+            <div class="role">The beginner</div>
+            <div class="pain">Five unexplained terms in one sentence. Opens four tabs, loses the thread, still doesn't know what to type.</div>
+          </div>
+          <div>
+            <div class="role">The expert</div>
+            <div class="pain">Skims three paragraphs re-explaining rebase — mastered in 2016 — to find the one line that's actually new.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="label" style="display:block;margin-bottom:14px">The solution ✦</span>
+        <h2 class="display">HOW IT<br>FITS</h2>
+      </div>
+      <span class="idx">02 / SOLUTION</span>
+    </div>
+
+    <div class="diagram-wrap reveal" id="diagram">
+      <div class="diag-top">
+        <div class="steps">
+          <div class="step-pill" data-step="1"><span class="n">1</span> Extract concepts</div>
+          <div class="step-pill" data-step="2"><span class="n">2</span> Check what you know</div>
+          <div class="step-pill" data-step="3"><span class="n">3</span> Re-render, fitted</div>
+        </div>
+        <button class="replay" id="replayBtn">↻ Replay</button>
+      </div>
+      <div class="stage">
+        <!-- COL 1: the answer -->
+        <div class="col">
+          <div class="col-head">The raw answer</div>
+          <div class="answer-lines">
+            <div class="ln"></div><div class="ln s"></div>
+            <div id="tokBox" style="margin:14px 0">
+              <span class="chip" data-c="rebase">rebase</span>
+              <span class="chip" data-c="merge storm">merge storm</span>
+              <span class="chip" data-c="TOCTOU">TOCTOU race</span>
+              <span class="chip" data-c="rerere">git rerere</span>
+              <span class="chip" data-c="force-with-lease">--force-with-lease</span>
+            </div>
+            <div class="ln"></div><div class="ln s"></div><div class="ln"></div>
+          </div>
+        </div>
+        <div class="arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+        <!-- COL 2: learner state -->
+        <div class="col mid">
+          <div class="col-head">Your learner state · Jev</div>
+          <div id="verdictBox">
+            <div class="verdict" data-c="rebase">
+              <div class="row"><span class="name">rebase</span><span class="tag known">known · 0.94</span></div>
+              <div class="bar"><i style="--w:94%"></i></div>
+            </div>
+            <div class="verdict gaprow" data-c="merge storm">
+              <div class="row"><span class="name">merge storm</span><span class="tag gap">gap · 0.22</span></div>
+              <div class="bar"><i style="--w:22%"></i></div>
+            </div>
+            <div class="verdict" data-c="TOCTOU">
+              <div class="row"><span class="name">TOCTOU race</span><span class="tag known">known · 0.88</span></div>
+              <div class="bar"><i style="--w:88%"></i></div>
+            </div>
+            <div class="verdict gaprow" data-c="rerere">
+              <div class="row"><span class="name">git rerere</span><span class="tag gap">gap · 0.31</span></div>
+              <div class="bar"><i style="--w:31%"></i></div>
+            </div>
+            <div class="verdict" data-c="force-with-lease">
+              <div class="row"><span class="name">--force-with-lease</span><span class="tag known">known · 0.79</span></div>
+              <div class="bar"><i style="--w:79%"></i></div>
+            </div>
+          </div>
+          <div class="mid-foot">Backfilled from your search history + your own Claude&nbsp;Code &amp; Codex transcripts. Confidence&nbsp;&lt;&nbsp;0.5 escalates to Fable.</div>
+        </div>
+        <div class="arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+        <!-- COL 3: fitted output -->
+        <div class="col">
+          <div class="col-head">The fitted answer</div>
+          <div class="out-known">
+            <div class="out-lbl">Already yours — collapsed</div>
+            <span class="out-chip" data-c="rebase">rebase</span>
+            <span class="out-chip" data-c="TOCTOU">TOCTOU race</span>
+            <span class="out-chip" data-c="force-with-lease">--force-with-lease</span>
+          </div>
+          <div class="out-lbl">New to you — expanded</div>
+          <div class="out-card" data-c="merge storm">
+            <div class="hd">merge storm <span class="kind">interactive DAG</span></div>
+            <div class="bd">
+              <div class="dag">
+                <span class="node fill"></span><span class="edge"></span><span class="node"></span><span class="edge"></span><span class="node fill"></span><span class="edge br"></span><span class="node"></span>
+              </div>
+              <p>Two branches touched the same lines. Replay each conflict one commit at a time →</p>
+            </div>
+          </div>
+          <div class="out-card" data-c="rerere">
+            <div class="hd">git rerere <span class="kind">code + one line</span></div>
+            <div class="bd">
+              <p style="font-family:'IBM Plex Mono';background:#0e0c8a;padding:8px 10px;border-radius:3px;font-size:11.5px">$ git config rerere.enabled true</p>
+              <p style="margin-top:8px">Records how you resolve a conflict, replays it next time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="how-steps reveal">
+      <div>
+        <div class="num">01</div>
+        <h4>Read the answer</h4>
+        <p>Fable extracts a concept graph from any AI answer in a single cached call — every piece of jargon becomes a node.</p>
+      </div>
+      <div>
+        <div class="num">02</div>
+        <h4>Score against you</h4>
+        <p>Jev judges each concept against your learner state and returns a calibrated probability that you already understand it.</p>
+      </div>
+      <div>
+        <div class="num">03</div>
+        <h4>Decide per concept</h4>
+        <p>Known → collapse it. Gap → intervene. Wrong shape → pick a better representation: a DAG, a timeline, a code snippet.</p>
+      </div>
+      <div>
+        <div class="num">04</div>
+        <h4>Re-render, in place</h4>
+        <p>The answer rebuilds around you. One tap of “I already knew this” updates your state and the next answer differs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="paper" id="pipeline">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="label" style="display:block;margin-bottom:14px">Under the hood ⚙</span>
+        <h2 class="display">THE&nbsp;PIPELINE</h2>
+      </div>
+      <span class="idx">03 / SYSTEM</span>
+    </div>
+
+    <div class="pipe-grid reveal">
+      <div>
+        <div class="k">Model · Fable</div>
+        <h4>Concept graph</h4>
+        <p>One <code>claude-fable-5</code> call turns an answer into a graph of concepts and dependencies. Results are SQLite-cached, so repeat runs are near-instant and free.</p>
+      </div>
+      <div>
+        <div class="k">Model · Jev</div>
+        <h4>Learner state</h4>
+        <p>TypeSafe System One scores per-concept mastery with calibrated confidence — ~113 req/s. An FSRS engine keeps state that's always recomputable from an immutable evidence log.</p>
+      </div>
+      <div>
+        <div class="k">Policy</div>
+        <h4>Intervention gate</h4>
+        <p>Per concept: <code>already_understands</code>, <code>intervention</code>, or <code>representation</code>. Confidence under <code>0.5</code> escalates to Fable. 92.9% agreement when Jev clears the gate.</p>
+      </div>
+    </div>
+
+    <div class="evid">
+      <div class="reveal">
+        <h3>How it knows what you know</h3>
+        <p style="font-size:15px;line-height:1.7;margin-bottom:8px">AnswerFit never guesses from a quiz. It reads the trail you've already left — then lets you correct it in one tap.</p>
+      </div>
+      <div class="reveal">
+        <ul>
+          <li><span class="en">1</span><p><b>Search &amp; watch history.</b> Real Google and YouTube events — searches, visits, watches — matched to concepts and judged by Jev.</p></li>
+          <li><span class="en">2</span><p><b>Your own transcripts.</b> Your typed messages in Claude&nbsp;Code &amp; Codex, judged as confusion, correct use, or an advanced question.</p></li>
+          <li><span class="en">3</span><p><b>“Didn't land” signals.</b> A remedial search minutes after an assistant explained something becomes strong negative evidence.</p></li>
+          <li><span class="en">4</span><p><b>Your feedback.</b> “Already knew this” / “still fuzzy” overrides everything and reshapes the very next answer.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><h2 class="display">FAQ</h2></div>
+      <a class="idx" id="ghFaq" href="#" target="_blank" rel="noopener" style="opacity:1">VIEW SOURCE →</a>
+    </div>
+    <div id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">Does AnswerFit change what the AI says? <span class="pm">+</span></button>
+        <div class="faq-a"><p>No. It's a personalization <em>overlay</em>. The underlying answer is unchanged — AnswerFit only decides which parts to collapse, which to expand, and what shape to render them in for the specific person reading.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Where does my learner state come from? <span class="pm">+</span></button>
+        <div class="faq-a"><p>From evidence you already generate: your search &amp; watch history, and your own messages in Claude&nbsp;Code and Codex. Everything is stored locally in SQLite as an immutable evidence log, and your state is always recomputable from it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What are Jev and Fable? <span class="pm">+</span></button>
+        <div class="faq-a"><p><b>Jev</b> is TypeSafe's System One — it returns calibrated probabilities that you understand a concept. <b>Fable</b> (<code>claude-fable-5</code>) extracts the concept graph and writes the fitted explanations. Low-confidence Jev calls escalate to Fable.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does it get better over time? <span class="pm">+</span></button>
+        <div class="faq-a"><p>Yes. There's a live capture loop: a Claude&nbsp;Code Stop hook feeds every turn back in as evidence, and one tap of feedback updates your state immediately. The next answer is fitted to the you that exists now, not last month.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I run it myself? <span class="pm">+</span></button>
+        <div class="faq-a"><p>Yes — it's an open-source Next.js app. Clone the repo, add an <code>ANTHROPIC_API_KEY</code> and <code>JEV_API_KEY</code>, run the backfill, and <code>npm run dev</code>. Setup steps are in the README.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-cta">
+        <h3 class="display">FIT THE<br>ANSWER TO<br>THE READER.</h3>
+        <a class="btn primary" id="ghFoot" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          View the repository
+        </a>
+      </div>
+      <div class="foot-links">
+        <a href="#problem">The problem</a>
+        <a href="#how">How it works</a>
+        <a href="#pipeline">The pipeline</a>
+        <a href="#faq">FAQ</a>
+        <a id="ghFoot2" href="#" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>ANSWERFIT · ONE ANSWER, FITTED PER READER</span>
+      <span>BUILT WITH FABLE + JEV · NEXT.JS · SQLITE</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---- GitHub links (set once; replaced with real repo URL at publish) ----
+var REPO_URL = "https://github.com/montaguegabe/answerfit";
+["ghNav","ghHero","ghFaq","ghFoot","ghFoot2"].forEach(function(id){
+  var el=document.getElementById(id); if(el) el.href=REPO_URL;
+});
+
+// ---- hero rays (radiating engraving lines) ----
+(function(){
+  var svg=document.querySelector(".rays"); if(!svg) return;
+  var cx=200,cy=200,html="";
+  for(var i=0;i<140;i++){
+    var a=(i/140)*Math.PI*2;
+    var r1=60+((i*37)%40);
+    var r2=210+((i*53)%80);
+    html+='<line x1="'+(cx+Math.cos(a)*r1).toFixed(1)+'" y1="'+(cy+Math.sin(a)*r1).toFixed(1)+'" x2="'+(cx+Math.cos(a)*r2).toFixed(1)+'" y2="'+(cy+Math.sin(a)*r2).toFixed(1)+'" stroke="#ffffff" stroke-width="0.6" opacity="'+(0.15+((i*7)%30)/120).toFixed(2)+'"/>';
+  }
+  html+='<circle cx="200" cy="200" r="150" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.3"/>';
+  svg.innerHTML=html;
+})();
+
+// ---- scroll reveal ----
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("seen"); io.unobserve(e.target);} });
+},{threshold:.15});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+
+// ---- FAQ accordion ----
+document.querySelectorAll(".faq-q").forEach(function(b){
+  b.addEventListener("click",function(){
+    var item=b.parentElement, open=item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open");});
+    if(!open) item.classList.add("open");
+  });
+});
+
+// ---- animated diagram timeline ----
+(function(){
+  var diagram=document.getElementById("diagram");
+  var pills=[].slice.call(document.querySelectorAll(".step-pill"));
+  var chips=[].slice.call(document.querySelectorAll("#tokBox .chip"));
+  var verdicts=[].slice.call(document.querySelectorAll("#verdictBox .verdict"));
+  var outChips=[].slice.call(document.querySelectorAll(".out-chip"));
+  var outCards=[].slice.call(document.querySelectorAll(".out-card"));
+  var timers=[];
+  function clearAll(){ timers.forEach(clearTimeout); timers=[]; }
+  function at(ms,fn){ timers.push(setTimeout(fn,ms)); }
+  function reset(){
+    pills.forEach(function(p){p.classList.remove("active");});
+    chips.forEach(function(c){c.classList.remove("in","tagged");});
+    verdicts.forEach(function(v){v.classList.remove("in"); v.querySelector(".bar i").style.width="0";});
+    outChips.forEach(function(c){c.classList.remove("in");});
+    outCards.forEach(function(c){c.classList.remove("in");});
+  }
+  function run(){
+    clearAll(); reset();
+    // STEP 1 — concepts surface
+    at(200,function(){pills[0].classList.add("active");});
+    chips.forEach(function(c,i){ at(450+i*180,function(){c.classList.add("in");}); });
+    at(450+chips.length*180+250,function(){ chips.forEach(function(c){c.classList.add("tagged");}); });
+    // STEP 2 — score against learner state
+    var t2=1900;
+    at(t2,function(){pills[0].classList.remove("active");pills[1].classList.add("active");});
+    verdicts.forEach(function(v,i){
+      at(t2+250+i*260,function(){
+        v.classList.add("in");
+        var bar=v.querySelector(".bar i");
+        bar.style.width=getComputedStyle(bar).getPropertyValue("--w");
+      });
+    });
+    // STEP 3 — re-render fitted
+    var t3=t2+250+verdicts.length*260+500;
+    at(t3,function(){pills[1].classList.remove("active");pills[2].classList.add("active");});
+    outChips.forEach(function(c,i){ at(t3+250+i*160,function(){c.classList.add("in");}); });
+    outCards.forEach(function(c,i){ at(t3+700+i*400,function(){c.classList.add("in");}); });
+    // loop
+    at(t3+2600,run);
+  }
+  var started=false;
+  var dio=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting && !started){ started=true; run(); } });
+  },{threshold:.35});
+  dio.observe(diagram);
+  document.getElementById("replayBtn").addEventListener("click",run);
+})();
+</script>
+</body>
+</html>
