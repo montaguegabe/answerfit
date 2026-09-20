@@ -88,3 +88,16 @@ A user-level Stop hook (`hooks/answerfit-capture.mjs`, registered in
 
 The hook fails silent by design (server down → no-op) and never blocks the
 session. Per-session transcript cursors live in `~/.claude/answerfit-hook-state.json`.
+
+## Chat mode (/chat)
+
+The flagship surface: ask a question, the raw answer streams immediately
+(fidelity first — never withheld), then personalization folds in live in the
+same bubble: verdict chips appear per concept as Jev decides (✓ known,
+↻ reminder, ▸ hedge, ⚡ explain), then the fitted view swaps in — marked
+spans, ordered concept cards, visuals, caveats. Your questions become live
+evidence. No hook, no second surface, no deferred notification.
+
+Note: Fable 5's API safety layer hard-refuses some innocuous prompts
+(observed: output-shaping system-prompt sentences; a BGP route-manipulation
+question). The route surfaces these as a friendly notice.

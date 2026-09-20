@@ -104,6 +104,7 @@ export default function Home() {
       <div className="header">
         <h1>AnswerFit</h1>
         <span className="tagline">one answer, fitted to what you already know</span>
+        <a className="navlink" href="/chat">chat mode →</a>
       </div>
 
       <div className="controls">

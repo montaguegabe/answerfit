@@ -249,16 +249,31 @@ async function decideConcept(userId: string, answer: string, c: ExtractedConcept
 
 const HEAVY = new Set(["example", "diagram", "interactive"]);
 
+/** Progress events for streaming surfaces (the /chat fold-in). */
+export type PersonalizeEvent =
+  | { type: "stage"; stage: "extract" | "policy" | "annotate" | "render" }
+  | { type: "concepts"; concepts: { id: string; name: string; quote: string }[] }
+  | { type: "decision"; block: ConceptBlock }
+  | { type: "plan"; plan: PersonalizeResult["plan"]; entries: { concept_id: string; verdict: string; order: number }[] };
+
 export async function personalize(
   userId: string,
   answer: string,
-  opts: { skipHeavyIfNoGaps?: boolean } = {}
+  opts: { skipHeavyIfNoGaps?: boolean; onEvent?: (e: PersonalizeEvent) => void } = {}
 ): Promise<PersonalizeResult> {
+  const emit = opts.onEvent ?? (() => {});
   const t0 = Date.now();
+  emit({ type: "stage", stage: "extract" });
   const concepts = await extractConcepts(answer);
+  emit({ type: "concepts", concepts: concepts.map((c) => ({ id: c.id, name: c.name, quote: c.quote })) });
   const t1 = Date.now();
 
-  const blocks = await mapConcurrent(concepts, 8, (c) => decideConcept(userId, answer, c));
+  emit({ type: "stage", stage: "policy" });
+  const blocks = await mapConcurrent(concepts, 8, async (c) => {
+    const b = await decideConcept(userId, answer, c);
+    emit({ type: "decision", block: b });
+    return b;
+  });
   const t2 = Date.now();
 
   // Capture-loop economy (smaller-plan: "decide when NOT to call the expensive
@@ -315,6 +330,7 @@ export async function personalize(
       t1: [b.decision.intervention, b.decision.representation, b.decision.depth],
     }))
   );
+  emit({ type: "stage", stage: "annotate" });
   let plan: ExplanationPlan;
   try {
     plan = enforceVisualBudget(await annotatePlan(answer, summaries, stableKey));
@@ -330,6 +346,12 @@ export async function personalize(
     b.plan = { ...e, overridden: e.verdict !== tier1Equiv };
   }
   blocks.sort((a, b) => (a.plan?.order ?? 99) - (b.plan?.order ?? 99));
+  emit({
+    type: "plan",
+    plan: { primary_visual: plan.primary_visual, caveats: plan.caveats, coherence_notes: plan.coherence_notes },
+    entries: blocks.map((b) => ({ concept_id: b.concept.id, verdict: finalVerdict(b), order: b.plan?.order ?? 99 })),
+  });
+  emit({ type: "stage", stage: "render" });
   const t3 = Date.now();
 
   // One render-fill call covering every concept that needs content

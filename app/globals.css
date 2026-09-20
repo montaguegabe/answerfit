@@ -124,6 +124,26 @@ pre.codeblock {
 .feed-strip { border-top: 1px dashed var(--border); padding-top: 10px; }
 .chip.pending { opacity: 0.55; cursor: default; }
 
+/* Chat mode */
+.navlink { margin-left: auto; color: var(--explain); font-size: 13px; text-decoration: none; }
+.navlink:hover { text-decoration: underline; }
+.chat-app { display: flex; flex-direction: column; min-height: calc(100vh - 48px); }
+.chat-log { flex: 1; display: flex; flex-direction: column; gap: 12px; padding-bottom: 16px; }
+.bubble { border-radius: 12px; padding: 12px 16px; max-width: 100%; }
+.bubble.user { background: #1f3a5f; align-self: flex-end; max-width: 70%; white-space: pre-wrap; }
+.bubble.assistant { background: var(--panel); border: 1px solid var(--border); align-self: stretch; }
+.bubble.assistant.fitted { padding: 14px; }
+.chat-answer { margin-bottom: 12px; color: var(--text); }
+.fit-progress { border-top: 1px dashed var(--border); margin-top: 10px; padding-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+.fit-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+.fitchip { cursor: default; }
+.fitchip.known { border-color: var(--known); color: var(--known); }
+.fitchip.reminder { border-color: var(--reminder); color: var(--reminder); }
+.fitchip.hedge { border-color: var(--hedge); color: var(--hedge); }
+.fitchip.explain { border-color: var(--explain); color: var(--explain); }
+.chat-input { position: sticky; bottom: 0; background: var(--bg); padding: 10px 0 16px; display: flex; gap: 8px; align-items: flex-end; }
+.chat-input textarea { min-height: 52px; max-height: 160px; flex: 1; }
+
 /* Tier-2 Explanation Plan additions */
 :root { --hedge: #f0883e; }
 .source-answer mark.hedge { color: var(--hedge); border-bottom: 2px dashed var(--hedge); }
