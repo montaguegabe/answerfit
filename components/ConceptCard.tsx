@@ -10,13 +10,18 @@ const FEEDBACK: { action: string; label: string }[] = [
 ];
 
 export function ConceptCard({ block, userId }: { block: any; userId: string }) {
-  const { concept, state, decision, jev, provenance, content } = block;
-  const kind = decision.intervention === "none" ? "known" : decision.intervention === "reminder" ? "reminder" : "explain";
-  const [open, setOpen] = useState(kind !== "known");
+  const { concept, state, decision, jev, provenance, content, plan } = block;
+  const verdict: string = plan?.verdict ?? (decision.intervention === "none" ? "suppress" : decision.intervention);
+  const kind =
+    verdict === "suppress" ? "known" : verdict === "reminder" ? "reminder" : verdict === "hedge" ? "hedge" : "explain";
+  // Hedge = the uncertainty hedge (PROPOSAL P6): collapsed by default; the
+  // expand action is itself evidence about the user's state.
+  const [open, setOpen] = useState(kind === "explain");
   const [sent, setSent] = useState<string | null>(null);
+  const [expandLogged, setExpandLogged] = useState(false);
 
-  async function sendFeedback(action: string) {
-    setSent(action);
+  async function sendFeedback(action: string, silent = false) {
+    if (!silent) setSent(action);
     await fetch("/api/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -24,14 +29,28 @@ export function ConceptCard({ block, userId }: { block: any; userId: string }) {
     });
   }
 
+  function toggle() {
+    if (kind === "hedge" && !open && !expandLogged) {
+      setExpandLogged(true);
+      sendFeedback("expanded_hedge", true); // telemetry, not a button click
+    }
+    setOpen((o) => !o);
+  }
+
   return (
     <div className="card">
-      <div className="card-head" onClick={() => setOpen((o) => !o)}>
-        <span className={`badge ${kind}`}>{kind === "known" ? "✓ known" : kind}</span>
+      <div className="card-head" onClick={toggle}>
+        <span className={`badge ${kind}`}>
+          {kind === "known" ? "✓ known" : kind === "hedge" ? "▸ likely known" : kind}
+        </span>
         <span className="cname">{concept.name}</span>
+        {kind === "hedge" && !open && content?.reminder_text && (
+          <span className="hedge-line">{content.reminder_text}</span>
+        )}
         <span className="meta">
           m={state.mastery.toFixed(2)} · n={state.evidence_count} ·{" "}
           <span className={`badge ${decision.decided_by}`}>{decision.decided_by}</span>
+          {plan?.overridden && <span className="badge plan" title={plan.rationale}>plan</span>}
         </span>
       </div>
       {open && (
@@ -47,8 +66,13 @@ export function ConceptCard({ block, userId }: { block: any; userId: string }) {
               <b>↻ Reminder:</b> {content.reminder_text}
             </div>
           )}
-          {kind === "explain" && content && (
+          {(kind === "explain" || kind === "hedge") && content && (
             <div>
+              {kind === "hedge" && content.reminder_text && (
+                <div className="reminder-line">
+                  <b>▾ Likely known:</b> {content.reminder_text}
+                </div>
+              )}
               {content.headline && <div className="headline">{content.headline}</div>}
               {content.body_markdown && <Md text={content.body_markdown} />}
               {content.code && <CodeBlock code={content.code} />}
@@ -56,6 +80,9 @@ export function ConceptCard({ block, userId }: { block: any; userId: string }) {
               {content.timeline && <Timeline timeline={content.timeline} />}
               {content.sequence && <Sequence seq={content.sequence} />}
             </div>
+          )}
+          {plan?.rationale && (
+            <div className="plan-rationale">plan: {plan.rationale}</div>
           )}
           {provenance?.length > 0 && (
             <div className="provenance">

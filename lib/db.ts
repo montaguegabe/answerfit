@@ -80,6 +80,11 @@ function migrate(d: Database.Database) {
       created_at TEXT NOT NULL
     );
   `);
+
+  // Additive migration: FSRS-style memory dynamics (lib/mastery.ts).
+  const cols = (d.prepare("PRAGMA table_info(concept_state)").all() as { name: string }[]).map((c) => c.name);
+  if (!cols.includes("stability_days")) d.exec("ALTER TABLE concept_state ADD COLUMN stability_days REAL");
+  if (!cols.includes("retrievability")) d.exec("ALTER TABLE concept_state ADD COLUMN retrievability REAL");
 }
 
 export function cacheGet(key: string): unknown | null {

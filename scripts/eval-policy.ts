@@ -109,7 +109,9 @@ Explain nothing the user demonstrably knows; spend explanatory bandwidth only ac
     tool_choice: { type: "tool", name: "label_cases" },
   });
   const tu = res.content.find((b) => b.type === "tool_use") as any;
-  const byCase = new Map<number, any>((tu.input.labels ?? []).map((l: any) => [l.case, l]));
+  const raw = tu.input.labels ?? [];
+  const labels: any[] = Array.isArray(raw) ? raw : Object.values(raw); // schema drift guard
+  const byCase = new Map<number, any>(labels.map((l: any) => [Number(l.case), l]));
   return batch.map((_, i) => {
     const l = byCase.get(offset + i);
     return l

@@ -57,13 +57,22 @@ export default function Home() {
   const anyLoading = Object.values(loading).some(Boolean);
 
   function markedAnswer(result: any) {
-    // Highlight extracted concept quotes inside the original answer, color-coded by decision.
+    // Highlight extracted concept quotes inside the original answer, color-coded by plan verdict.
     let html = escapeHtml(result.answer);
     const blocks = [...result.blocks].sort((a: any, b: any) => b.concept.quote.length - a.concept.quote.length);
     for (const b of blocks) {
-      const kind = b.decision.intervention === "none" ? "known" : b.decision.intervention === "reminder" ? "reminder" : "explain";
+      const verdict = b.plan?.verdict ?? (b.decision.intervention === "none" ? "suppress" : b.decision.intervention);
+      const kind =
+        verdict === "suppress" ? "known" : verdict === "reminder" ? "reminder" : verdict === "hedge" ? "hedge" : "explain";
       const q = escapeHtml(b.concept.quote);
       if (q && html.includes(q)) html = html.replace(q, `<mark class="${kind}">${q}</mark>`);
+    }
+    // Caveat spans (plan rule 4) get a persistent warning underline on top.
+    for (const c of result.plan?.caveats ?? []) {
+      const q = escapeHtml(c.quote);
+      if (q && html.includes(q) && !html.includes(`<mark class="caveat">${q}`)) {
+        html = html.replace(q, `<mark class="caveat" title="${escapeHtml(c.reason)}">${q}</mark>`);
+      }
     }
     return html;
   }
@@ -106,7 +115,7 @@ export default function Home() {
           <button className="btn" onClick={run} disabled={anyLoading || !answer.trim()}>
             {anyLoading ? "Personalizing…" : "Personalize"}
           </button>
-          {anyLoading && <span className="status">Fable extracts → Jev judges each concept → Fable fills the plan…</span>}
+          {anyLoading && <span className="status">Fable extracts → Jev judges each concept → Fable resolves the plan → fills content…</span>}
         </div>
         {error && <div className="error">{error}</div>}
       </div>
@@ -128,8 +137,19 @@ export default function Home() {
                       <ConceptCard key={b.concept.id} block={b} userId={uid} />
                     ))}
                   </div>
+                  {result.plan?.caveats?.length > 0 && (
+                    <div className="caveats">
+                      <div className="ptitle">⚠ Caveats preserved for every reader</div>
+                      {result.plan.caveats.map((c: any, i: number) => (
+                        <div className="pitem" key={i}>
+                          “{c.quote}” <span style={{ color: "var(--muted)" }}>— {c.reason}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div className="timing">
-                    extract {result.timing_ms.extract}ms · policy {result.timing_ms.policy}ms · render {result.timing_ms.render}ms
+                    extract {result.timing_ms.extract}ms · policy {result.timing_ms.policy}ms · annotate{" "}
+                    {result.timing_ms.annotate}ms · render {result.timing_ms.render}ms
                   </div>
                 </>
               )}

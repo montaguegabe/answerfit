@@ -7,8 +7,13 @@
     "build": "next build",
     "start": "next start -p 3210",
     "init-db": "tsx scripts/init-db.ts",
+    "ingest": "tsx scripts/ingest-transcripts.ts",
     "backfill": "tsx scripts/backfill.ts",
     "seed-personas": "tsx scripts/seed-personas.ts",
+    "recompute": "tsx scripts/recompute-states.ts",
+    "eval-state": "tsx scripts/eval-state.ts",
+    "tune-state": "tsx scripts/tune-state.ts",
+    "eval-policy": "tsx scripts/eval-policy.ts",
     "inspect": "tsx scripts/inspect-state.ts"
   },
   "dependencies": {

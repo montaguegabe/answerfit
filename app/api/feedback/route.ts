@@ -4,6 +4,9 @@ import { addEvidence, refreshState } from "@/lib/mastery";
 
 // Feedback → evidence append → state refresh (smaller-plan Day 4 loop).
 const ACTIONS: Record<string, { dimension: string; direction: number; strength: number }> = {
+  // Expanding a hedged (collapsed-likely-known) section: mild gap evidence —
+  // the user wanted the detail the model thought they wouldn't need.
+  expanded_hedge: { dimension: "explain", direction: -0.3, strength: 0.4 },
   already_knew: { dimension: "explain", direction: 2, strength: 0.95 },
   still_confused: { dimension: "explain", direction: -2, strength: 0.9 },
   more_detail: { dimension: "explain", direction: -0.5, strength: 0.5 },

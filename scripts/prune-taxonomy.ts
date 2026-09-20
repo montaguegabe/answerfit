@@ -101,7 +101,7 @@ Never retire induced or protected concepts. Do not retire something merely becau
     const [loser, winner] = score(a) >= score(b) ? [b, a] : [a, b];
     parent.set(loser, winner);
   }
-  for (const id of [...byId.keys()]) {
+  for (const id of [...byId.keys()] as string[]) {
     const root = find(id);
     if (root === id) continue;
     const from = byId.get(id) as any;
