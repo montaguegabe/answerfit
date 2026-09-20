@@ -877,7 +877,11 @@
         "scripts/promote",
         "protect staging branch",
         "staging stack variant",
-        "develop off staging"
+        "develop off staging",
+        "staging even with develop",
+        "staging promotion",
+        "release runbook",
+        "branches even"
       ],
       "category": "devops",
       "viz": "timeline",
@@ -1103,7 +1107,14 @@
         "direct vs relay",
         "connection options",
         "nwpathmonitor",
-        "suppress default stun"
+        "suppress default stun",
+        "ice tcp",
+        "call won't connect",
+        "webrtc connectivity",
+        "turn fallback",
+        "stun turn",
+        "call connectivity",
+        "webrtc stun"
       ],
       "category": "net",
       "viz": "sequence",
@@ -1701,7 +1712,10 @@
         "dispatcher thread",
         "dispatcher recreated",
         "purge scheduler",
-        "unfinished-work routine"
+        "unfinished-work routine",
+        "agent thread id",
+        "hook env injection",
+        "session env variable"
       ],
       "category": "ai",
       "viz": "sequence",
@@ -2217,7 +2231,10 @@
         "codex agents.md",
         "plan mode",
         "cursor ide",
-        "claude desktop"
+        "claude desktop",
+        "claude code profile",
+        "config profile isolation",
+        "default model override"
       ],
       "category": "ai",
       "viz": "sequence",
@@ -2307,7 +2324,12 @@
         "sandbox run commands",
         "codex inside docker",
         "codex lock down",
-        "unix user permissions codex"
+        "unix user permissions codex",
+        "filesystem tool access",
+        "break glass tools",
+        "sandbox without filesystem",
+        "restrict agent tools",
+        "agent filesystem access"
       ],
       "category": "ai",
       "viz": "prose",
@@ -2380,7 +2402,8 @@
         "env var config",
         "tfvars file",
         "ci secrets env",
-        "env variables docker compose"
+        "env variables docker compose",
+        "secret scanning gitleaks"
       ],
       "category": "infra",
       "viz": "prose",
@@ -2416,7 +2439,15 @@
         "menu bar app macos",
         "foreground app macos",
         "two dock icons",
-        "nsstatusitem"
+        "nsstatusitem",
+        "disable sleep lid close",
+        "recovery mode terminal",
+        "pmset",
+        "mac won't hold online",
+        "mac sleep settings",
+        "prevent sleep macos",
+        "macos recovery",
+        "recovery mode boot"
       ],
       "category": "infra",
       "viz": "prose",
@@ -3936,6 +3967,2939 @@
         "db.postgres_ops"
       ],
       "source": "induced"
+    },
+    {
+      "id": "new.git_rerere",
+      "name": "git rerere (reuse recorded resolutions)",
+      "aliases": [
+        "git rerere",
+        "reuse recorded resolutions"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "git.merge"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.integration_branch_serialization",
+      "name": "Integration branch / serialized merge queue",
+      "aliases": [
+        "integration branch serialization"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "git.merge",
+        "git.rebase"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.exclusive_file_open_flag",
+      "name": "Exclusive file open flag ('wx')",
+      "aliases": [
+        "exclusive file open flag",
+        "'wx'"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.fs_exists_check",
+      "name": "fs.existsSync check-then-write pattern",
+      "aliases": [
+        "fs.existssync check-then-write pattern",
+        "fs exists check"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ecs_container_resource_limits",
+      "name": "ECS container health checks & memory limits",
+      "aliases": [
+        "ecs container resource limits"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "infra.docker",
+        "infra.aws"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.burstable_cpu_credits",
+      "name": "Burstable instance CPU credits (t3.small)",
+      "aliases": [
+        "burstable instance cpu credits",
+        "t3.small",
+        "burstable cpu credits"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "infra.aws"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.merge_storm",
+      "name": "Merge storm (repeated rebase invalidation)",
+      "aliases": [
+        "merge storm",
+        "repeated rebase invalidation"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "git.rebase",
+        "git.dag"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.gunicorn_worker_scaling",
+      "name": "Worker process count & memory tradeoff",
+      "aliases": [
+        "gunicorn worker scaling"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "infra.reverse_proxy",
+        "concurrency.event_loop"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.sync_in_async_blocking",
+      "name": "Blocking the event loop with sync work",
+      "aliases": [
+        "sync in async blocking"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "concurrency.event_loop",
+        "python.async"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.t3_cpu_credits",
+      "name": "Burstable instance CPU credit exhaustion",
+      "aliases": [
+        "t3 cpu credits"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "infra.aws"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.channels_redis",
+      "name": "Channels-redis cross-process websocket state",
+      "aliases": [
+        "channels-redis cross-process websocket state",
+        "channels redis"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "web.websockets",
+        "django.framework"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ecs_health_check_gap",
+      "name": "Container health checks vs actual availability",
+      "aliases": [
+        "ecs health check gap"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "infra.aws",
+        "infra.docker"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.headless_provisioning",
+      "name": "Headless / non-interactive machine provisioning",
+      "aliases": [
+        "headless provisioning"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ec2_user_data",
+      "name": "EC2 user-data injection at boot",
+      "aliases": [
+        "ec2 user data"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.aws"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ami_baking",
+      "name": "AMI baking vs boot-time self-configuration",
+      "aliases": [
+        "ami baking"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "infra.aws",
+        "new.headless_provisioning"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.interactive_setup_flow",
+      "name": "The interactive login/setup flow being automated",
+      "aliases": [
+        "interactive setup flow"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.crdt",
+      "name": "CRDTs (conflict-free replicated data types)",
+      "aliases": [
+        "crdts",
+        "conflict-free replicated data types",
+        "crdt"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "infra.sync_replication"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.last_write_wins",
+      "name": "Last-write-wins conflict resolution",
+      "aliases": [
+        "last-write-wins conflict resolution",
+        "last write wins"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "infra.sync_replication"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.eventual_convergence",
+      "name": "Convergence via commutative/associative/idempotent merges",
+      "aliases": [
+        "eventual convergence"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.crdt"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.sequence_crdt",
+      "name": "Sequence CRDTs for text (RGA/Yjs)",
+      "aliases": [
+        "sequence crdts for text",
+        "rga/yjs",
+        "sequence crdt"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "new.crdt"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.tombstones",
+      "name": "Tombstones & compaction",
+      "aliases": [
+        "tombstones & compaction",
+        "tombstones"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "new.sequence_crdt"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.operational_transform",
+      "name": "Operational transform (OT)",
+      "aliases": [
+        "operational transform"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.claude_code_hooks",
+      "name": "Claude Code hooks & settings.json lifecycle events",
+      "aliases": [
+        "claude code hooks"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.coding_agents"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.transcript_cursor_tailing",
+      "name": "Per-session transcript tailing with a cursor",
+      "aliases": [
+        "transcript cursor tailing"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.claude_code_hooks"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.gap_gated_pipeline_economy",
+      "name": "Gap-gated staged pipeline (cheap gate skips expensive stages)",
+      "aliases": [
+        "gap-gated staged pipeline",
+        "gap gated pipeline economy"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.knowledge_tracing"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.deferred_notification",
+      "name": "Deferred, next-turn notification of async results",
+      "aliases": [
+        "deferred notification"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.claude_code_hooks",
+        "new.gap_gated_pipeline_economy"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.mastery_based_suppression",
+      "name": "Mastery-score-based concept suppression (per-concept discrimination)",
+      "aliases": [
+        "mastery-score-based concept suppression",
+        "per-concept discrimination",
+        "mastery based suppression"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "ai.knowledge_tracing"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.fail_silent_design",
+      "name": "Fail-silent hook design (no-op on failure, hard timeout)",
+      "aliases": [
+        "fail-silent hook design",
+        "fail silent design"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "new.claude_code_hooks"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.answer_hash_dedup",
+      "name": "Deduplication by content hash",
+      "aliases": [
+        "deduplication by content hash",
+        "answer hash dedup"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "security.crypto_basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.polling_ui",
+      "name": "Polling-based UI refresh",
+      "aliases": [
+        "polling-based ui refresh",
+        "polling ui"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.optimistic_concurrency_control",
+      "name": "Optimistic concurrency control (base_rev + conflict on overlap)",
+      "aliases": [
+        "optimistic concurrency control"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "db.transactions",
+        "concurrency.race_condition"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.suite_gated_commits",
+      "name": "Suite-gated commits (verification before landing)",
+      "aliases": [
+        "suite-gated commits",
+        "verification before landing",
+        "suite gated commits"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "db.transactions"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.occ_rebase_disjoint_nodes",
+      "name": "Auto-landing stale commits when changes are disjoint (OCC rebase)",
+      "aliases": [
+        "occ rebase",
+        "occ rebase disjoint nodes"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "new.optimistic_concurrency_control"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.verified_history_by_construction",
+      "name": "Every revision of main verified by construction",
+      "aliases": [
+        "verified history by construction"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.suite_gated_commits"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.merge_queue_speculation",
+      "name": "Merge queues & speculative parallel verification",
+      "aliases": [
+        "merge queue speculation"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "git.basics",
+        "concurrency.race_condition",
+        "devops.ci"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.green_main_guarantee",
+      "name": "Green-main guarantee (serialized landing order)",
+      "aliases": [
+        "green-main guarantee",
+        "serialized landing order",
+        "green main guarantee"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "git.merge"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.independent_base_testing",
+      "name": "Failure mode of testing on independent bases",
+      "aliases": [
+        "independent base testing"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "git.merge"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.sqlite_write_lock",
+      "name": "SQLite write locking & busy_timeout",
+      "aliases": [
+        "sqlite write lock"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "db.transactions",
+        "concurrency.mutex"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.dependency_hashed_test_caching",
+      "name": "Dependency-closure-hashed test result caching",
+      "aliases": [
+        "dependency-closure-hashed test result caching",
+        "dependency hashed test caching"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "security.crypto_basics",
+        "git.dag"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ast_program_database",
+      "name": "AST database with node-level content addressing",
+      "aliases": [
+        "ast program database"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "security.crypto_basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.test_impact_heuristics",
+      "name": "File-based CI test selection heuristics",
+      "aliases": [
+        "test impact heuristics"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "devops.ci"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.evict_and_retest",
+      "name": "Evict-and-retest on speculation failure",
+      "aliases": [
+        "evict-and-retest on speculation failure",
+        "evict and retest"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.merge_queue_speculation"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.llm_judge_pipeline",
+      "name": "LLM-as-judge classification (Jev judging)",
+      "aliases": [
+        "llm-as-judge classification",
+        "jev judging",
+        "llm judge pipeline"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.llm_basics",
+        "ai.structured_output"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.provenance_classification",
+      "name": "Message provenance & authorship detection (pasted vs. own words)",
+      "aliases": [
+        "pasted vs. own words",
+        "provenance classification"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "ai.knowledge_tracing"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.regex_heuristic_signals",
+      "name": "Regex/structural heuristics as fallback features",
+      "aliases": [
+        "regex heuristic signals"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.request_batching",
+      "name": "Batching questions into existing LLM calls",
+      "aliases": [
+        "request batching"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.llm_basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.git_history_mining",
+      "name": "Mining git history for doc edits as evidence",
+      "aliases": [
+        "git history mining"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "git.dag"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.git_identity_authorship",
+      "name": "Git identity, commit trailers & agent authorship attribution",
+      "aliases": [
+        "git identity authorship"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "git.basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.backfill_reprocessing",
+      "name": "Backfill / re-processing of historical data",
+      "aliases": [
+        "backfill reprocessing"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.branchless_workflow",
+      "name": "Branchless / trunk-only workflow for agents",
+      "aliases": [
+        "branchless workflow"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "db.transactions"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.dry_run_flag",
+      "name": "Dry-run commit (verify without landing)",
+      "aliases": [
+        "dry-run commit",
+        "verify without landing",
+        "dry run flag"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "db.transactions"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.synchronous_conflict_feedback",
+      "name": "Synchronous conflict report to the committing author",
+      "aliases": [
+        "synchronous conflict feedback"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "git.merge"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.event_driven_merge",
+      "name": "Auto-merge on ready (daemon/event handler instead of polling agent)",
+      "aliases": [
+        "auto-merge on ready",
+        "event driven merge"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_orchestration",
+        "git.merge"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.llm_as_judge",
+      "name": "LLM-as-judge pipeline (Jev making classification judgments)",
+      "aliases": [
+        "llm-as-judge pipeline",
+        "jev making classification judgments",
+        "llm as judge"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.llm_basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.structural_heuristics",
+      "name": "Structural/regex heuristics as fallback features",
+      "aliases": [
+        "structural heuristics"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.evidence_provenance",
+      "name": "Evidence provenance & pasted-text demotion",
+      "aliases": [
+        "evidence provenance"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "ai.knowledge_tracing"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.git_commit_authorship_attribution",
+      "name": "Git commit authorship & identity attribution",
+      "aliases": [
+        "git commit authorship attribution"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.calibration_metrics",
+      "name": "Calibration & log-loss evaluation metrics",
+      "aliases": [
+        "calibration metrics"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "stats.ml_methods"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.label_set_shift",
+      "name": "Outcome label set shift invalidating metric comparison",
+      "aliases": [
+        "label set shift"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "new.calibration_metrics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.cache_warming",
+      "name": "Cache warming / pre-computation of demo state",
+      "aliases": [
+        "cache warming"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.stop_hook_time_budget",
+      "name": "Stop hooks & their strict time budget",
+      "aliases": [
+        "stop hook time budget"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.coding_agents"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.deferred_one_turn_lag_pipeline",
+      "name": "Deferred result delivery (one-turn lag pattern)",
+      "aliases": [
+        "deferred result delivery",
+        "one-turn lag pattern"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.stop_hook_time_budget"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.background_async_processing",
+      "name": "Background async processing of long-running work",
+      "aliases": [
+        "background async processing"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.polling_vs_push",
+      "name": "Polling as a delivery mechanism",
+      "aliases": [
+        "polling vs push"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.push_notification_on_completion",
+      "name": "Server-fired macOS notification on completion",
+      "aliases": [
+        "push notification on completion"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "shell.tools"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.async_rewake_hook",
+      "name": "asyncRewake background hooks that wake the model",
+      "aliases": [
+        "async rewake hook"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "new.stop_hook_time_budget",
+        "ai.coding_agents"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.gap_gating",
+      "name": "Gap-gating (only notify when knowledge gaps found)",
+      "aliases": [
+        "gap-gating",
+        "gap gating"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ast_based_storage",
+      "name": "AST-based code storage (code as syntax tree, not files)",
+      "aliases": [
+        "ast-based code storage",
+        "ast based storage"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ast_level_merging",
+      "name": "AST-level (structural) merging vs textual diffs",
+      "aliases": [
+        "structural",
+        "ast level merging"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "git.merge"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.version_control_concept",
+      "name": "Version control systems",
+      "aliases": [
+        "version control systems",
+        "version control concept"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.speculative_merge_queue",
+      "name": "Speculative merge queue (verify optimistically, land on hash match)",
+      "aliases": [
+        "speculative merge queue"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "concurrency.race_condition",
+        "concurrency.mutex"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.occ_optimistic_concurrency",
+      "name": "Optimistic concurrency control (OCC) conflict checks",
+      "aliases": [
+        "occ optimistic concurrency"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "db.transactions"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.predicted_landing_state",
+      "name": "Predicted landing state (speculative verification target)",
+      "aliases": [
+        "predicted landing state",
+        "speculative verification target"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.dag",
+        "new.speculative_merge_queue"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.thread_safe_output_capture",
+      "name": "Thread-safe output capture (process-global stdout vs per-thread shadowing)",
+      "aliases": [
+        "thread-safe output capture",
+        "thread safe output capture"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "concurrency.race_condition",
+        "python.language"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.pure_function_convention",
+      "name": "Pure-function assumption for cache soundness (Unison-style)",
+      "aliases": [
+        "unison-style",
+        "pure function convention"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "new.dependency_hashed_test_caching"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.claude_code_stop_hooks",
+      "name": "Claude Code Stop hooks & live capture pipelines",
+      "aliases": [
+        "claude code stop hooks"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.coding_agents"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.evidence_hygiene_pipeline",
+      "name": "Evidence hygiene filtering (e.g., pasted-content exclusion)",
+      "aliases": [
+        "evidence hygiene filtering",
+        "e.g., pasted-content exclusion",
+        "evidence hygiene pipeline"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "ai.knowledge_tracing"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.sandboxed_iframe_rendering",
+      "name": "Sandboxed iframe rendering for untrusted visualization output",
+      "aliases": [
+        "sandboxed iframe rendering"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "ai.sandboxing"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.cross_repo_cherry_picking",
+      "name": "Cross-repo feature pulls & pull-manifest handoff",
+      "aliases": [
+        "cross repo cherry picking"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.cost_gating_skip_heavy",
+      "name": "Cost-gated pipeline short-circuiting (skipHeavyIfNoGaps)",
+      "aliases": [
+        "cost-gated pipeline short-circuiting",
+        "skipheavyifnogaps",
+        "cost gating skip heavy"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.llm_basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.llm_judge_fanout",
+      "name": "LLM-as-judge evidence extraction (Jev fan-out)",
+      "aliases": [
+        "llm-as-judge evidence extraction",
+        "jev fan-out",
+        "llm judge fanout"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.llm_basics",
+        "ai.structured_output"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.raft_leader_election",
+      "name": "Raft leader election (terms, states, RequestVote)",
+      "aliases": [
+        "raft leader election",
+        "terms, states, requestvote"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.consensus_replication",
+      "name": "Consensus & replicated log fundamentals",
+      "aliases": [
+        "consensus replication"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.quorum_majority",
+      "name": "Majority quorums & intersection argument",
+      "aliases": [
+        "quorum majority"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.randomized_election_timeout",
+      "name": "Randomized election timeouts & split votes",
+      "aliases": [
+        "randomized election timeout"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.raft_leader_election"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.log_up_to_date_check",
+      "name": "Log up-to-date voting restriction",
+      "aliases": [
+        "log up-to-date voting restriction"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "new.raft_leader_election",
+        "new.quorum_majority"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.commit_semantics",
+      "name": "Commit point & in-flight write outcomes",
+      "aliases": [
+        "commit semantics"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "new.quorum_majority",
+        "new.raft_leader_election"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.log_truncation",
+      "name": "AppendEntries consistency check & log truncation",
+      "aliases": [
+        "log truncation"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "new.raft_leader_election"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.figure8_no_op",
+      "name": "Figure 8 problem & no-op commit of prior-term entries",
+      "aliases": [
+        "figure8 no op"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "new.commit_semantics",
+        "new.log_up_to_date_check"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.client_ack_semantics",
+      "name": "Client retry semantics: timeout ≠ failed",
+      "aliases": [
+        "client ack semantics"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "new.commit_semantics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.idempotency_dedup",
+      "name": "Idempotency & client-session deduplication",
+      "aliases": [
+        "idempotency & client-session deduplication",
+        "idempotency dedup"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "new.client_ack_semantics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ast_database_codebase",
+      "name": "Database-backed codebase (no files, AST store)",
+      "aliases": [
+        "database-backed codebase",
+        "no files, ast store",
+        "ast database codebase"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "git.basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.optimistic_concurrency_eviction",
+      "name": "Optimistic commit queue with eviction & retry",
+      "aliases": [
+        "optimistic concurrency eviction"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "concurrency.race_condition"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.ast_as_database",
+      "name": "AST-as-database code storage (nodes instead of files)",
+      "aliases": [
+        "ast-as-database code storage",
+        "nodes instead of files",
+        "ast as database"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "new.operations_against_node_ids",
+      "name": "Editing via operations committed against node IDs",
+      "aliases": [
+        "operations against node ids"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "new.ast_as_database"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.render_at_revision",
+      "name": "Rendering any branch at any revision on demand",
+      "aliases": [
+        "render at revision"
+      ],
+      "category": "discovered",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.dag"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.files_on_disk_source",
+      "name": "Conventional files-on-disk source code model",
+      "aliases": [
+        "files on disk source"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "promoted"
+    },
+    {
+      "id": "macos.applescript_automation",
+      "name": "AppleScript & macOS UI automation (screenshots, foregrounding)",
+      "aliases": [
+        "applescript screenshot",
+        "applescript foreground window",
+        "background screenshot mac",
+        "macos accessibility permissions"
+      ],
+      "category": "macos",
+      "viz": "code",
+      "prereqs": [
+        "shell.tools",
+        "infra.launchd_services"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "macos.tcc_permissions",
+      "name": "macOS TCC privacy permissions (screen recording, desktop access)",
+      "aliases": [
+        "tcc permissions",
+        "screen recording permission",
+        "desktop folder access",
+        "macos privacy prompts"
+      ],
+      "category": "macos",
+      "viz": "prose",
+      "prereqs": [
+        "infra.launchd_services"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "macos.disk_space_diagnosis",
+      "name": "Disk space usage diagnosis on macOS",
+      "aliases": [
+        "out of disk space",
+        "disk usage breakdown",
+        "du disk space",
+        "find large files mac"
+      ],
+      "category": "macos",
+      "viz": "code",
+      "prereqs": [
+        "shell.tools",
+        "unix.permissions"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "db.duckdb_analytics",
+      "name": "DuckDB embedded analytics & local OLAP",
+      "aliases": [
+        "duckdb",
+        "duckdb local database",
+        "on-volume duckdb",
+        "embedded olap"
+      ],
+      "category": "db",
+      "viz": "code",
+      "prereqs": [
+        "db.sql",
+        "db.olap_analytics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "db.temp_table_concurrency",
+      "name": "Temp tables & session isolation under parallel ingestion",
+      "aliases": [
+        "create temp table",
+        "temp table parallel",
+        "session scoped temp table",
+        "concurrent ingest temp table"
+      ],
+      "category": "db",
+      "viz": "code",
+      "prereqs": [
+        "db.sql",
+        "db.transactions"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "data.columnar_file_formats",
+      "name": "Columnar & structured data formats (Parquet, JSONL, CSV conversion)",
+      "aliases": [
+        "convert to parquet",
+        "jsonl vs csv",
+        "parquet format",
+        "large file conversion"
+      ],
+      "category": "data",
+      "viz": "code",
+      "prereqs": [
+        "python.pandas"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "viz.agent_chart_rendering",
+      "name": "Agent-driven chart generation & grammar-of-graphics specs (Vega, GPT-Vis)",
+      "aliases": [
+        "vega lite spec",
+        "gpt-vis",
+        "agent generated charts",
+        "interactive graphs react"
+      ],
+      "category": "viz",
+      "viz": "code",
+      "prereqs": [
+        "ai.structured_output",
+        "web.nextjs"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.eval_cost_budgeting",
+      "name": "Eval run cost estimation & API credit budgeting",
+      "aliases": [
+        "eval run cost",
+        "api credits spent",
+        "cost per eval",
+        "run out of credit"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.model_selection",
+        "infra.cost_management",
+        "ai.agent_evals"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.eval_overfitting",
+      "name": "Overfitting eval harnesses to example cases",
+      "aliases": [
+        "overfitting to test cases",
+        "hardcoded example names",
+        "eval contamination",
+        "harness overfitting"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.agent_evals"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.context_template_hygiene",
+      "name": "Agent context file hygiene (templates & examples leaking into context)",
+      "aliases": [
+        "context.md template",
+        "examples in agent context",
+        "prompt template stripping",
+        "agent context pollution"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.tokens_context",
+        "ai.agent_skills"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.autonomous_agent_loops",
+      "name": "Autonomous agent loops & human-approval escalation",
+      "aliases": [
+        "agent approval gate",
+        "autonomous agent loop",
+        "notify before acting"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_orchestration",
+        "ai.coding_agents"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.dirty_git_state_sync",
+      "name": "Syncing dirty git state & .git across machines",
+      "aliases": [
+        "sync dirty git state",
+        "sync .git directory",
+        "git repo sync devices",
+        "uncommitted changes sync"
+      ],
+      "category": "infra",
+      "viz": "git_dag",
+      "prereqs": [
+        "infra.sync_replication",
+        "git.basics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "analytics.ga4_bigquery",
+      "name": "GA4 setup, event streams & BigQuery export",
+      "aliases": [
+        "ga4 data stream",
+        "google analytics bigquery",
+        "ga user id",
+        "analytics funnel dropoff",
+        "identify proxy",
+        "desktop analytics identity",
+        "analytics user id"
+      ],
+      "category": "analytics",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.analytics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "analytics.cross_platform_identity",
+      "name": "Cross-platform user identity stitching in analytics",
+      "aliases": [
+        "track users across platforms",
+        "identify proxy analytics",
+        "user id stitching",
+        "cross device analytics"
+      ],
+      "category": "analytics",
+      "viz": "prose",
+      "prereqs": [
+        "infra.analytics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "electron.app_packaging",
+      "name": "Electron macOS app packaging, dock icons & bundled companions",
+      "aliases": [
+        "electron dock icon duplicate",
+        "bundle helper app",
+        "electron dmg build"
+      ],
+      "category": "electron",
+      "viz": "prose",
+      "prereqs": [
+        "electron.desktop",
+        "infra.launchd_services"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "aws.cost_explorer_breakdown",
+      "name": "AWS cost breakdown & idle resource teardown",
+      "aliases": [
+        "aws cost breakdown cli",
+        "cost explorer cli",
+        "stop unused infrastructure"
+      ],
+      "category": "aws",
+      "viz": "code",
+      "prereqs": [
+        "infra.aws",
+        "infra.cost_management"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "net.p2p_relay_fallback",
+      "name": "P2P direct connection vs relay fallback & latency diagnosis",
+      "aliases": [
+        "direct connection failed relay",
+        "relay latency",
+        "nat traversal failure",
+        "why using relay"
+      ],
+      "category": "net",
+      "viz": "sequence",
+      "prereqs": [
+        "net.wireguard_mesh",
+        "web.turn_ice"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.taxonomy_bootstrapping",
+      "name": "Bootstrapping concept taxonomies from user history (vs hand-written seeds)",
+      "aliases": [
+        "seed taxonomy",
+        "taxonomy from transcripts",
+        "auto derived taxonomy",
+        "concept extraction history"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.knowledge_tracing",
+        "ai.llm_basics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "oss.boundary_scrubbing",
+      "name": "Open-source boundary setting & history scrubbing before publishing",
+      "aliases": [
+        "open source boundary",
+        "scrub git history",
+        "make repo public safely",
+        "history purge secrets"
+      ],
+      "category": "oss",
+      "viz": "prose",
+      "prereqs": [
+        "git.undo_recovery",
+        "infra.secrets_management"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.gmk_decompilation",
+      "name": "GMK decompilation & programmatic room editing",
+      "aliases": [
+        "decompile gmk",
+        "gmk recompile",
+        "game maker room edit",
+        "gmk file format"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [
+        "gamedev.gamemaker_porting"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "data.streaming_large_files",
+      "name": "Processing files too large for memory (streaming/chunked conversion)",
+      "aliases": [
+        "streaming file processing",
+        "chunked csv processing",
+        "process large files"
+      ],
+      "category": "data",
+      "viz": "code",
+      "prereqs": [
+        "python.language",
+        "python.pandas"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "devops.multi_agent_git_hygiene",
+      "name": "Separating commits among concurrent agents in one repo",
+      "aliases": [
+        "commit only my changes",
+        "separate agent commits",
+        "concurrent agents same repo",
+        "mixed working tree commit"
+      ],
+      "category": "devops",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "ai.coding_agents"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "mobile.push_notification_routing",
+      "name": "Mobile push notification delivery & routing (FCM/APNs)",
+      "aliases": [
+        "fcm inbound call",
+        "push notification cascade",
+        "apns delivery",
+        "notification trigger cloud",
+        "background call wake",
+        "background call wakeup",
+        "voip push",
+        "app backgrounded call"
+      ],
+      "category": "mobile",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "mobile.ios_android_feature_parity",
+      "name": "Cross-platform iOS/Android feature parity auditing",
+      "aliases": [
+        "ios android parity",
+        "feature parity check",
+        "android gaps",
+        "cross platform parity"
+      ],
+      "category": "mobile",
+      "viz": "prose",
+      "prereqs": [
+        "swift.ios_dev",
+        "android.dev"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "mobile.play_store_publishing",
+      "name": "Google Play Store publishing & closed testing requirements",
+      "aliases": [
+        "google play closed test",
+        "play store distribution",
+        "play console testers",
+        "apk distribution",
+        "12 testers 14 days"
+      ],
+      "category": "mobile",
+      "viz": "timeline",
+      "prereqs": [
+        "android.dev"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "net.vpn_split_tunneling",
+      "name": "VPN routing & split tunneling (device internet access under VPN)",
+      "aliases": [
+        "vpn blocks internet",
+        "split tunneling",
+        "vpn routing rules",
+        "android vpn service",
+        "staging vpn"
+      ],
+      "category": "net",
+      "viz": "sequence",
+      "prereqs": [
+        "net.tailscale",
+        "net.wireguard_mesh"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.agent_session_state_sync",
+      "name": "Agent session state sync across TUI/desktop/cloud surfaces",
+      "aliases": [
+        "tui sync",
+        "session state sync",
+        "steer codex turn",
+        "shared session list",
+        "codex remote mode",
+        "localdaemon vs remote",
+        "codex remote unix",
+        "app server binding",
+        "remote task resume"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.coding_agents"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.cli_agent_wrapping",
+      "name": "Wrapping & driving CLI coding agents from external processes",
+      "aliases": [
+        "wrap claude code",
+        "drive codex",
+        "pty wrapper",
+        "external message injection",
+        "agent transcript hook"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.coding_agents",
+        "shell.tools"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "security.bind_interface_exposure",
+      "name": "Network interface binding & 0.0.0.0 exposure",
+      "aliases": [
+        "bind 0.0.0.0",
+        "listen all interfaces",
+        "localhost binding",
+        "interface exposure"
+      ],
+      "category": "security",
+      "viz": "code",
+      "prereqs": [
+        "web.http"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "perf.web_page_load_profiling",
+      "name": "Page load & backend latency profiling (instrument, cache, measure)",
+      "aliases": [
+        "slow page load",
+        "thread loading slow",
+        "instrument latency",
+        "django cache",
+        "query profiling"
+      ],
+      "category": "perf",
+      "viz": "timeline",
+      "prereqs": [
+        "perf.benchmarking",
+        "django.framework"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "privacy.analytics_opt_in",
+      "name": "Analytics consent & opt-in defaults in shipped apps",
+      "aliases": [
+        "analytics opt in",
+        "telemetry default off",
+        "opt out analytics",
+        "desktop analytics consent"
+      ],
+      "category": "privacy",
+      "viz": "prose",
+      "prereqs": [
+        "infra.analytics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "docs.doc_drift_freshness",
+      "name": "Documentation drift & single-source-of-truth doc hygiene",
+      "aliases": [
+        "stale docs",
+        "doc drift",
+        "docs freshness",
+        "specs directory drift"
+      ],
+      "category": "docs",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "oss.public_repo_hygiene",
+      "name": "Keeping personal data & hard-coded config out of public repos",
+      "aliases": [
+        "hardcoded name",
+        "public skill reusable",
+        "repo scrubbing"
+      ],
+      "category": "oss",
+      "viz": "prose",
+      "prereqs": [
+        "oss.boundary_scrubbing"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.staging_isolation",
+      "name": "Shared vs isolated infrastructure for staging environments",
+      "aliases": [
+        "isolated staging infra",
+        "share prod infra",
+        "staging environment isolation",
+        "staging vs prod resources"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "devops.deploy_pipeline"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.golden_image_purity",
+      "name": "Golden VM images & keeping base images untainted",
+      "aliases": [
+        "golden image",
+        "tart golden vm",
+        "pristine base image",
+        "untainted starting point",
+        "vm image bake"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "infra.vm_emulation",
+        "new.ami_baking"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "web.deep_links",
+      "name": "Deep links & URL scheme handling in desktop/mobile apps",
+      "aliases": [
+        "deep link",
+        "url scheme",
+        "open url handler",
+        "app deep linking"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "crm.agent_driven_crm",
+      "name": "Agent-driven CRM & outreach automation (lead scoring, contact dedup)",
+      "aliases": [
+        "crm skill",
+        "lead scoring",
+        "contact dedup",
+        "agent crm",
+        "gmail contact sync",
+        "possible duplicates",
+        "crm dedup",
+        "merge duplicate contacts"
+      ],
+      "category": "crm",
+      "viz": "prose",
+      "prereqs": [
+        "ai.agent_skills"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "auth.oauth_token_expiry",
+      "name": "OAuth token refresh & expiring API access (Gmail/Luma sessions)",
+      "aliases": [
+        "gmail token expired",
+        "oauth refresh token",
+        "prevent token expiry",
+        "session expiry api"
+      ],
+      "category": "auth",
+      "viz": "sequence",
+      "prereqs": [
+        "web.oauth"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ios.device_automation_usb",
+      "name": "Driving physical iOS/Android devices over USB for testing",
+      "aliases": [
+        "build to iphone",
+        "usb device testing",
+        "automate phone tap",
+        "field testing phone",
+        "drive apk on phone"
+      ],
+      "category": "ios",
+      "viz": "prose",
+      "prereqs": [
+        "ai.device_automation",
+        "ios.build_distribution"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "collab.shared_doc_permissions",
+      "name": "Live collaborative editing & link-sharing permission models",
+      "aliases": [
+        "google doc style editing",
+        "anyone with link",
+        "read only sharing",
+        "live report editing",
+        "share permissions"
+      ],
+      "category": "collab",
+      "viz": "prose",
+      "prereqs": [
+        "new.crdt"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "repo.multi_workspace_organization",
+      "name": "Splitting monorepos & organizing multi-repo workspaces",
+      "aliases": [
+        "split ios app repo",
+        "workspace folder organization",
+        "multi workspace repos",
+        "repo split"
+      ],
+      "category": "repo",
+      "viz": "prose",
+      "prereqs": [
+        "tools.boilersync_multi",
+        "git.submodules"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.waitlist_email_failure",
+      "name": "Diagnosing transactional email & form submission failures (domain verification)",
+      "aliases": [
+        "waitlist broken",
+        "resend domain verified",
+        "contact form failing",
+        "email send error"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.email_deliverability"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.error_suppression_verification",
+      "name": "Verifying agent claims & fixing error-suppressing feedback loops",
+      "aliases": [
+        "error suppressed",
+        "confidently said working",
+        "false success report",
+        "agent verification loop"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.autonomous_agent_loops"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "analytics.funnel_analysis",
+      "name": "User funnel analysis & drop-off visualization",
+      "aliases": [
+        "funnel analysis",
+        "onboarding funnel",
+        "user drop off",
+        "signup funnel",
+        "conversion funnel"
+      ],
+      "category": "analytics",
+      "viz": "prose",
+      "prereqs": [
+        "infra.analytics",
+        "analytics.ga4_bigquery"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ios.usb_device_tunneling",
+      "name": "iOS USB device tunneling & pairing daemons (tunneld)",
+      "aliases": [
+        "tunneld",
+        "ios usb tunnel",
+        "device pairing daemon",
+        "usb device connection"
+      ],
+      "category": "ios",
+      "viz": "sequence",
+      "prereqs": [
+        "ios.device_automation_usb"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.agent_watchdog_stall_detection",
+      "name": "Agent stall detection & watchdog recovery",
+      "aliases": [
+        "agent watchdog",
+        "stall detection",
+        "agent hang recovery",
+        "detect agent pause"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.autonomous_agent_loops",
+        "ai.cli_agent_wrapping"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "perf.binary_field_layout",
+      "name": "Binary record layouts & ranged field reads vs compression",
+      "aliases": [
+        "ranged field reads",
+        "per-field compression",
+        "binary record format",
+        "fixed offset reads"
+      ],
+      "category": "perf",
+      "viz": "code",
+      "prereqs": [
+        "python.serialization_perf",
+        "perf.benchmarking"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.artifact_rendering_contract",
+      "name": "Agent artifact rendering contracts (render_* artifacts vs files)",
+      "aliases": [
+        "render artifacts",
+        "artifact rendering",
+        "agent chart artifacts",
+        "ephemeral sandbox files"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "viz.agent_chart_rendering",
+        "ai.sandboxing"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "macos.app_bundling_companion",
+      "name": "Bundling companion helpers inside a single macOS .app",
+      "aliases": [
+        "companion app bundle",
+        "helper app macos",
+        "bundled companion",
+        "single app bundle"
+      ],
+      "category": "macos",
+      "viz": "prose",
+      "prereqs": [
+        "electron.app_packaging",
+        "infra.launchd_services"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.agent_notification_escalation",
+      "name": "Agent-initiated notification & approval escalation (tts/call when action needed)",
+      "aliases": [
+        "agent notify me",
+        "approval escalation",
+        "agent calls user",
+        "tts notification"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.autonomous_agent_loops",
+        "new.push_notification_on_completion"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "api.backwards_compatible_deprecation",
+      "name": "Backwards-compatible command/API changes & deprecation warnings",
+      "aliases": [
+        "deprecation warning",
+        "backwards compatible command",
+        "breaking cli change",
+        "compat shim"
+      ],
+      "category": "api",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.dsl_vs_standard_spec",
+      "name": "Custom mini-spec vs standard grammar (Vega) tradeoff for generated visualizations",
+      "aliases": [
+        "mini spec vs vega",
+        "custom chart spec",
+        "vega tradeoff",
+        "chart dsl design"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "viz.agent_chart_rendering"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "data.fmcg_scale_estimation",
+      "name": "Estimating whether analytics tooling scales to production data volume",
+      "aliases": [
+        "data scale estimate",
+        "would data fit locally",
+        "scale to real data",
+        "local vs warehouse"
+      ],
+      "category": "data",
+      "viz": "prose",
+      "prereqs": [
+        "db.duckdb_analytics",
+        "data.retail_analytics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "devops.pypi_package_naming",
+      "name": "PyPI package publishing & name reservation",
+      "aliases": [
+        "pypi name",
+        "pypi package publish",
+        "reserve package name",
+        "pypi release"
+      ],
+      "category": "devops",
+      "viz": "prose",
+      "prereqs": [
+        "python.env",
+        "devops.deploy_pipeline"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "unison.content_addressed_code",
+      "name": "Unison & content-addressed codebases (UCM)",
+      "aliases": [
+        "unison language",
+        "unison ucm",
+        "content addressed code",
+        "unison codebase manager"
+      ],
+      "category": "unison",
+      "viz": "prose",
+      "prereqs": [
+        "new.ast_as_database",
+        "new.pure_function_convention"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.agent_marketplace_simulation",
+      "name": "Agent network/marketplace simulation (NANDA-style agent economies)",
+      "aliases": [
+        "project nanda",
+        "agent marketplace",
+        "agent auction",
+        "agent network simulation"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.agent_orchestration"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.model_tier_cost_policy",
+      "name": "Assigning model tiers to background agent loops by cost",
+      "aliases": [
+        "model tier policy",
+        "cheap model for loops",
+        "background agent model",
+        "model cost policy"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.model_selection",
+        "infra.cost_management"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "security.agent_email_attack_vector",
+      "name": "Email as an agent attack vector & sender verification skills",
+      "aliases": [
+        "email attack vector",
+        "proof sender",
+        "gmail skill security",
+        "agent email safety"
+      ],
+      "category": "security",
+      "viz": "prose",
+      "prereqs": [
+        "ai.prompt_injection",
+        "auth.oauth_token_expiry"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.multi_device_thread_sync",
+      "name": "Cross-device thread/report sync with dedup & pagination",
+      "aliases": [
+        "cross device threads",
+        "thread sync devices",
+        "report dedup",
+        "server pagination sync"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_session_state_sync",
+        "infra.sync_replication"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.sync_deletion_propagation",
+      "name": "Deletion propagation in file/state sync",
+      "aliases": [
+        "deletion propagation",
+        "sync deletions",
+        "propagate deletes",
+        "folder deletion sync"
+      ],
+      "category": "new",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.sync_replication"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.repo_dormancy_detection",
+      "name": "Detecting active vs dormant repos (mtime heuristics)",
+      "aliases": [
+        "dormant repo",
+        "recently changed files",
+        "filesystem mtime",
+        "repo activity detection"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "shell.tools",
+        "git.basics"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.env_var_migration_compat",
+      "name": "Environment variable renaming & backwards-compat fallback",
+      "aliases": [
+        "env var rename",
+        "backwards compat env var",
+        "environment variable fallback",
+        "phase out env var"
+      ],
+      "category": "new",
+      "viz": "code",
+      "prereqs": [
+        "api.backwards_compatible_deprecation"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.shared_session_store",
+      "name": "Shared conversation/session storage across agent surfaces",
+      "aliases": [
+        "shared session store",
+        "shared history file",
+        "session list sync",
+        "conversation storage location"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "ai.agent_session_state_sync"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.django_view_caching",
+      "name": "Django caching layers for slow views",
+      "aliases": [
+        "django memory cache",
+        "django cache framework",
+        "view caching django",
+        "cache slow endpoint"
+      ],
+      "category": "new",
+      "viz": "code",
+      "prereqs": [
+        "django.framework",
+        "perf.web_page_load_profiling"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.notification_trigger_fanout",
+      "name": "Event-triggered notifications vs client-open cascades",
+      "aliases": [
+        "notification cascade",
+        "notification trigger",
+        "push on report created",
+        "notification fanout"
+      ],
+      "category": "new",
+      "viz": "sequence",
+      "prereqs": [
+        "mobile.push_notification_routing"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.deploy_env_var_persistence",
+      "name": "Preserving env vars/secrets across deployments",
+      "aliases": [
+        "keys dropped on deploy",
+        "env vars deploy",
+        "secrets persistence deploy",
+        "readback env vars"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "infra.secrets_management",
+        "devops.deploy_pipeline"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.desktop_status_bar_devices",
+      "name": "Status bar/menu-bar device presence & stale device pruning",
+      "aliases": [
+        "status bar dropdown",
+        "stale devices",
+        "menu bar app devices",
+        "device presence list"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "infra.launchd_services"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.system_prompt_exfiltration",
+      "name": "System prompt extraction & agent probing attacks",
+      "aliases": [
+        "reproduce system message",
+        "system prompt leak",
+        "prompt extraction",
+        "verbatim system prompt"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "ai.prompt_injection"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.agent_blocking_wait_probes",
+      "name": "Blocking wait loops & mid-turn message injection probes",
+      "aliases": [
+        "flag file wait loop",
+        "sleep until flag",
+        "mid turn injection",
+        "bash wait probe"
+      ],
+      "category": "new",
+      "viz": "code",
+      "prereqs": [
+        "ai.prompt_injection",
+        "ai.sandboxing"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.first_registered_wins_selection",
+      "name": "First-registered-wins backend/device selection bugs",
+      "aliases": [
+        "first desktop wins",
+        "backend selection bug",
+        "device selection order",
+        "first registered wins"
+      ],
+      "category": "new",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_session_state_sync"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.event_attendee_export",
+      "name": "Event platform data export for outreach (Luma/Partiful CSV)",
+      "aliases": [
+        "luma export csv",
+        "attendee export",
+        "partiful attendees",
+        "event guest list export"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "crm.agent_driven_crm"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.report_write_authorization",
+      "name": "External edit authorization & default-private sharing for synced docs",
+      "aliases": [
+        "report edit source",
+        "external user edits",
+        "default nothing shared"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "collab.shared_doc_permissions",
+        "infra.multi_device_thread_sync"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.reusable_skill_parameterization",
+      "name": "Keeping personal data out of reusable agent skills",
+      "aliases": [
+        "skill personal data",
+        "reusable skill",
+        "baked in accounts",
+        "parameterize skill"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "ai.agent_skills",
+        "oss.public_repo_hygiene"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.tts_transcribe_field_loop",
+      "name": "TTS + mic-record/transcribe loops for agent field testing",
+      "aliases": [
+        "tts then transcribe",
+        "mic record transcribe",
+        "field testing audio loop",
+        "tts prompt user"
+      ],
+      "category": "new",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.tts_stt_services",
+        "ai.agent_notification_escalation"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.apex_domain_redirects",
+      "name": "Apex domain redirects & deploy-preview URL leakage",
+      "aliases": [
+        "domain redirect wrong",
+        "deploy preview url",
+        "apex redirect",
+        "redirect to canonical domain"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "infra.dns",
+        "infra.cloudflare_hosting"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.claude_code_notification_hooks",
+      "name": "Hooking agent pause/question events for audible alerts",
+      "aliases": [
+        "beep on question",
+        "claude code notification hook",
+        "alert when agent asks",
+        "hook pause event"
+      ],
+      "category": "new",
+      "viz": "code",
+      "prereqs": [
+        "new.claude_code_hooks"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.opaque_reference_preset",
+      "name": "Precise-reference conventions in agent presets (paths, UUIDs, hashes)",
+      "aliases": [
+        "say file paths uuids",
+        "preset reference convention",
+        "commit hashes in replies",
+        "agent naming preset"
+      ],
+      "category": "new",
+      "viz": "prose",
+      "prereqs": [
+        "ai.context_template_hygiene"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.physics_ball_games",
+      "name": "3D ball physics & gameplay tuning (bounce, spin, collision)",
+      "aliases": [
+        "ball physics bounce",
+        "ball collision tuning",
+        "ball spin physics",
+        "physics gameplay tuning"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [
+        "graphics.3d_engines"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.third_person_camera",
+      "name": "3rd-person camera systems (follow cam, adaptive framing, look controls)",
+      "aliases": [
+        "third person camera",
+        "camera follow player",
+        "adaptive game camera",
+        "camera look controls"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [
+        "graphics.3d_engines"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.pointer_lock_input",
+      "name": "Browser pointer lock & mouse-based game input",
+      "aliases": [
+        "pointer lock",
+        "pointer lock api",
+        "mouse aim browser game",
+        "mouse sensitivity game"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.slow_motion_hit_timing",
+      "name": "Hit timing windows, slow-motion & gameplay feedback",
+      "aliases": [
+        "slow motion gameplay",
+        "hit timing window",
+        "swing timing feedback",
+        "time scale game"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.real_world_3d_modeling",
+      "name": "Modeling real-world environments in games (3D scans, OBJ import, measured geometry)",
+      "aliases": [
+        "3d scan import",
+        "obj file import",
+        "real world game geometry",
+        "photogrammetry scan game"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [
+        "graphics.3d_engines"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.trajectory_prediction",
+      "name": "Trajectory prediction & landing markers",
+      "aliases": [
+        "trajectory prediction",
+        "ball landing marker",
+        "projectile trace",
+        "predicted path visualization"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.lan_multiplayer_state",
+      "name": "LAN-hosted shared game state (local server, multi-device sync)",
+      "aliases": [
+        "lan multiplayer server",
+        "local network game server",
+        "shared state lan",
+        "multi device score sync"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [
+        "web.websockets"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "web.responsive_touch_ui",
+      "name": "Mobile-friendly touch UI & thumb-zone layout",
+      "aliases": [
+        "thumb zone",
+        "mobile touch layout",
+        "thumb zone buttons",
+        "responsive game ui"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [
+        "css.layout"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "web.fixed_aspect_fullscreen",
+      "name": "Fixed aspect ratio & fullscreen for web games",
+      "aliases": [
+        "fixed aspect ratio game",
+        "fullscreen api",
+        "letterbox game canvas",
+        "aspect ratio canvas"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "css.layout"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "graphics.zfighting_lighting",
+      "name": "Z-fighting, coplanar surfaces & lighting artifacts",
+      "aliases": [
+        "z-fighting",
+        "coplanar surface flicker",
+        "surface flickering 3d",
+        "lighting artifacts 3d"
+      ],
+      "category": "graphics",
+      "viz": "prose",
+      "prereqs": [
+        "graphics.3d_engines"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.imessage_agent_gateway",
+      "name": "Agent-mediated iMessage/WhatsApp sending with approval gating",
+      "aliases": [
+        "imessage automation",
+        "whatsapp agent send",
+        "approved contacts messaging",
+        "agent send imessage"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_notification_escalation"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.approval_queue_ux",
+      "name": "Human approval queues for agent actions (expiry, redaction, rendering)",
+      "aliases": [
+        "approval queue",
+        "agent approval expiry",
+        "approvals tab"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.autonomous_agent_loops"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "net.vpn_hostname_scheme",
+      "name": "Tailnet hostname schemes & port-free service addressing",
+      "aliases": [
+        "vpn hostname collision",
+        "port free domain",
+        "custom vpn domain",
+        "tailnet dns names"
+      ],
+      "category": "net",
+      "viz": "prose",
+      "prereqs": [
+        "net.tailscale",
+        "infra.dns"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "email.multi_provider_cli",
+      "name": "Multi-provider email CLI (Gmail/Outlook auth, drafts vs send)",
+      "aliases": [
+        "outlook cli",
+        "gmail cli",
+        "email cli auth",
+        "smtp send cli"
+      ],
+      "category": "email",
+      "viz": "code",
+      "prereqs": [
+        "auth.oauth_token_expiry"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.agent_calendar_scheduling",
+      "name": "Agent-driven calendar management & availability filling",
+      "aliases": [
+        "agent calendar access",
+        "fill availability",
+        "google calendar automation",
+        "calendar event automation"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "auth.oauth_token_expiry"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.health_check_design",
+      "name": "Service health check design (binary health, self-probe pitfalls)",
+      "aliases": [
+        "health check design",
+        "self probe",
+        "healthy unhealthy states",
+        "service health endpoint"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "infra.observability"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.voice_call_field_testing",
+      "name": "Field-testing voice agents over phone calls (mute/unmute, audio routing)",
+      "aliases": [
+        "voice agent field test",
+        "phone call agent testing",
+        "audio routing bluetooth",
+        "agent unmute speak"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.voice_pipeline",
+        "new.tts_transcribe_field_loop"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "docs.runbook_dry_docs",
+      "name": "Runbooks & DRY documentation across dev/non-dev flows",
+      "aliases": [
+        "runbook documentation",
+        "dry runbooks",
+        "onboarding runbook",
+        "install runbook"
+      ],
+      "category": "docs",
+      "viz": "prose",
+      "prereqs": [
+        "docs.doc_drift_freshness"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "privacy.telemetry_content_scope",
+      "name": "Telemetry scoping: metadata vs content in app analytics",
+      "aliases": [
+        "telemetry content privacy",
+        "what telemetry is sent",
+        "analytics data scope",
+        "telemetry redaction"
+      ],
+      "category": "privacy",
+      "viz": "prose",
+      "prereqs": [
+        "privacy.analytics_opt_in"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "web.tabbed_pane_workspace",
+      "name": "Tabbed/split-pane workspace UI (preview tabs, keyboard shortcuts, layout state)",
+      "aliases": [
+        "split pane tabs",
+        "preview tab behavior",
+        "tab keyboard shortcuts",
+        "workspace layout state"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [
+        "react.rendering",
+        "electron.desktop"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ethics.automation_norms",
+      "name": "Ethics of automating human-like actions (outreach, platform norms)",
+      "aliases": [
+        "automation ethics",
+        "is automating this ok",
+        "outreach automation ethics",
+        "platform terms automation"
+      ],
+      "category": "ethics",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.game_asset_music_generation",
+      "name": "AI-generated game audio & selecting among generations",
+      "aliases": [
+        "ai music generation",
+        "generated game music",
+        "sound effects generation",
+        "pick generation option"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
     }
   ]
 }

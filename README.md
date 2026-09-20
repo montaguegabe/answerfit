@@ -101,3 +101,25 @@ evidence. No hook, no second surface, no deferred notification.
 Note: Fable 5's API safety layer hard-refuses some innocuous prompts
 (observed: output-shaping system-prompt sentences; a BGP route-manipulation
 question). The route surfaces these as a friendly notice.
+
+## Open-world concept registry
+
+The taxonomy is no longer closed-world:
+
+1. **Promotion at mint-time** — when extraction mints a `new.*` concept, it
+   joins `taxonomy/concepts.json` immediately (aliases derived from its name,
+   `source: "promoted"`), so live capture and future backfills accumulate
+   evidence on it from first mention. `promoteOrphans()` retro-registered the
+   ~100 concepts minted before this existed.
+2. **Standing discovery** — unmatched live-captured messages queue in
+   `unmatched_messages`; when the backlog exceeds ~150 (max hourly), or via
+   `npm run discover`, Fable proposes concepts from recent unmatched-but-
+   technical messages/searches and an alias merge dedupes against the
+   registry (`lib/discovery.ts`, cursor in the `kv` table). The one-shot
+   induce-taxonomy is now a loop: the vocabulary tracks what you're actually
+   learning.
+3. *(Deferred)* embedding-similarity matching for paraphrases the alias
+   regex misses ("rewriting commit history" → git.rebase).
+
+Registry mutations invalidate the in-process alias cache and the extraction
+cache (taxonomy hash is part of its key), and sync the DB `concepts` table.

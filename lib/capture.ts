@@ -4,6 +4,7 @@ import { addEvidence, refreshState } from "./mastery";
 import { matchConcepts } from "./taxonomy";
 import { interpretChatEvent, CONFUSION, type ChatEvent } from "./interpret";
 import { personalize, finalVerdict, type ConceptBlock } from "./pipeline";
+import { maybeTriggerDiscovery } from "./discovery";
 
 /**
  * Live capture loop (Claude Code Stop hook → here):
@@ -37,6 +38,14 @@ export async function ingestLiveMessages(userId: string, messages: CaptureUserMe
       concepts = matchConcepts(ev.prev_assistant_tail).slice(0, 3);
       inUserText = false;
     }
+    if (concepts.length === 0) {
+      // Closed-world escape hatch: queue for periodic concept discovery
+      // instead of dropping the message on the floor.
+      db()
+        .prepare("INSERT INTO unmatched_messages (ts, user_id, source, text) VALUES (?, ?, ?, ?)")
+        .run(ev.ts, userId, ev.source, ev.user_text.slice(0, 400));
+      continue;
+    }
     for (const c of concepts.slice(0, 3)) {
       const interp = await interpretChatEvent(ev, c.name, inUserText, true);
       addEvidence({
@@ -55,6 +64,7 @@ export async function ingestLiveMessages(userId: string, messages: CaptureUserMe
       added++;
     }
   }
+  maybeTriggerDiscovery();
   return added;
 }
 

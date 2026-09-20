@@ -1,6 +1,6 @@
 import { db } from "./db";
 import { getEvidence, getState, type EvidenceRow } from "./mastery";
-import { conceptById } from "./taxonomy";
+import { conceptById, registerConcepts, deriveAliases } from "./taxonomy";
 import {
   extractConcepts,
   escalatePolicy,
@@ -265,6 +265,25 @@ export async function personalize(
   const t0 = Date.now();
   emit({ type: "stage", stage: "extract" });
   const concepts = await extractConcepts(answer);
+  // Promotion: a minted new.* concept joins the registry immediately, with
+  // aliases derived from its name — from now on live capture and backfills
+  // accumulate evidence on it instead of it staying an evidence-less orphan.
+  const minted = concepts.filter((c) => c.id.startsWith("new."));
+  if (minted.length) {
+    const { merged } = registerConcepts(
+      minted.map((c) => ({
+        id: c.id,
+        name: c.name,
+        aliases: deriveAliases(c.id, c.name),
+        category: "discovered",
+        viz: c.viz_hint,
+        prereqs: c.prereqs,
+        source: "promoted" as const,
+      }))
+    );
+    // A mint that collided with an existing concept's aliases is that concept.
+    for (const c of concepts) if (merged[c.id]) c.id = merged[c.id];
+  }
   emit({ type: "concepts", concepts: concepts.map((c) => ({ id: c.id, name: c.name, quote: c.quote })) });
   const t1 = Date.now();
 

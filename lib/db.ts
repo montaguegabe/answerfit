@@ -100,6 +100,25 @@ function migrate(d: Database.Database) {
   `);
 
   d.exec(`
+    -- Small key/value store (discovery cursor, run guards).
+    CREATE TABLE IF NOT EXISTS kv (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
+
+    -- Live-captured user messages that matched no registry concept: the input
+    -- queue for periodic concept discovery (closed-world escape hatch).
+    CREATE TABLE IF NOT EXISTS unmatched_messages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      ts TEXT NOT NULL,
+      user_id TEXT NOT NULL,
+      source TEXT NOT NULL,
+      text TEXT NOT NULL,
+      processed INTEGER NOT NULL DEFAULT 0
+    );
+  `);
+
+  d.exec(`
     -- Custom-visualization recurrence log: form_slugs that keep appearing are
     -- candidates for promotion into the fixed renderer vocabulary.
     CREATE TABLE IF NOT EXISTS custom_renders (
@@ -116,6 +135,15 @@ function migrate(d: Database.Database) {
   const cols = (d.prepare("PRAGMA table_info(concept_state)").all() as { name: string }[]).map((c) => c.name);
   if (!cols.includes("stability_days")) d.exec("ALTER TABLE concept_state ADD COLUMN stability_days REAL");
   if (!cols.includes("retrievability")) d.exec("ALTER TABLE concept_state ADD COLUMN retrievability REAL");
+}
+
+export function kvGet(key: string): string | null {
+  const row = db().prepare("SELECT value FROM kv WHERE key = ?").get(key) as { value: string } | undefined;
+  return row?.value ?? null;
+}
+
+export function kvSet(key: string, value: string) {
+  db().prepare("INSERT OR REPLACE INTO kv (key, value) VALUES (?, ?)").run(key, value);
 }
 
 export function cacheGet(key: string): unknown | null {
