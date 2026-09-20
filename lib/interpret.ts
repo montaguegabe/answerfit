@@ -116,10 +116,15 @@ export async function interpretEvent(ev: RawHistoryEvent, conceptName: string, u
 
 export interface ChatEvent {
   ts: string;
-  source: "claude_code" | "codex";
+  source: "claude_code" | "codex" | "chat_app";
   user_text: string;
   prev_assistant_tail: string;
+  provenance_hint?: "typed" | "pasted"; // cheap structural guess; Jev decides
 }
+
+// Fallback-only (no-Jev path). The real judgments — own-words provenance and
+// instructs/documents detection — are Jev questions in JEV_CHAT_QUESTIONS.
+const INSTRUCTS_FALLBACK = /\b(add (a )?rule|document that|update the (readme|docs|agents\.md|claude\.md))\b/i;
 
 export const CONFUSION = /(don'?t (understand|get|follow)|what does (that|this|it) mean|what (is|are|does|do you mean)|i'?m (confused|lost)|can you explain|explain (that|this|what)|huh\?|wait,? (what|why)|why (is|does|did|would))/i;
 
@@ -128,11 +133,17 @@ const CHAT_SIGNAL_MAP: Record<string, { dimension: Interpretation["dimension"]; 
   asks_for_explanation: { dimension: "recognition", direction: -0.85 },
   asks_advanced_question: { dimension: "explain", direction: 0.4 },
   uses_correctly: { dimension: "apply", direction: 0.75 },
+  instructs_or_documents: { dimension: "explain", direction: 0.85 },
   corrects_assistant: { dimension: "debug", direction: 0.9 },
   incidental: { dimension: "recognition", direction: 0.05 },
 };
 
 const JEV_CHAT_QUESTIONS = (conceptName: string): Record<string, JevQuestion> => ({
+  own_words: {
+    type: "noul",
+    instructions:
+      "Is this message the user's own typed thought — as opposed to pasted material (an AI answer, log/terminal output, documentation excerpt, code blob) or platform-injected instructions? Structural features are included in the state; judge from the text itself.",
+  },
   signal: {
     type: "choice",
     instructions: `This is a message the user typed to an AI coding assistant (with the assistant's preceding message for context). What does it imply about the user's knowledge of "${conceptName}" at that moment?`,
@@ -141,6 +152,7 @@ const JEV_CHAT_QUESTIONS = (conceptName: string): Record<string, JevQuestion> =>
       asks_for_explanation: `User asks what "${conceptName}" is or how it works — basic information seeking`,
       asks_advanced_question: `User asks a specific/advanced question that presupposes understanding the basics of "${conceptName}"`,
       uses_correctly: `User employs "${conceptName}" fluently and correctly while directing work`,
+      instructs_or_documents: `User dictates a rule, convention, or documentation content involving "${conceptName}" (e.g. telling the agent what to write in AGENTS.md/README) — teaching-level signal`,
       corrects_assistant: `User correctly corrects or challenges the assistant about "${conceptName}" — expert-level signal`,
       incidental: "The concept mention is incidental; little can be inferred",
     },
@@ -153,12 +165,19 @@ const JEV_CHAT_QUESTIONS = (conceptName: string): Record<string, JevQuestion> =>
 });
 
 export function heuristicInterpretChat(ev: ChatEvent, conceptInUserText: boolean): Interpretation {
+  if (ev.provenance_hint === "pasted") {
+    // Pasted/injected blob: exposure, not the user's own words.
+    return { dimension: "recognition", direction: 0.1, strength: 0.3, interpretation: "pasted_exposure", judge: "heuristic" };
+  }
   if (!conceptInUserText) {
     // Concept only appears in the assistant's preceding message → attributed confusion.
     return { dimension: "explain", direction: -0.8, strength: 0.6, interpretation: "confusion_about_prior_message", judge: "heuristic" };
   }
   if (CONFUSION.test(ev.user_text)) {
     return { dimension: "recognition", direction: -0.7, strength: 0.7, interpretation: "asks_for_explanation", judge: "heuristic" };
+  }
+  if (INSTRUCTS_FALLBACK.test(ev.user_text)) {
+    return { dimension: "explain", direction: 0.85, strength: 0.7, interpretation: "instructs_or_documents", judge: "heuristic" };
   }
   return { dimension: "apply", direction: 0.4, strength: 0.55, interpretation: "uses_correctly", judge: "heuristic" };
 }
@@ -178,9 +197,19 @@ export async function interpretChatEvent(
           preceding_assistant_message_excerpt: ev.prev_assistant_tail.slice(-500),
           concept: conceptName,
           concept_appears_in: conceptInUserText ? "user_message" : "preceding_assistant_message_only",
+          structural_features: {
+            length_chars: ev.user_text.length,
+            line_count: ev.user_text.split("\n").length,
+            looks_pasted_hint: ev.provenance_hint === "pasted",
+          },
         },
         JEV_CHAT_QUESTIONS(conceptName)
       );
+      const own = (res.answers.own_words as JevNoulAnswer).noul;
+      if (own < 0.4) {
+        // Jev judges this pasted/injected: exposure evidence only.
+        return { dimension: "recognition", direction: 0.1, strength: 0.3, interpretation: "pasted_exposure", judge: "jev" };
+      }
       const signal = res.answers.signal as JevChoiceAnswer;
       const strength = res.answers.strength as JevScoreAnswer;
       const mapped = CHAT_SIGNAL_MAP[signal.choice] ?? CHAT_SIGNAL_MAP.incidental;

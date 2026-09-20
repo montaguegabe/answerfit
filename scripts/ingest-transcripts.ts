@@ -53,6 +53,26 @@ function cleanUserText(txt: string): string | null {
   return t.slice(0, MAX_USER_LEN);
 }
 
+/**
+ * Cheap structural HINT only — the real provenance judgment is Jev's
+ * `own_words` question at interpret time (lib/interpret.ts); this hint is one
+ * feature in that state plus the no-Jev fallback verdict.
+ */
+function guessProvenance(raw: string, cleaned: string, prevAssistant: string): "typed" | "pasted" {
+  if (raw.length >= 1400) return "pasted"; // at/near the truncation cap
+  const lines = cleaned.split("\n");
+  if (lines.length > 8) {
+    const structural = lines.filter((l) => /^\s*([#>\-*|]|\d+\.|```)/.test(l)).length;
+    if (structural / lines.length > 0.5 || cleaned.includes("```")) return "pasted";
+  }
+  // Verbatim overlap with the assistant's preceding message = quoted-back text.
+  if (cleaned.length > 200 && prevAssistant.length > 200) {
+    const probe = cleaned.slice(50, 130);
+    if (probe.length > 60 && prevAssistant.includes(probe)) return "pasted";
+  }
+  return "typed";
+}
+
 function listJsonl(root: string): string[] {
   if (!fs.existsSync(root)) return [];
   const files: string[] = [];
@@ -168,8 +188,9 @@ async function main() {
       } else {
         const txt = cleanUserText(m.text);
         if (!txt) continue;
+        const provenance_hint = guessProvenance(m.text.trim(), txt, prevAssistant);
         chat.write(
-          JSON.stringify({ ts: m.ts, source: src, user_text: txt, prev_assistant_tail: prevAssistant, session: m.session }) + "\n"
+          JSON.stringify({ ts: m.ts, source: src, user_text: txt, prev_assistant_tail: prevAssistant, session: m.session, provenance_hint }) + "\n"
         );
         stats[src].user++;
       }

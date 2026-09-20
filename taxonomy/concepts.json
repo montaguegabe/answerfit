@@ -4451,7 +4451,8 @@
       "aliases": [
         "green-main guarantee",
         "serialized landing order",
-        "green main guarantee"
+        "green main guarantee",
+        "clean serialization"
       ],
       "category": "discovered",
       "viz": "git_dag",
@@ -5199,7 +5200,8 @@
       "aliases": [
         "database-backed codebase",
         "no files, ast store",
-        "ast database codebase"
+        "ast database codebase",
+        "astdb commits"
       ],
       "category": "discovered",
       "viz": "prose",
@@ -6900,6 +6902,21 @@
       "viz": "prose",
       "prereqs": [],
       "source": "discovered"
+    },
+    {
+      "id": "new.forced_race_staging",
+      "name": "Forcing a deterministic race via coordinated commit timing",
+      "aliases": [
+        "forced race staging"
+      ],
+      "category": "discovered",
+      "viz": "sequence",
+      "prereqs": [
+        "concurrency.race_condition",
+        "new.optimistic_concurrency_control",
+        "ai.agent_orchestration"
+      ],
+      "source": "promoted"
     }
   ]
 }

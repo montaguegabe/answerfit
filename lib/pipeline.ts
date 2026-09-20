@@ -181,7 +181,15 @@ async function decideConcept(userId: string, answer: string, c: ExtractedConcept
     representation_hint_for_concept_type: c.viz_hint,
   };
 
-  const res = await jevJudge(jevState, policyQuestions(c.name));
+  // Jev unavailable (billing/outage) must degrade to Fable-only, not 500:
+  // Tier-1 is an optimization, never a dependency.
+  let res: Awaited<ReturnType<typeof jevJudge>>;
+  try {
+    res = await jevJudge(jevState, policyQuestions(c.name));
+  } catch {
+    const fable = await escalatePolicy({ ...jevState, note: "Jev unavailable; deciding without Tier-1 pre-scores" });
+    return finishBlock(c, state, evidence, applyFeedbackOverrides({ ...fable, decided_by: "fable" }, fb, c), undefined);
+  }
   const already = (res.answers.already_understands as JevNoulAnswer).noul;
   const mastery = res.answers.mastery as JevScoreAnswer;
   const intervention = res.answers.intervention as JevChoiceAnswer;
@@ -217,8 +225,16 @@ async function decideConcept(userId: string, answer: string, c: ExtractedConcept
     };
   }
 
-  // Explicit feedback hard-overrides inferred state (eval showed Jev's
-  // already_understands runs strict — never let it veto the user's own claim).
+  return finishBlock(c, state, evidence, applyFeedbackOverrides(decision, fb, c), jevSummary);
+}
+
+/** Explicit feedback hard-overrides inferred state (eval showed Jev's
+ * already_understands runs strict — never let it veto the user's own claim). */
+function applyFeedbackOverrides(
+  decision: PolicyDecision & { decided_by: "jev" | "fable" },
+  fb: Record<string, number>,
+  c: ExtractedConcept
+): PolicyDecision & { decided_by: "jev" | "fable" } {
   if ((fb.already_knew ?? 0) > 0) {
     decision = { ...decision, intervention: "none", rationale: decision.rationale + "; user said already-knew" };
   }
@@ -228,7 +244,16 @@ async function decideConcept(userId: string, answer: string, c: ExtractedConcept
   if ((fb.still_confused ?? 0) > 0 && decision.intervention === "none") {
     decision = { ...decision, intervention: "example", depth: 2, rationale: decision.rationale + "; user said still-confused" };
   }
+  return decision;
+}
 
+function finishBlock(
+  c: ExtractedConcept,
+  state: ReturnType<typeof getState>,
+  evidence: EvidenceRow[],
+  decision: PolicyDecision & { decided_by: "jev" | "fable" },
+  jevSummary: ConceptBlock["jev"]
+): ConceptBlock {
   return {
     concept: c,
     state: {

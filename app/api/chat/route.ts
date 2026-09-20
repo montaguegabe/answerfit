@@ -33,9 +33,11 @@ export async function POST(req: NextRequest) {
         const last = messages[messages.length - 1];
         if (last?.role === "user") {
           const prevTail = String(messages[messages.length - 2]?.content ?? "").slice(-1200);
-          void ingestLiveMessages(uid, [
-            { ts: new Date().toISOString(), text: String(last.content), prev_assistant_tail: prevTail },
-          ]).catch(() => {});
+          void ingestLiveMessages(
+            uid,
+            [{ ts: new Date().toISOString(), text: String(last.content), prev_assistant_tail: prevTail }],
+            "chat_app"
+          ).catch(() => {});
         }
 
         const client = new Anthropic();

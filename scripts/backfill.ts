@@ -184,8 +184,11 @@ async function main() {
   const { candidates, scanned, filtered } = await collectCandidates();
   console.log(`Scanned ${scanned} events → ${filtered} concept-matched candidates (mode: ${useJev ? "jev" : "heuristic-only"})`);
 
-  // Idempotency: wipe previously backfilled evidence for this user (keep feedback).
-  d.prepare("DELETE FROM events WHERE user_id = ? AND source != 'feedback'").run(USER_ID);
+  // Idempotency: wipe previously backfilled evidence for this user, preserving
+  // sources owned by other pipelines — feedback UI, doc-edit miner, and /chat
+  // (chat conversations have no transcript backing, so a wipe would destroy
+  // that evidence permanently).
+  d.prepare("DELETE FROM events WHERE user_id = ? AND source NOT IN ('feedback', 'doc_edit', 'chat_app')").run(USER_ID);
 
   const insert = d.prepare(
     `INSERT INTO events (user_id, concept_id, ts, source, raw_text, dimension, direction, strength, interpretation, judge)

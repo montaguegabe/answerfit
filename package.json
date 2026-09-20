@@ -15,6 +15,7 @@
     "tune-state": "tsx scripts/tune-state.ts",
     "eval-policy": "tsx scripts/eval-policy.ts",
     "discover": "tsx scripts/discover-concepts.ts",
+    "mine-docs": "tsx scripts/mine-doc-edits.ts",
     "inspect": "tsx scripts/inspect-state.ts"
   },
   "dependencies": {

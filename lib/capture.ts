@@ -23,14 +23,21 @@ export interface CaptureUserMessage {
   prev_assistant_tail?: string;
 }
 
-export async function ingestLiveMessages(userId: string, messages: CaptureUserMessage[]): Promise<number> {
+export async function ingestLiveMessages(
+  userId: string,
+  messages: CaptureUserMessage[],
+  source: "claude_code" | "chat_app" = "claude_code"
+): Promise<number> {
   let added = 0;
   for (const m of messages) {
     const ev: ChatEvent = {
       ts: m.ts,
-      source: "claude_code",
+      source,
       user_text: m.text.slice(0, 1500),
       prev_assistant_tail: m.prev_assistant_tail ?? "",
+      // /chat input is typed by construction; hook-captured text may be pasted —
+      // leave the hint unset there and let Jev's own_words question decide.
+      provenance_hint: source === "chat_app" ? "typed" : undefined,
     };
     let concepts = matchConcepts(ev.user_text);
     let inUserText = true;

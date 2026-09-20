@@ -56,6 +56,8 @@ const SOURCE_WEIGHT: Record<string, number> = {
   youtube_watch: 0.35,
   claude_code: 0.95, // typed thoughts to an assistant: high-signal
   codex: 0.95,
+  chat_app: 0.95, // typed into AnswerFit /chat (no transcript backing — never wiped by backfill)
+  doc_edit: 0.9, // manual git-attributed doc edits (scripts/mine-doc-edits.ts)
   post_answer_search: 1.1, // assistant explained it, user searched it anyway
 };
 
