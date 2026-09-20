@@ -1,0 +1,28 @@
+{
+  "name": "answerfit",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3210",
+    "build": "next build",
+    "start": "next start -p 3210",
+    "init-db": "tsx scripts/init-db.ts",
+    "backfill": "tsx scripts/backfill.ts",
+    "seed-personas": "tsx scripts/seed-personas.ts",
+    "inspect": "tsx scripts/inspect-state.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.65.0",
+    "better-sqlite3": "^12.2.0",
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

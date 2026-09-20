@@ -1,0 +1,3941 @@
+{
+  "_comment": "Seed concept taxonomy. In the full plan this is induced by a frontier-model pass over sampled history (Day 1 step 2); this hand-built version plays that role offline. aliases are matched case-insensitively as whole words/phrases in search queries and pasted answers. viz = preferred representation when explaining. prereqs/contrasts reference concept ids.",
+  "concepts": [
+    {
+      "id": "git.basics",
+      "name": "Git basics (commit/branch/checkout)",
+      "aliases": [
+        "git commit",
+        "git branch",
+        "git checkout",
+        "git clone",
+        "git push",
+        "git pull",
+        "git status",
+        "git log",
+        "git add",
+        "gitpython add all files",
+        "force push branch",
+        "commit and push",
+        "dirty changes",
+        "push as private repo"
+      ],
+      "category": "git",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "git.merge",
+      "name": "Git merge & merge conflicts",
+      "aliases": [
+        "git merge",
+        "merge conflict",
+        "merge conflicts",
+        "resolve conflict",
+        "conflict resolution",
+        "merging branches"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics"
+      ]
+    },
+    {
+      "id": "git.rebase",
+      "name": "Git rebase",
+      "aliases": [
+        "git rebase",
+        "rebase",
+        "rebasing",
+        "interactive rebase",
+        "rebase onto",
+        "rebase pr target",
+        "retarget pr to develop"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.merge"
+      ]
+    },
+    {
+      "id": "git.dag",
+      "name": "Commit graph / ancestry (DAG)",
+      "aliases": [
+        "commit graph",
+        "commit ancestry",
+        "git dag",
+        "git history graph",
+        "detached head",
+        "git reflog",
+        "commit sha",
+        "git internals"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics"
+      ]
+    },
+    {
+      "id": "git.cherry_pick",
+      "name": "Cherry-pick",
+      "aliases": [
+        "cherry pick",
+        "cherry-pick",
+        "git cherry-pick"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.dag"
+      ]
+    },
+    {
+      "id": "concurrency.race_condition",
+      "name": "Race condition",
+      "aliases": [
+        "race condition",
+        "race conditions",
+        "data race",
+        "first-desktop-wins bug",
+        "stuck on running thread",
+        "deploy race condition",
+        "stale-process-pool",
+        "toctou",
+        "time of check to time of use",
+        "check-then-act",
+        "check then act",
+        "deploy race conditions",
+        "thread safe process safe"
+      ],
+      "category": "concurrency",
+      "viz": "timeline",
+      "prereqs": []
+    },
+    {
+      "id": "concurrency.mutex",
+      "name": "Locks & mutexes",
+      "aliases": [
+        "mutex",
+        "mutexes",
+        "lock contention",
+        "semaphore",
+        "critical section",
+        "locking"
+      ],
+      "category": "concurrency",
+      "viz": "sequence",
+      "prereqs": [
+        "concurrency.race_condition"
+      ]
+    },
+    {
+      "id": "concurrency.event_loop",
+      "name": "Event loop & async scheduling",
+      "aliases": [
+        "event loop",
+        "microtask",
+        "macrotask",
+        "task queue",
+        "run loop"
+      ],
+      "category": "concurrency",
+      "viz": "timeline",
+      "prereqs": []
+    },
+    {
+      "id": "js.async_await",
+      "name": "Promises & async/await",
+      "aliases": [
+        "async await",
+        "async/await",
+        "promise",
+        "promises",
+        "promise.all",
+        "then chain",
+        "unhandled rejection"
+      ],
+      "category": "javascript",
+      "viz": "code",
+      "prereqs": [
+        "concurrency.event_loop"
+      ]
+    },
+    {
+      "id": "js.closures",
+      "name": "Closures",
+      "aliases": [
+        "closure",
+        "closures",
+        "lexical scope",
+        "captured variable"
+      ],
+      "category": "javascript",
+      "viz": "code",
+      "prereqs": []
+    },
+    {
+      "id": "react.hooks",
+      "name": "React hooks",
+      "aliases": [
+        "usestate",
+        "useeffect",
+        "usememo",
+        "usecallback",
+        "react hooks",
+        "useref",
+        "custom hook"
+      ],
+      "category": "frontend",
+      "viz": "code",
+      "prereqs": [
+        "js.closures"
+      ]
+    },
+    {
+      "id": "react.rendering",
+      "name": "React rendering & reconciliation",
+      "aliases": [
+        "react rerender",
+        "re-render",
+        "reconciliation",
+        "virtual dom",
+        "react memo",
+        "stale closure"
+      ],
+      "category": "frontend",
+      "viz": "timeline",
+      "prereqs": [
+        "react.hooks"
+      ]
+    },
+    {
+      "id": "css.layout",
+      "name": "CSS layout (flexbox/grid)",
+      "aliases": [
+        "flexbox",
+        "css grid",
+        "justify-content",
+        "align-items",
+        "css position",
+        "z-index"
+      ],
+      "category": "frontend",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "web.cors",
+      "name": "CORS",
+      "aliases": [
+        "cors",
+        "cross-origin",
+        "preflight request",
+        "access-control-allow-origin",
+        "cors_replace_https_referer"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ]
+    },
+    {
+      "id": "web.http",
+      "name": "HTTP semantics",
+      "aliases": [
+        "http status",
+        "http headers",
+        "http request",
+        "rest api",
+        "http 403",
+        "http 401",
+        "http 500",
+        "post request",
+        "get request",
+        "multipart form data",
+        "multipart endpoint",
+        "payload benchmarking",
+        "upload throughput",
+        "post benchmark",
+        "multipart ingest",
+        "multipart faster",
+        "parallel parts upload",
+        "multipart uploads library",
+        "multipart upload",
+        "multipart threshold",
+        "part size",
+        "max concurrent parts",
+        "s3 transfer tuning",
+        "upload connection pool",
+        "etag checksum",
+        "parts in parallel",
+        "s3 upload checksums",
+        "parallel multipart upload",
+        "multipart win for speed",
+        "multipart field sizes",
+        "multipart endpoint slower",
+        "s3 upload speed"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.aws",
+        "concurrency.event_loop"
+      ]
+    },
+    {
+      "id": "web.websockets",
+      "name": "WebSockets & realtime",
+      "aliases": [
+        "websocket",
+        "websockets",
+        "server-sent events",
+        "sse stream",
+        "long polling",
+        "pubnub",
+        "websockets peer",
+        "django ninja websocket",
+        "streaming speed",
+        "app control socket",
+        "pubnub swift"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ]
+    },
+    {
+      "id": "web.oauth",
+      "name": "OAuth & auth flows",
+      "aliases": [
+        "oauth",
+        "oauth2",
+        "refresh token",
+        "access token",
+        "jwt",
+        "openid connect",
+        "auth flow",
+        "sign in with apple",
+        "pkce",
+        "account linking",
+        "github oauth callback",
+        "installation_id",
+        "google-auth-oauthlib",
+        "ngrok login",
+        "social sign-in",
+        "google login broken",
+        "invalid client_id",
+        "jwt sign in again",
+        "google auth settings",
+        "azure ad",
+        "microsoft entra",
+        "block access unless group",
+        "ad group access"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ]
+    },
+    {
+      "id": "db.sql",
+      "name": "SQL & queries",
+      "aliases": [
+        "sql query",
+        "sql join",
+        "group by",
+        "sql select",
+        "postgres",
+        "sqlite",
+        "mysql"
+      ],
+      "category": "databases",
+      "viz": "code",
+      "prereqs": []
+    },
+    {
+      "id": "db.transactions",
+      "name": "Transactions & isolation",
+      "aliases": [
+        "transaction isolation",
+        "acid",
+        "serializable isolation",
+        "read committed",
+        "write skew",
+        "optimistic locking",
+        "db transaction",
+        "currententitlements empty"
+      ],
+      "category": "databases",
+      "viz": "timeline",
+      "prereqs": [
+        "db.sql",
+        "concurrency.race_condition"
+      ]
+    },
+    {
+      "id": "infra.docker",
+      "name": "Docker & containers",
+      "aliases": [
+        "docker",
+        "dockerfile",
+        "docker compose",
+        "container image",
+        "kubernetes",
+        "k8s",
+        "docker container",
+        "container workspace",
+        "maritime docker image",
+        "docker image credentials",
+        "docker force rebuild",
+        "docker buildx",
+        "debug docker build",
+        "podman compose",
+        "compose command array",
+        "docker image",
+        "docker compose environment variables",
+        "docker buildx cache",
+        "docker image ci",
+        "podman",
+        "docker compose depends_on",
+        "docker compose postgres",
+        "pycharm docker compose",
+        "portainer",
+        "docker compose command array",
+        "docker compose environment",
+        "docker image both architectures",
+        "dockerized",
+        "docker system df",
+        "docker overlay2 cleanup",
+        "docker prune",
+        "docker disk usage"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "infra.dns",
+      "name": "DNS & domains",
+      "aliases": [
+        "dns record",
+        "cname",
+        "a record",
+        "nameserver",
+        "dns propagation",
+        "txt record",
+        "whatsmydns",
+        "cloudflare dns",
+        "aaaa record",
+        "custom domain tld",
+        "netlify domain",
+        "own subdomain",
+        "cloudflare api add domain",
+        "dns keep www",
+        "namecheap domain",
+        "websites begin with numbers",
+        "domain names choose",
+        "dan domains",
+        "cached dns target",
+        "al top level domain",
+        "afternic lease to own",
+        "namecheap",
+        "keep www in url",
+        "domain belongs to site"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": []
+    },
+    {
+      "id": "infra.ssh",
+      "name": "SSH & keys",
+      "aliases": [
+        "ssh key",
+        "ssh-keygen",
+        "ssh config",
+        "ssh tunnel",
+        "public key auth",
+        "known_hosts",
+        "ssh access",
+        "allow ssh from ip",
+        "ssh into mac mini",
+        "ssh into my macbook",
+        "ssh command for mac mini",
+        "connect over ssh",
+        "ssh username folder",
+        "ssh into macbook"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "ai.llm_basics",
+      "name": "LLM fundamentals",
+      "aliases": [
+        "llm",
+        "large language model",
+        "transformer model",
+        "language model",
+        "gpt-6",
+        "gpt 6",
+        "fable 5",
+        "anthropic api",
+        "openai api",
+        "bluebrown transformer"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "ai.tokens_context",
+      "name": "Tokens & context windows",
+      "aliases": [
+        "context window",
+        "token limit",
+        "tokenizer",
+        "token count",
+        "context length",
+        "claude ai context window",
+        "ran out of context"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.llm_basics"
+      ]
+    },
+    {
+      "id": "ai.embeddings",
+      "name": "Embeddings & vector search",
+      "aliases": [
+        "embedding",
+        "embeddings",
+        "vector search",
+        "vector database",
+        "cosine similarity",
+        "semantic search",
+        "chatgpt embeddings pricing",
+        "voyage multimodal",
+        "bm25",
+        "image recommender system"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.llm_basics"
+      ]
+    },
+    {
+      "id": "ai.rag",
+      "name": "Retrieval-augmented generation",
+      "aliases": [
+        "rag",
+        "retrieval augmented",
+        "retrieval-augmented",
+        "chunking strategy"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.embeddings"
+      ]
+    },
+    {
+      "id": "ai.fine_tuning",
+      "name": "Fine-tuning & distillation",
+      "aliases": [
+        "fine tuning",
+        "fine-tuning",
+        "finetune",
+        "lora",
+        "peft",
+        "distillation",
+        "rlhf"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.llm_basics"
+      ]
+    },
+    {
+      "id": "ai.knowledge_tracing",
+      "name": "Knowledge tracing & learner modeling",
+      "aliases": [
+        "knowledge tracing",
+        "learner model",
+        "mastery model",
+        "spaced repetition",
+        "forgetting curve",
+        "item response theory"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "ai.bandits",
+      "name": "Contextual bandits & RL basics",
+      "aliases": [
+        "contextual bandit",
+        "multi-armed bandit",
+        "thompson sampling",
+        "epsilon greedy",
+        "reinforcement learning",
+        "reward model"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "python.env",
+      "name": "Python environments & packaging",
+      "aliases": [
+        "pip install",
+        "virtualenv",
+        "venv",
+        "conda",
+        "poetry",
+        "requirements.txt",
+        "pyproject",
+        "update poetry",
+        "brew install",
+        "pypi staging",
+        "nvm node",
+        "pip install from git",
+        "dlopen library not loaded",
+        "uv tool install",
+        "uv documentation",
+        "venv outside directory",
+        "pypi local versions",
+        "which python version",
+        "pip install q flag",
+        "pip minimal installation",
+        "brew install without sudo",
+        "pycharm pep8 warnings",
+        "venv missing",
+        "brew install dlib",
+        "ubuntu install pillow",
+        "disable pep8",
+        "python 3.10 changelist",
+        "importerror dlopen",
+        "anaconda",
+        "install jupyter lab",
+        "jupyterhub",
+        "pypi package",
+        "pyproject.toml",
+        "uv dependencies",
+        "publish to pypi",
+        "version constraints pyproject",
+        "publish pypi token"
+      ],
+      "category": "python",
+      "viz": "code",
+      "prereqs": []
+    },
+    {
+      "id": "python.async",
+      "name": "Python asyncio",
+      "aliases": [
+        "asyncio",
+        "python async",
+        "coroutine",
+        "await python",
+        "closedresourceerror",
+        "asyncio timeout",
+        "asyncexitstack"
+      ],
+      "category": "python",
+      "viz": "code",
+      "prereqs": [
+        "concurrency.event_loop"
+      ]
+    },
+    {
+      "id": "ts.types",
+      "name": "TypeScript type system",
+      "aliases": [
+        "typescript generic",
+        "type narrowing",
+        "discriminated union",
+        "typescript error",
+        "type inference",
+        "zod",
+        "node16 vs nodenext"
+      ],
+      "category": "typescript",
+      "viz": "code",
+      "prereqs": []
+    },
+    {
+      "id": "shell.tools",
+      "name": "Shell & CLI tools",
+      "aliases": [
+        "grep",
+        "awk",
+        "sed command",
+        "bash script",
+        "zsh",
+        "chmod",
+        "xargs",
+        "find command",
+        "sublime text cli",
+        "vim basics",
+        "jupyter run bash",
+        "brew without sudo",
+        "vscode debugpy launch json",
+        "vscode gutter run",
+        "applescript foreground",
+        "open in typora",
+        "zshrc command",
+        "shell quoting error",
+        "bash sleep",
+        "grep set difference",
+        "bash boolean",
+        "echo environment variables",
+        "shell command exit code",
+        "diff ignore whitespace",
+        "bash nohup",
+        "recursive chown",
+        "readarray",
+        "pass list of files",
+        "find exec first argument",
+        "bash match sorted list",
+        "frozenset whitespace",
+        "bash command success boolean",
+        "xargs bash function",
+        "diff ignore-trailing-space",
+        "brew install readarray",
+        "list of files as argument",
+        "find exec argument",
+        "bash match sorted"
+      ],
+      "category": "shell",
+      "viz": "code",
+      "prereqs": []
+    },
+    {
+      "id": "net.tailscale",
+      "name": "VPN / tailnet networking",
+      "aliases": [
+        "tailscale",
+        "wireguard",
+        "tailnet",
+        "vpn tunnel",
+        "vpn network status",
+        "private dns vpn",
+        "disable tailscale",
+        "tailscale stun",
+        "tailscale account",
+        "tailscale getting started",
+        "tailnet devices",
+        "tailscale for mac",
+        "tailscale vpn active",
+        "vpn into the vpc",
+        "tailscale connected",
+        "paired over tailscale",
+        "tailnet vpc"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": []
+    },
+    {
+      "id": "git.worktrees",
+      "name": "Git worktrees & multi-workspace repos",
+      "aliases": [
+        "git worktree",
+        "worktrees",
+        "worktree dropdown",
+        "multi workspace",
+        "multiworkspace",
+        "stash before worktree",
+        "multi workspace worktree",
+        "worktree merged",
+        "reconcile worktrees",
+        "legacy worktree",
+        "multi workspace root",
+        "pr-worktrees",
+        "worktree inventory",
+        "clones in worktrees",
+        "netmesh worktree",
+        "git worktrees count",
+        "how many worktrees",
+        "worktree pile",
+        "local worktrees branches"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "git.dag"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "git.undo_recovery",
+      "name": "Undoing changes & recovering work in Git",
+      "aliases": [
+        "undo discard changes",
+        "git restore",
+        "recover discarded changes",
+        "git merge preserve history",
+        "undo github discard changes",
+        "revert my commits",
+        "restore from archive",
+        "rewrite all commits",
+        "git filter-repo",
+        "rewrite commit dates",
+        "git history rewrite",
+        "backs up .git",
+        "git rm --cached",
+        "remove from git history",
+        "untrack file git",
+        "git archive without committing"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "git.dag",
+        "git.gitignore"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "devops.deploy_pipeline",
+      "name": "Deployment pipelines & release promotion",
+      "aliases": [
+        "deploy to staging",
+        "push deploy staging",
+        "deploy skill",
+        "promote script",
+        "release candidate",
+        "rc release",
+        "cut a release",
+        "staging environment",
+        "deploy pipeline",
+        "promote to staging",
+        "promotion to production",
+        "environment parity",
+        "full promotion",
+        "unpromoted commit",
+        "promote staging",
+        "staging to production",
+        "develop staging main",
+        "promote develop",
+        "staging to main",
+        "branch promotion",
+        "hotfix prod",
+        "merge into staging",
+        "develop to staging",
+        "promote to main",
+        "promote to production",
+        "push to develop",
+        "staging branch",
+        "promotion path",
+        "default branches develop",
+        "even between develop and main",
+        "merge into develop",
+        "prod-deploy script",
+        "deploy succeeded ref",
+        "push and roll",
+        "auto-update",
+        "release channel",
+        "dev channel",
+        "testflight for android",
+        "electron auto update",
+        "pypi publish",
+        "version pinning",
+        "staging versioning",
+        "ami bake",
+        "staging release",
+        "auto_update",
+        "cli release",
+        "source of truth staging releases",
+        "staging releases source of truth",
+        "repush electron app",
+        "push to s3 electron",
+        "auto-deploys to s3",
+        "auto-update version",
+        "staging-depends-on-staging",
+        "deploy develop to main",
+        "promote deploy script",
+        "promote develop to main",
+        "promote again",
+        "push to staging",
+        "staging branch pull",
+        "scripts/promote",
+        "protect staging branch",
+        "staging stack variant",
+        "develop off staging"
+      ],
+      "category": "devops",
+      "viz": "timeline",
+      "prereqs": [
+        "git.basics",
+        "git.merge"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "devops.paas",
+      "name": "PaaS & self-hosted app platforms",
+      "aliases": [
+        "paas",
+        "heroku proxy",
+        "heroku release command",
+        "platform as a service",
+        "paas cli",
+        "auto-deploy from branch",
+        "paas tenant",
+        "openbase cloud",
+        "devspace",
+        "lightsail container",
+        "paas tenants",
+        "deploy_failed alert",
+        "dokku",
+        "wercker",
+        "install heroku cli",
+        "heroku config",
+        "serverpool",
+        "deployment stack",
+        "openbase-deploy",
+        "paas deploy cost",
+        "openbase paas",
+        "daytona disk size",
+        "paas managed",
+        "app.openbase.cloud",
+        "heroku cli",
+        "heroku deploy",
+        "celery procfile",
+        "heroku disable release command",
+        "heroku downtime deploy",
+        "heroku config vars",
+        "heroku gunicorn logging",
+        "render api key",
+        "render deploy",
+        "render env vars",
+        "render hosting"
+      ],
+      "category": "devops",
+      "viz": "prose",
+      "prereqs": [
+        "devops.deploy_pipeline"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "devops.ci",
+      "name": "CI pipelines & build automation",
+      "aliases": [
+        "github actions",
+        "ci secrets",
+        "xcode version ci",
+        "prelaunchtask",
+        "nevercode",
+        "ci pipeline",
+        "branch protection",
+        "gha deploy",
+        "github workflow",
+        "disable workflow",
+        "workflow failed",
+        "auto-deploying",
+        "failed github actions",
+        "gha shipping",
+        "green check",
+        "docker build-push-action",
+        "github actions apple silicon",
+        "github actions ip address",
+        "gha success failure",
+        "nevercode ci",
+        "github actions disable workflow",
+        "startbuild concurrency",
+        "gha main branch",
+        "github actions trigger",
+        "codebuild",
+        "codebuild cost",
+        "aws build pipeline"
+      ],
+      "category": "devops",
+      "viz": "timeline",
+      "prereqs": [
+        "git.basics",
+        "infra.aws"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.aws",
+      "name": "AWS core services (EC2/ECS/S3/IAM)",
+      "aliases": [
+        "aws ec2",
+        "security group",
+        "iam user",
+        "aws data lake",
+        "boto3",
+        "s3 upload",
+        "ec2 key pair",
+        "inbound rules",
+        "m6i.large",
+        "aws instance type",
+        "aws inferentia",
+        "lambda arm",
+        "aws cli breakdown",
+        "cannot access ec2 instance",
+        "t3.medium",
+        "ec2 serviceresource",
+        "devspace ami",
+        "aws direct connect",
+        "aws cli diagnose",
+        "cloudtrail bucket",
+        "ecs deploy cost",
+        "eks vs ecs",
+        "boto3 reboot wait",
+        "aws authentication directory",
+        "site-to-site vpn",
+        "security group rules",
+        "vpn gateway aws",
+        "alb access",
+        "copy inbound rules",
+        "devspace security group",
+        "aws vpn",
+        "t3.xlarge",
+        "instance type pricing",
+        "nice dcv",
+        "cheapest gpu instance",
+        "m7i.xlarge",
+        "cheaper instance type",
+        "dev ami",
+        "staging ami",
+        "cannot access ec2",
+        "new ec2 instance",
+        "ingestion vpc",
+        "site to site vpn",
+        "policy based tunnel",
+        "vpc peering",
+        "web app vpc",
+        "policy based vpn",
+        "route based vpn",
+        "dcv ingress",
+        "allowed_cidrs",
+        "pre-shared key vpn",
+        "vpc flow logs",
+        "ecs task",
+        "ecs shell access",
+        "ecs admin shell",
+        "one-off shell task",
+        "task definition",
+        "ecs exec",
+        "multi ecs setup",
+        "ecs fargate",
+        "aws sso login",
+        "aws session token",
+        "aws profile",
+        "sso profile",
+        "temporary aws credentials",
+        "aws_session_token",
+        "aws profile env",
+        "work-fresh profile",
+        "read-only iam",
+        "iam permissions",
+        "least privilege policy",
+        "iam policy scoping"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "infra.terraform",
+        "infra.docker",
+        "infra.secrets_management"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.tls_certs",
+      "name": "TLS certificates & SSL verification",
+      "aliases": [
+        "certificate verify failed",
+        "ssl certificate",
+        "local issuer certificate",
+        "https url",
+        "tls certificate",
+        "ssl error",
+        "ssl certificate verify"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "net.wireguard_mesh",
+      "name": "WireGuard mesh VPN internals (DERP/MagicDNS/headscale)",
+      "aliases": [
+        "derp relay",
+        "magic dns",
+        "magicdns",
+        "headscale",
+        "direct connection nat",
+        "tailnet key",
+        "cloud relay",
+        "mesh vpn",
+        "netmesh",
+        "derp",
+        "openbase vpn",
+        "pair over tailscale",
+        "tailscale serve",
+        "vpn active no internet",
+        "shifting ips magic dns",
+        "stun server",
+        "nat traversal",
+        "direct vs relay",
+        "connection options",
+        "nwpathmonitor",
+        "suppress default stun"
+      ],
+      "category": "net",
+      "viz": "sequence",
+      "prereqs": [
+        "net.tailscale",
+        "infra.dns",
+        "web.turn_ice",
+        "net.headscale_derp"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.reverse_proxy",
+      "name": "Reverse proxies & app servers (gunicorn/uvicorn)",
+      "aliases": [
+        "gunicorn",
+        "uvicorn",
+        "reverse proxy",
+        "502 errors",
+        "run uvicorn under gunicorn",
+        "wsgi",
+        "asgi",
+        "gunicorn traffic",
+        "nginx routing",
+        "serving file://",
+        "nginx proxy",
+        "nginx port 80",
+        "nginx csrf token",
+        "nginx server block",
+        "nginx reverse proxy"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.sync_replication",
+      "name": "File sync & conflict reconciliation (Syncthing)",
+      "aliases": [
+        "syncthing",
+        "sync thing",
+        "syncthing ignore",
+        "sync conflict",
+        "file sync",
+        "single source of truth sync",
+        "syncthing stalled",
+        "syncthing activity",
+        "code sync",
+        "sessions sync",
+        "syncthing conflicts",
+        "sync conflicts",
+        "code-sync",
+        "ignore rules sync",
+        "syncthing config",
+        "syncthing login",
+        "thread sync",
+        "mac mini sync",
+        "skills being synced",
+        "syncthing deletions",
+        "skills sync syncthing",
+        "syncthing firewall",
+        "syncthing linux",
+        "sync pictures folder",
+        "syncthing exclude"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "infra.vm_emulation",
+      "name": "VMs & emulation (QEMU/Tart)",
+      "aliases": [
+        "qemu",
+        "tart image",
+        "disposable vm",
+        "virtual machine",
+        "run the vms",
+        "field-test vm",
+        "tart vm",
+        "field-test mac",
+        "crossover",
+        "field test vm",
+        "guest admin",
+        "manual-vm install",
+        "dmg install test",
+        "qemu powermac",
+        "qemu mac99",
+        "test with tart",
+        "crossover install",
+        "tart macos vm",
+        "podman macos",
+        "windows 7 vm",
+        "qemu command line",
+        "vmware fusion",
+        "raspberry pi emulationstation"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "ai.computer_use"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.observability",
+      "name": "Error monitoring & observability (Sentry)",
+      "aliases": [
+        "sentry",
+        "sentry error",
+        "sentry quota",
+        "sentry issues",
+        "error monitoring",
+        "sentry pricing",
+        "sentry production error",
+        "llm observability",
+        "paas-host",
+        "sentry issue",
+        "sentry triage",
+        "sentry threads",
+        "prod api logs",
+        "grafana access",
+        "sentry errors",
+        "llm observability tools",
+        "sentry sdk python"
+      ],
+      "category": "infra",
+      "viz": "timeline",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "infra.analytics",
+      "name": "Product analytics & event export (Amplitude/BigQuery)",
+      "aliases": [
+        "amplitude",
+        "amplitude export",
+        "bigquery export",
+        "google analytics backend",
+        "analytics events",
+        "user funnel"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "django.framework",
+      "name": "Django framework & ORM",
+      "aliases": [
+        "django model field",
+        "django admin",
+        "django allauth",
+        "django custom id",
+        "django enum field",
+        "django on debian",
+        "django rest framework",
+        "drf serializer",
+        "django email",
+        "django wsgirequest",
+        "django delete instance",
+        "post_save",
+        "django template include",
+        "related_name",
+        "apps aren't loaded yet",
+        "django admin inline",
+        "django queryset count",
+        "django orm async",
+        "manage.py shell",
+        "manage.py command",
+        "django increment integer field",
+        "django template imagefield",
+        "django admin geo",
+        "django ip throttling",
+        "django multiple keys",
+        "django enum model field",
+        "django first",
+        "django check if fields have changed",
+        "django max_num inline",
+        "post_save instance",
+        "django custom database adapter",
+        "manage.py migrate",
+        "data_upload_max_number_fields",
+        "django with fastapi",
+        "makemigrations",
+        "django increment field",
+        "django admin url",
+        "django template directory",
+        "template block super",
+        "django admin site",
+        "django admin string names",
+        "is_staff or is_superuser",
+        "verbose_name",
+        "django foreign key bigint",
+        "django relative imports",
+        "django media files",
+        "django static s3",
+        "aws_s3_custom_domain",
+        "django settings.py",
+        "django protect media"
+      ],
+      "category": "django",
+      "viz": "code",
+      "prereqs": [
+        "db.sql",
+        "infra.object_storage"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "db.postgres_ops",
+      "name": "Postgres setup & connections",
+      "aliases": [
+        "postgres.app",
+        "database url",
+        "local postgres",
+        "psycopg2",
+        "psycopg3",
+        "connection pool postgres",
+        "postgres docker",
+        "heroku postgres",
+        "postgres computed column",
+        "psql copy progress",
+        "non-atomic postgres commit",
+        "postgres local testing",
+        "row corruption",
+        "pg point-read",
+        "postgres.app database url",
+        "psycopg2 connection pool",
+        "database_url",
+        "local postgres db url",
+        "psql database_url",
+        "supabase",
+        "rds instance",
+        "migrate to rds",
+        "supabase auth",
+        "production supabase",
+        "supabase locally",
+        "rds mimic data",
+        "supabase project url",
+        "supabase features",
+        "rds sslmode verify-full",
+        "backed by rds"
+      ],
+      "category": "db",
+      "viz": "code",
+      "prereqs": [
+        "db.sql"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "swift.ios_dev",
+      "name": "Swift & iOS/UIKit development",
+      "aliases": [
+        "swift string",
+        "uilabel",
+        "indexpath",
+        "uiview",
+        "view controller",
+        "init from xib",
+        "swiftui",
+        "swift switch",
+        "swift json encode",
+        "swift set to array",
+        "swift package manager",
+        "scenekit",
+        "spritekit",
+        "swift @binding",
+        "uilabel intrinsiccontentsize",
+        "userdefaults",
+        "swift parse xml",
+        "swift cast enum",
+        "localizederror",
+        "swift print without newline",
+        "urlcache",
+        "swiftui tutorial",
+        "swift enumerate directory",
+        "swift move view with keyboard",
+        "stackview constraints",
+        "uialertaction",
+        "swiftui offset vs position",
+        "core data uitableview",
+        "swift cell styles",
+        "indexpath get index",
+        "uilabel ellipsis",
+        "swift init from xib",
+        "swift dismiss view controller",
+        "uiview superview",
+        "core data persistent store",
+        "ios phone number entry",
+        "swift get directory contents",
+        "cannot subscript string",
+        "swift subclass",
+        "google maps ios marker",
+        "popviewcontroller unrecognized selector",
+        "swift bar button",
+        "swift move view keyboard",
+        "unrecognized selector",
+        "nsexception uncaught",
+        "popviewcontroller crash",
+        "swift stack trace",
+        "view controller stack",
+        "wait called on main thread",
+        "non-main thread ascopy",
+        "transaction currententitlements",
+        "ios app blank map",
+        "unhandled dyld version",
+        "context leak detected",
+        "swift switch return",
+        "swift string length",
+        "swift encode json",
+        "swift interpolate string",
+        "swift decimal to string",
+        "swiftc ast",
+        "swift sil",
+        "swift call subclass method",
+        "gryphon kotlin swift",
+        "swift struct mixins",
+        "swift 5",
+        "ahap",
+        "core haptics",
+        "convert wav to ahap",
+        "haptics ios",
+        "haptics post upload",
+        "userdefaults not saving",
+        "urlcache default",
+        "en_us_posix",
+        "swift localizederror",
+        "apns",
+        "async apns",
+        "ios push notification",
+        "apple push notification",
+        "apns diagnosis"
+      ],
+      "category": "swift",
+      "viz": "code",
+      "prereqs": [
+        "ios.build_distribution"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "swift.combine_async",
+      "name": "Swift Combine & async patterns",
+      "aliases": [
+        "anypublisher",
+        "combine future",
+        "rxswift",
+        "promisekit",
+        "cancelbag",
+        "main thread wait",
+        "swift combine future",
+        "swift create future",
+        "anypublisher to future",
+        "rxswift vs promisekit",
+        "swift cancelbag",
+        "swift handleevents",
+        "async await ios version",
+        "rxswift rest api"
+      ],
+      "category": "swift",
+      "viz": "code",
+      "prereqs": [
+        "swift.ios_dev",
+        "concurrency.event_loop"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ios.build_distribution",
+      "name": "Xcode build, signing & distribution",
+      "aliases": [
+        "xcodebuild",
+        "provisioning profile",
+        "testflight",
+        "xcode code indexing",
+        "launchscreen storyboard",
+        "app store entitlements",
+        "xcode ios app mac",
+        "tuist sign build",
+        "testflight environments",
+        "no such module",
+        "xcodebuild provisioning profile",
+        "testflight build",
+        "storekit apple review",
+        "hot loaded code apple",
+        "pod install from github",
+        "xcodebuild build",
+        "provisioning profile location",
+        "xcode ios app into mac app",
+        "github actions xcode version",
+        "team id developer id",
+        "pod install github",
+        "testflight beta",
+        "old xcodeproj",
+        "rebuild to iphone",
+        "storekit subscriptions",
+        "apple review subscriptions",
+        "in-app subscription ios"
+      ],
+      "category": "ios",
+      "viz": "timeline",
+      "prereqs": [
+        "swift.ios_dev"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "android.dev",
+      "name": "Android app development",
+      "aliases": [
+        "android fragment",
+        "edittext",
+        "android webview",
+        "androidx test runner",
+        "kotlin android",
+        "retrofit kotlin",
+        "startactivityforresult",
+        "appium",
+        "uiautomator2",
+        "androidx",
+        "android intent",
+        "android support library",
+        "android field test",
+        "android apk publish",
+        "android google login",
+        "firebase beta testing",
+        "android ephemeral user",
+        "android hide element",
+        "edittext prevent entry",
+        "android fragment getstring",
+        "anko startactivityforresult",
+        "android webview disable",
+        "admob app open ad",
+        "androidx package list",
+        "android intent vs activity",
+        "android logo circle"
+      ],
+      "category": "android",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "electron.desktop",
+      "name": "Electron desktop apps & dev-server integration",
+      "aliases": [
+        "electron app",
+        "vite dev server",
+        "electron dmg",
+        "electron build",
+        "electron wizard",
+        "vite electron",
+        "electron forge",
+        "electron app build",
+        "deep link scheme",
+        "electron reload",
+        "electron packaging",
+        "split panel electron",
+        "electron app onboarding",
+        "electron backgroundmaterial",
+        "electron vibrancy",
+        "traffic light buttons",
+        "downloaded dmg",
+        "electron desktop app repo",
+        "multi desktop",
+        "electron auto-increment version",
+        "rebuild electron app",
+        "dmg build",
+        "electron app package.json"
+      ],
+      "category": "electron",
+      "viz": "prose",
+      "prereqs": [
+        "js.async_await",
+        "devops.deploy_pipeline"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.agent_orchestration",
+      "name": "Multi-agent orchestration & agent ops",
+      "aliases": [
+        "super agent",
+        "superagent",
+        "dispatcher agent",
+        "agent session id",
+        "spin up an agent",
+        "agent workspace",
+        "claude code agent",
+        "codex agent",
+        "agents.md",
+        "claude.md",
+        "agent skills",
+        "deepagents",
+        "langgraph",
+        "ai agent",
+        "agentic",
+        "tool use",
+        "function calling",
+        "mcp server",
+        "mcp",
+        "model context protocol",
+        "subagent",
+        "agents sdk",
+        "human in the loop",
+        "codex sdk",
+        "agent server",
+        "computer use",
+        "openai agents sdk",
+        "langgraph.json",
+        "agent chat ui",
+        "agentkit vs agents sdk",
+        "claude agents sdk",
+        "adk agents",
+        "langchain long term memory",
+        "aimessagechunk",
+        "agent work scheduler",
+        "omnara",
+        "paseo agents",
+        "super agents",
+        "sub-agent",
+        "agent introduces itself",
+        "spawn superagent",
+        "bounded sub-agent",
+        "agent skills folder",
+        ".agents/skills",
+        "superagents dispatch",
+        "dispatcher conversation",
+        "chief of staff dispatch",
+        "read-only dispatch",
+        "super agents mcp",
+        "start a new super agent",
+        "superagents from today",
+        "dispatch to agent",
+        "start a super agent",
+        "sub agents",
+        "spawn a super agent",
+        "super agent instructions",
+        "sub agent spawn",
+        "superagents",
+        "session continuation",
+        "context handoff",
+        "thread id",
+        "resume codex",
+        "conversation summary handoff",
+        "transfer me to",
+        "agent introduce yourself",
+        "instruction-loading test",
+        "loaded instructions",
+        "thread uuid",
+        "session handoff summary",
+        "conversation ran out of context",
+        "cross-device thread sync",
+        "codex-sync",
+        "thread name agent name",
+        "approval requests",
+        "user say command",
+        "notification delivery test",
+        "approvals mechanism",
+        "cloud notifications",
+        "approvals cross-device",
+        "approval item",
+        "slack notifications channel",
+        "give me approvals",
+        "approval request",
+        "openbase approvals",
+        "notify me when done",
+        "steering",
+        "queued messages",
+        "steer the agent",
+        "interrupt the agent",
+        "steering acceptance marker",
+        "same-turn steering",
+        "queue steer",
+        "start turns plan mode",
+        "steer conversations",
+        "cue the agent",
+        "dispatcher",
+        "routine health",
+        "daily routine agent",
+        "dispatcher config",
+        "chief of staff routine",
+        "routines marketplace",
+        "dispatcher-config",
+        "dispatch worker",
+        "restart the dispatcher",
+        "rollout file",
+        "dispatcher thread",
+        "dispatcher recreated",
+        "purge scheduler",
+        "unfinished-work routine"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.llm_basics",
+        "ai.tokens_context",
+        "ai.coding_agents"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.mcp",
+      "name": "Model Context Protocol (MCP) servers & tools",
+      "aliases": [
+        "mcp tools",
+        "mcp authentication",
+        "stateful mcp",
+        "claude desktop mcp",
+        "appium mcp",
+        "install the mcp",
+        "notion mcp",
+        "mcp install",
+        "python mcp library",
+        "fastmcp",
+        "django mcp",
+        "mcp server response",
+        "superagents mcp",
+        "email over mcp",
+        "mcp stateful server",
+        "mcp json",
+        ".mcp.json",
+        "python mcp server",
+        "stdio mcp",
+        "mcp for single project",
+        "install an mcp",
+        "mcp stdio",
+        "mcp wrapper",
+        "mcp server folder",
+        "gmail mcp server",
+        "slack integration agent",
+        "whatsapp senders",
+        "send in any channel",
+        "gmail draft approval",
+        "whatsapp api",
+        "authenticate slack",
+        "whatsapp messages json",
+        "approved contacts mcp"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_orchestration"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.model_selection",
+      "name": "LLM model tiers, slugs & cost tradeoffs",
+      "aliases": [
+        "model slug",
+        "opus",
+        "claude models",
+        "sonnet",
+        "fast mode claude",
+        "model tier",
+        "powerful models cost",
+        "switch model",
+        "haiku",
+        "gpt 5.5 codex",
+        "model tiers",
+        "gpt4.5 pricing",
+        "claude vs o1",
+        "gpt 4o mini",
+        "opus model",
+        "anthropic credits",
+        "openai latest model",
+        "claude context window",
+        "fast tier",
+        "sonnet versions",
+        "model slug versions"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.llm_basics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.voice_pipeline",
+      "name": "Voice AI pipelines (STT/TTS, full-duplex)",
+      "aliases": [
+        "speech to text api",
+        "text to speech",
+        "tts command",
+        "cartesia",
+        "elevenlabs",
+        "deepgram",
+        "full duplex voice",
+        "turn detection",
+        "voice latency",
+        "filler words",
+        "livekit",
+        "full duplex",
+        "voice interface",
+        "tts me",
+        "audio engine error",
+        "steering by voice",
+        "openai real time voice",
+        "voice agent demo",
+        "claude call voice",
+        "voice mode",
+        "rhasspy",
+        "auto-mute",
+        "auto-unmute",
+        "addressee detection",
+        "barge-in",
+        "waiting for agent",
+        "sample rate",
+        "audio buffer",
+        "echo cancellation",
+        "webrtc audio",
+        "opus codec",
+        "latency audio",
+        "melodyne",
+        "note modulation",
+        "audio transport",
+        "voice coding",
+        "openai realtime voice",
+        "auto unmute",
+        "auto mute",
+        "wake word gate",
+        "stop listening",
+        "full duplex call",
+        "voice dispatcher",
+        "unmute after tts",
+        "unmute after talking",
+        "mute sound",
+        "agent interrupt reasons",
+        "voice agent latency",
+        "spoken voice route",
+        "transfer the call",
+        "voice session transfer",
+        "call handoff agent"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "web.websockets",
+        "web.turn_ice",
+        "ai.agent_orchestration"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.doc_parsing",
+      "name": "Document parsing & OCR for AI pipelines",
+      "aliases": [
+        "llamaparse",
+        "docling",
+        "ocr pipeline",
+        "pdf parsing ai",
+        "pdf to markdown",
+        "llamaparse ocr",
+        "docling api",
+        "pdf to markdown api"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.rag"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.structured_output",
+      "name": "Structured output & tool calling APIs",
+      "aliases": [
+        "structured output",
+        "tool calling",
+        "openai tool calling",
+        "json schema output",
+        "claude structured output",
+        "openai model_object",
+        "claude text completion",
+        "beta.chat.completions.parse",
+        "response format json",
+        "tool_use tool_result blocks",
+        "openai structured output",
+        "tool calling defaults",
+        "chat.completions.parse",
+        "tool_use tool_result",
+        "basemodel completions"
+      ],
+      "category": "ai",
+      "viz": "code",
+      "prereqs": [
+        "ai.llm_basics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "security.crypto_basics",
+      "name": "Hashing, MACs & signatures",
+      "aliases": [
+        "sha512 hash",
+        "hmac",
+        "rsa signature",
+        "non-malleable",
+        "hash length",
+        "salt key",
+        "ecc cryptography",
+        "sha512",
+        "homomorphic encryption",
+        "sha512 hash length",
+        "non-malleable rsa",
+        "what is hmac",
+        "4 digit vs 6 digit code"
+      ],
+      "category": "security",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "security.web_hardening",
+      "name": "Web app security hardening (CSRF, cookies, auth surfaces)",
+      "aliases": [
+        "csrf exempt",
+        "cookie hijack",
+        "subdomain cookies",
+        "401 unauthorized",
+        "token expired",
+        "security review cli",
+        "credential scrubbing",
+        "secrets in repo",
+        "nginx proxy csrf token",
+        "csrf trusted origins",
+        "csrf behind proxy",
+        "waitlist bypass",
+        "sign up mess with",
+        "notifications to other users",
+        "leak our token",
+        "csrf token proxy",
+        "block account creation",
+        "request access form csrf",
+        "0.0.0.0 hardening",
+        "bind all interfaces",
+        "credentials in env variables",
+        "exposed port hardening",
+        "binds to the network",
+        "less secure default bind",
+        "expose 0.0.0.0",
+        "host on 0.0.0.0",
+        "never open to 0.0.0.0"
+      ],
+      "category": "security",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http",
+        "web.oauth",
+        "infra.reverse_proxy",
+        "infra.secrets_management"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "python.pandas",
+      "name": "Pandas & dataframes",
+      "aliases": [
+        "pandas series",
+        "pandas apply",
+        "dataframe merge",
+        "pandas dataframe",
+        "seaborn",
+        "pandas read json",
+        "pandas set window size",
+        "pandas one hot encoding",
+        "pandas series apply",
+        "pandas dataframe merge",
+        "seaborn confidence interval",
+        "seaborn cumulative distribution",
+        "pandas window size"
+      ],
+      "category": "python",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "python.language",
+      "name": "Python language idioms",
+      "aliases": [
+        "property decorator",
+        "default if none",
+        "fromtimestamp",
+        "copytree",
+        "python download file",
+        "gitpython",
+        "python namedtuple",
+        "random.randint",
+        "random.normalvariate",
+        "classname python",
+        "pep8 line too long",
+        "mutable default argument",
+        "default_factory",
+        "relative vs absolute imports",
+        "mutable default",
+        "python default if none",
+        "python property decorator",
+        "python fromtimestamp",
+        "python random with probability",
+        "normalvariate vs numpy",
+        "python download file from url",
+        "functools.cache",
+        "f821 undefined name",
+        "python default argument"
+      ],
+      "category": "python",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "graphics.3d_engines",
+      "name": "3D engines & rendering (Unity/three.js)",
+      "aliases": [
+        "threejs",
+        "unity shader",
+        "unity sprite",
+        "anti aliasing",
+        "openframeworks",
+        "panda3d",
+        "scenekit tutorial",
+        "maya renderer",
+        "unity gameobject",
+        "unity transform",
+        "unity set force",
+        "unity camera",
+        "unity color from hex",
+        "unity tag",
+        "graphicraycaster",
+        "unity scripting",
+        "unity installer",
+        "unity yaml scenes",
+        "unity settargetbuffers",
+        "unity load gltf",
+        "unity package from github",
+        "photon sdk unity",
+        "unity trigger camera render",
+        "threejs svg 3d",
+        "libgdx vs lwjgl",
+        "unity animate sprite",
+        "unity anti aliasing",
+        "unity c# assets",
+        "unity editor",
+        "raspberry pi unity",
+        "unity package github",
+        "unity mr template",
+        "maya render",
+        "defaultrenderglobals",
+        "ultimate3d",
+        "u3d file format",
+        "maya substance",
+        "autodesk maya",
+        "maya arnold sky",
+        "kinect scanning",
+        "unity get object with tag",
+        "unity editor scene",
+        "unity trigger camera",
+        "unity editor create script",
+        "stl opengl library",
+        "legacy engine port",
+        "opengl wrapper",
+        "ultimate 3d",
+        "opengl demo",
+        "ninja ripper",
+        "tutorial python opengl"
+      ],
+      "category": "graphics",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "stats.ml_methods",
+      "name": "Applied stats & ML methods",
+      "aliases": [
+        "propensity score matching",
+        "kernel density estimation",
+        "eigenvectors",
+        "confidence interval",
+        "canny edge detection",
+        "gradient entropy",
+        "lstm pytorch",
+        "transformer architecture",
+        "numpy histogram weights",
+        "numpy identity matrix",
+        "differential privacy",
+        "romberg integration",
+        "matlab eigenvectors",
+        "gradient entropy smoothing",
+        "tridiagonal",
+        "hyperparameter tuning",
+        "ddpm",
+        "probabilistic modeling",
+        "hot hands fallacy",
+        "histogram bin size"
+      ],
+      "category": "stats",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "ai.agent_skills",
+      "name": "Agent skill files & instruction documents (SKILL.md, AGENTS.md)",
+      "aliases": [
+        "skill.md",
+        "agent skill file",
+        "skill documentation",
+        "combine skills",
+        "skills marketplace",
+        "claude skills",
+        "install skill",
+        "skill-sync",
+        "appium-via-mcp skill",
+        "onboarding skill",
+        "agent skill files",
+        "project agent skill",
+        "skills directory",
+        "update the skill",
+        "dev-docs skills",
+        "skill for openbase-deploy",
+        "branch protection skill",
+        "notion skills",
+        "vercel skills",
+        "skills subrepo",
+        "codex plugins",
+        "install the skill"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.agent_orchestration"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.agent_evals",
+      "name": "Agent evaluation harnesses & A/B eval runs",
+      "aliases": [
+        "eval harness",
+        "agentic eval",
+        "eval suite",
+        "run the eval",
+        "judge code",
+        "eval criteria leak",
+        "a/b eval",
+        "test harness for agents",
+        "harbor eval",
+        "field test",
+        "field tests",
+        "field testing docs",
+        "notification test",
+        "eval suite cost",
+        "run full eval suite",
+        "field-test driver",
+        "tart field test",
+        "qualifying field test",
+        "acceptance check iphone",
+        "appium via mcp"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_orchestration",
+        "ai.llm_basics",
+        "ai.device_automation",
+        "infra.vm_emulation"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.coding_agents",
+      "name": "Coding agents & CLI assistants (Claude Code, Codex)",
+      "aliases": [
+        "codex cli",
+        "codex profiles",
+        "claude code resume",
+        "slash resume",
+        "codex permissions",
+        "resume remote task",
+        "claude code update",
+        "steering claude code",
+        "agent transcript",
+        "codex config",
+        "claude code config",
+        "codex resume",
+        "agents.md instructions",
+        "codex homes",
+        "claude -p",
+        "codex app server",
+        "codex thread names",
+        "codex skills location",
+        "openbase coder",
+        "cursor pyright",
+        "codex mode",
+        "claude auth login",
+        "codex threads",
+        "claude code backend",
+        "claude code session",
+        "codex agents.md",
+        "plan mode",
+        "cursor ide",
+        "claude desktop"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_orchestration",
+        "shell.tools"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.device_automation",
+      "name": "Mobile device automation & UI testing (Appium/Detox)",
+      "aliases": [
+        "detox",
+        "device automation",
+        "physical iphone automation",
+        "udid",
+        "webdriver mobile",
+        "adb input",
+        "physical device driver",
+        "drive my iphone",
+        "physical android device",
+        "detox keyboard"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.mcp"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.computer_use",
+      "name": "Computer & browser control by agents",
+      "aliases": [
+        "drive my chrome",
+        "screen control",
+        "chrome extension side panel",
+        "browser automation agent",
+        "control my computer",
+        "computer control skill",
+        "pyautogui",
+        "click around",
+        "screen share control",
+        "chrome computer control",
+        "background screenshotting",
+        "playwright diagnose",
+        "browser open",
+        "computer control",
+        "screen share agent",
+        "chrome control",
+        "simulating the command key",
+        "remote debugging chrome",
+        "manual control agent",
+        "use playwright",
+        "run playwright",
+        "playwright test",
+        "playwright e2e",
+        "chrome profile-directory",
+        "chrome profile switch",
+        "default chrome profile",
+        "chrome automation profile"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.agent_orchestration"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.sandboxing",
+      "name": "Agent sandboxing & arbitrary code execution safety",
+      "aliases": [
+        "daytona sandbox",
+        "arbitrary code execution",
+        "sandboxed agent",
+        "break-glass tools",
+        "agent bash access",
+        "clean-room install",
+        "daytona",
+        "sandboxing of agents",
+        "codex seatbelt",
+        "daytona security",
+        "cloud sandbox",
+        "sandbox filesystem",
+        "sandbox run commands",
+        "codex inside docker",
+        "codex lock down",
+        "unix user permissions codex"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.agent_orchestration",
+        "infra.docker",
+        "infra.vm_emulation"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.multitenancy",
+      "name": "Multi-tenant isolation & tenant security",
+      "aliases": [
+        "tenant isolation",
+        "cross-tenant",
+        "deployment group",
+        "multi-tenant",
+        "tenant deploy",
+        "env var isolation",
+        "account-private dns",
+        "network namespace per account",
+        "tenant deploy failed",
+        "all the paas tenants",
+        "tenant-pool deploys",
+        "tenant permissions",
+        "tenant deploy alert",
+        "control plane shared"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "devops.paas",
+        "security.web_hardening"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.secrets_management",
+      "name": "Secrets, credentials & API key management",
+      "aliases": [
+        "env variable credentials",
+        "secrets management",
+        "api key in env",
+        "credential expired",
+        "stored credentials",
+        "all secrets",
+        "load_dotenv",
+        "refill the keys",
+        "developer .env",
+        "api token credit",
+        "getting secrets cli",
+        "stripe api key env",
+        "no api key provided",
+        "set environment variable deploy",
+        "env credentials fallback",
+        "same set of secrets",
+        "admin secret value",
+        "vendor keys",
+        "anthropic_api_key mount",
+        "pypi_publish_token",
+        "webhook secret",
+        "gitleaks",
+        "scan for secrets",
+        "leaked api key",
+        "secret scanning",
+        "production stripe key",
+        "dotenv prefix",
+        ".env file",
+        "env var config",
+        "tfvars file",
+        "ci secrets env",
+        "env variables docker compose"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "git.basics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.launchd_services",
+      "name": "macOS services, launchd & app lifecycle",
+      "aliases": [
+        "launchd",
+        "login items",
+        "status bar app",
+        "launch app from terminal",
+        "caffeinate",
+        "csrutil",
+        "background service macos",
+        "menu bar app",
+        "launchd process",
+        "login item",
+        "launch openbase.app",
+        "launchctl tasks",
+        "launchctl command",
+        "services restart",
+        "quicklook thumbnail",
+        "launch from terminal argument",
+        "macos dock nix",
+        "launchctl",
+        "tasks.json launchctl",
+        "launchd service",
+        "menu bar app macos",
+        "foreground app macos",
+        "two dock icons",
+        "nsstatusitem"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "shell.tools",
+        "swift.ios_dev"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.object_storage",
+      "name": "Object storage & S3-compatible backends (MinIO, boto3)",
+      "aliases": [
+        "minio",
+        "s3 outage",
+        "object storage",
+        "s3 compatible",
+        "s3 nginx routing",
+        "boto3 s3 upload",
+        "boto3 s3 client",
+        "boto3 upload directory",
+        "s3 transfer tooling",
+        "s3 access logging",
+        "gc-able s3 objects",
+        "boto3 reference"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "infra.aws"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.turn_ice",
+      "name": "TURN/ICE & WebRTC connectivity (LiveKit)",
+      "aliases": [
+        "turn server",
+        "livekit-server",
+        "turn endpoint",
+        "webrtc relay",
+        "ice candidates",
+        "callkit livekit",
+        "createroomrequest",
+        "livekit server",
+        "livekit down",
+        "livekit webrtc",
+        "livekit turn detection",
+        "livekit room",
+        "join the room",
+        "livekit console",
+        "livekit callkit",
+        "livekit dockerfile",
+        "tailscale stun server",
+        "livekit cli",
+        "livekit thread",
+        "livekit examples"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [
+        "web.websockets"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.tts_stt_services",
+      "name": "TTS/STT provider integration (AssemblyAI, Cartesia, ElevenLabs, Kokoro)",
+      "aliases": [
+        "assembly ai",
+        "assemblyai",
+        "kokoro tts",
+        "whisper transcribe",
+        "voice service",
+        "text to speech api",
+        "transcription lag",
+        "run the tts",
+        "raspberry pi text to speech",
+        "natural sounding text to speech",
+        "speech to text latency",
+        "deepgram filler words",
+        "cartesia voices",
+        "elevenlabs transcription",
+        "elevenlabs speech to text",
+        "openai speech to text",
+        "nvidia riva",
+        "does not survive tts",
+        "transcribe with whisper",
+        "assemblyai plan",
+        "natural sounding tts"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [
+        "ai.voice_pipeline"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.drf",
+      "name": "Django REST Framework & API serialization",
+      "aliases": [
+        "serializermethodfield",
+        "browsable api",
+        "drf serializers",
+        "primarykeyrelatedfield",
+        "drf generic views",
+        "drf spectacular",
+        "serializer validators",
+        "django rest framework primary key",
+        "serializer get user",
+        "django ninja",
+        "django rest framework swagger",
+        "drf swagger examples",
+        "django rest framework markdown",
+        "drf browsable api",
+        "drf validators",
+        "drf primary key field"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "django.framework",
+        "web.http"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "python.celery",
+      "name": "Celery & background task queues in Django",
+      "aliases": [
+        "celery",
+        "celery beat",
+        "celery revoke",
+        "django long running task",
+        "background tasks django",
+        "taskiq",
+        "taskiq workers",
+        "write-ahead queue",
+        "durable queue",
+        "async batcher",
+        "read-your-write",
+        "tail latency ack"
+      ],
+      "category": "python",
+      "viz": "sequence",
+      "prereqs": [
+        "django.framework",
+        "python.async",
+        "web.http",
+        "db.transactions"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.api_schema",
+      "name": "OpenAPI schemas & client generation",
+      "aliases": [
+        "openapi",
+        "swagger",
+        "swagger client generator",
+        "openapi typescript",
+        "api schema",
+        "generated client",
+        "default-non-nullable",
+        "backend contract summary"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "web.http",
+        "ts.types"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.nextjs",
+      "name": "Next.js & React data-fetching stack",
+      "aliases": [
+        "nextjs",
+        "next.js",
+        "create-next-app",
+        "tanstack query",
+        "react query",
+        "nextjs 14",
+        "nextjs app",
+        "hook vs hoc",
+        "react skeleton",
+        "resizable panels",
+        "vitest",
+        "react split pane",
+        "tiptap",
+        "chatkit react",
+        "vuex",
+        "hoc vs render props",
+        "npm link",
+        "vue vs react",
+        "vue devtools",
+        "react function component vs class",
+        "vite prebuild",
+        "es6 append to list",
+        "react usecallback",
+        "react hook vs hoc",
+        "react-resizable-panels",
+        "react split drag",
+        "react vite app",
+        "nextjs with tanstack",
+        "usequery caching"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "react.rendering",
+        "react.hooks"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.ui_component_libs",
+      "name": "UI component libraries (shadcn, Radix, Bootstrap)",
+      "aliases": [
+        "shadcn",
+        "radix ui",
+        "shadcn vs radix",
+        "react bootstrap",
+        "component library",
+        "vue bootstrap",
+        "react bootstrap primary color",
+        "b-col fixed width",
+        "material spacer"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "web.nextjs",
+        "css.layout"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "gamedev.spritekit",
+      "name": "SpriteKit & iOS 2D game physics",
+      "aliases": [
+        "skphysicsworld",
+        "skshapenode",
+        "sk physics",
+        "swift sprite rendering",
+        "spritekit alternative",
+        "spritekit physics step",
+        "skshapenode dashed border",
+        "spritekit tutorial",
+        "player too fast",
+        "hitting animations",
+        "aiming direction",
+        "scoring visualization",
+        "avoid-points mode",
+        "game feel",
+        "thumb zone controls",
+        "redo rule",
+        "jump serves",
+        "ai players bounce",
+        "points from defeat"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [
+        "swift.ios_dev"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "hw.embedded",
+      "name": "Embedded hardware & microcontrollers (Arduino, nRF, BLE)",
+      "aliases": [
+        "arduino",
+        "nrf52 dfu",
+        "ble spi",
+        "uart",
+        "segger flash",
+        "particle.io",
+        "iot module",
+        "hologram sim",
+        "btsnoop",
+        "sparkfun pro mini",
+        "feather esp8266",
+        "nrf51822 datasheet",
+        "jlink swd",
+        "digikey usb power supply",
+        "ble spi friend",
+        "arduino keyboard",
+        "segger nrf51",
+        "uart wired",
+        "adafruit nrf52",
+        "usb to rs485",
+        "raspberry pi voltage",
+        "raspberry pi alexa",
+        "raspberry pi microphone",
+        "pi speaker setup",
+        "alexa replacement",
+        "wake word",
+        "jarvis wake word",
+        "livekit rpi"
+      ],
+      "category": "hw",
+      "viz": "code",
+      "prereqs": [
+        "ai.voice_pipeline"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.mitm_debugging",
+      "name": "Traffic interception & network debugging (mitmproxy, Wireshark)",
+      "aliases": [
+        "mitmproxy",
+        "wireshark",
+        "seleniumwire",
+        "listen to http traffic",
+        "packet capture",
+        "intercept traffic",
+        "haythem public-ip",
+        "mitm proxy",
+        "btsnoop_hci"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.cloudflare_hosting",
+      "name": "Static hosting, CDNs & domain routing (Cloudflare Pages, GH Pages)",
+      "aliases": [
+        "cloudflare pages",
+        "gh pages",
+        "github pages",
+        "connect domain",
+        "cloudflare wordpress",
+        "downloads page deploy",
+        "redirect domain",
+        "marketing website deploy",
+        "downloads page link",
+        "static hosting mime",
+        "connected to cloudflare",
+        "cloudflare aaaa",
+        "netlify ssl",
+        "cdn deployment",
+        "cloudflare pages domain",
+        "cloudflare api token",
+        "bad gateway cloudflare",
+        "cloudflare account",
+        "cloudflare large images",
+        "cloudflare account dns",
+        "custom paas domain",
+        "s3 website downloads file",
+        "octet-stream html",
+        "content-type html",
+        "s3 static website",
+        "s3 nginx for routing",
+        "s3 website octet stream",
+        "s3 downloads file instead",
+        "mime type octet",
+        "aws amplify",
+        "amplify hosting",
+        "deploy nextjs amplify",
+        "amplify frontend"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "infra.dns",
+        "infra.object_storage",
+        "web.http",
+        "infra.aws",
+        "web.nextjs"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.cost_management",
+      "name": "Cloud & LLM cost tracking and optimization",
+      "aliases": [
+        "aws cost breakdown",
+        "aws spot",
+        "cost per run",
+        "api pricing",
+        "embeddings pricing",
+        "spend per day",
+        "billing breakdown",
+        "budget-capped",
+        "cost per day running",
+        "nothing cheaper than",
+        "aws cost report",
+        "cost report script",
+        "estimate eval cost"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "infra.aws",
+        "ai.model_selection"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ml.pytorch",
+      "name": "PyTorch training & GPU basics",
+      "aliases": [
+        "pytorch",
+        "backprop",
+        ".cuda()",
+        "train on aws spot",
+        "colab instance types",
+        "mixed precision",
+        "softmax function",
+        "torch relu",
+        "torchvision cifar100",
+        "pytorch lstm save graph",
+        "deploy pytorch model c++",
+        "deploy tensorflow model",
+        "huggingface peft train",
+        "pytorch backprop",
+        "pytorch cuda",
+        "softmax function python",
+        "mixed precision spacy",
+        "aws spot training",
+        "lambda arm processor",
+        "gpu instance pricing"
+      ],
+      "category": "ml",
+      "viz": "code",
+      "prereqs": [
+        "stats.ml_methods",
+        "infra.aws",
+        "infra.cost_management"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ml.cv_pipelines",
+      "name": "Computer vision & image processing pipelines",
+      "aliases": [
+        "template matching",
+        "skimage",
+        "pytesseract",
+        "pose estimation",
+        "image recommender",
+        "controlnet",
+        "rgb-d camera",
+        "numpy to cv2 image",
+        "opencv add image",
+        "pix2pix",
+        "nvidia spade",
+        "skimage template matching",
+        "pytesseract boxes",
+        "rgb-d pose estimation"
+      ],
+      "category": "ml",
+      "viz": "prose",
+      "prereqs": [
+        "stats.ml_methods"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "django.auth_email",
+      "name": "Auth, email verification & user flows (allauth, auth0)",
+      "aliases": [
+        "allauth",
+        "email verification",
+        "resend verification email",
+        "account_email_verification",
+        "is_staff",
+        "is_superuser",
+        "verification code",
+        "django allauth google one tap",
+        "django oauth2 client",
+        "email verification bypass",
+        "social login fix",
+        "django registration template",
+        "django server_email",
+        "django smtp email",
+        "allauth same-origin",
+        "email verification flow",
+        "allauth email verification",
+        "auth0 resend verification",
+        "csrf verification failed",
+        "jwt token strategy",
+        "allauth google one tap",
+        "sign-in-with-apple"
+      ],
+      "category": "django",
+      "viz": "sequence",
+      "prereqs": [
+        "django.framework",
+        "web.oauth"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.zero_downtime_deploy",
+      "name": "Zero-downtime deploys & deploy failure diagnosis",
+      "aliases": [
+        "zero downtime deploy",
+        "deploy without downtime",
+        "deploy failed",
+        "heroku downtime",
+        "deploy stopped mid-run",
+        "rolling deploy",
+        "zero downtime deploys",
+        "brownout",
+        "superseded deploy",
+        "deploy stopped newer push"
+      ],
+      "category": "infra",
+      "viz": "timeline",
+      "prereqs": [
+        "devops.deploy_pipeline"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "math.symbolic_tools",
+      "name": "Symbolic & numeric math tooling (math.js, Wolfram, linear algebra)",
+      "aliases": [
+        "mathjson",
+        "math.js",
+        "wolfram alpha",
+        "krylov subspace",
+        "transpose matrix",
+        "laplace equation",
+        "greens theorem",
+        "wolfram alpha transpose"
+      ],
+      "category": "math",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "data.retail_analytics",
+      "name": "Retail sales analytics (share, SKUs, private label)",
+      "aliases": [
+        "private label share",
+        "sku margin",
+        "dollar sales",
+        "year over year sales",
+        "market share bps",
+        "retailer dataset",
+        "subcategory sales",
+        "distribution trend",
+        "mccormick brand",
+        "badia target",
+        "seasoned salt subcategory",
+        "sold on promo",
+        "private label brand",
+        "top skus walmart",
+        "share bps"
+      ],
+      "category": "data",
+      "viz": "prose",
+      "prereqs": [
+        "db.sql",
+        "python.pandas"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "git.submodules",
+      "name": "Git submodules & subrepo management",
+      "aliases": [
+        "git submodules",
+        "vscode git submodules",
+        "subrepos",
+        "subrepo default branch",
+        "submodule branches"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "git.dag"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "git.lfs",
+      "name": "Git LFS & large file handling",
+      "aliases": [
+        "git lfs",
+        "remove lfs",
+        "lfs migrate",
+        "large file storage"
+      ],
+      "category": "git",
+      "viz": "code",
+      "prereqs": [
+        "git.basics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "git.gitignore",
+      "name": "Gitignore patterns & ignore rules",
+      "aliases": [
+        "gitignore",
+        "git ignore symlinks",
+        "ds_store in gitignore",
+        "pyinstaller gitignore",
+        "javascript gitignore",
+        "ignore rules",
+        "gitignore symlinks",
+        "ds_store gitignore",
+        "gitignore .reports"
+      ],
+      "category": "git",
+      "viz": "code",
+      "prereqs": [
+        "git.basics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "git.trunk_based",
+      "name": "Trunk-based development vs gitflow",
+      "aliases": [
+        "trunk based development",
+        "gitflow",
+        "trunk based vs gitflow",
+        "no staging branch",
+        "gitflow vs trunk"
+      ],
+      "category": "git",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "devops.deploy_pipeline"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "git.stash_hooks",
+      "name": "Git stash & autostash behavior",
+      "aliases": [
+        "git stash",
+        "autostash",
+        "accidental stash",
+        "stash entry"
+      ],
+      "category": "git",
+      "viz": "code",
+      "prereqs": [
+        "git.basics",
+        "git.undo_recovery"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "perf.benchmarking",
+      "name": "Performance benchmarking & optimization methodology",
+      "aliases": [
+        "benchmark results",
+        "speedup factor",
+        "memory footprint benchmark",
+        "performance optimization pr",
+        "cold start benchmark",
+        "latency measurement"
+      ],
+      "category": "perf",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "python.serialization_perf",
+      "name": "Python parsing & serialization performance (orjson, frozenset tricks)",
+      "aliases": [
+        "orjson",
+        "json parsing overhead",
+        "frozenset lookup",
+        "parsing with offsets",
+        "fast json python",
+        "is python getting faster"
+      ],
+      "category": "python",
+      "viz": "code",
+      "prereqs": [
+        "python.language",
+        "perf.benchmarking"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.terraform",
+      "name": "Terraform & infrastructure as code",
+      "aliases": [
+        "terraform",
+        "terraform apply",
+        "hetzner terraform",
+        "terraform state",
+        "infrastructure as code",
+        "terraform stuff",
+        "manage_cloudtrail_bucket",
+        "terraform hcl",
+        "tfvars",
+        "terraform state bucket",
+        "reusable terraform modules",
+        "terraform teardown",
+        "tf vars",
+        "terraform apply changes",
+        "terraform modules variables",
+        "terraform tfstate",
+        "backend.hcl",
+        "terraform drift",
+        "s3 backend terraform",
+        "terraform state file"
+      ],
+      "category": "infra",
+      "viz": "code",
+      "prereqs": [
+        "infra.aws"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.aws_serverless",
+      "name": "AWS lambda/SNS/SSM & event-driven services",
+      "aliases": [
+        "lambda trigger sns",
+        "ssm parameter",
+        "common_secrets ssm",
+        "aws lambda",
+        "sagemaker",
+        "aws codedeploy",
+        "ask lambda arm",
+        "sns dlq"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.aws"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.caddy_lb",
+      "name": "Caddy & zero-downtime load balancing",
+      "aliases": [
+        "caddy",
+        "caddy zero downtime",
+        "502 zero downtime",
+        "circuit-breaker rollback",
+        "caddy auto-tls",
+        "local caddy"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.reverse_proxy",
+        "infra.zero_downtime_deploy"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "devops.dependabot",
+      "name": "Dependabot & dependency vulnerability management",
+      "aliases": [
+        "dependabot",
+        "dependabot vulnerabilities",
+        "dependency vulnerabilities",
+        "lockfile changes",
+        "dependabot security alerts",
+        "clear dependabot alerts"
+      ],
+      "category": "devops",
+      "viz": "prose",
+      "prereqs": [
+        "devops.ci"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "net.headscale_derp",
+      "name": "Headscale deployment & DERP relay operation",
+      "aliases": [
+        "derp server",
+        "relay nyc",
+        "tsnet",
+        "headscale solution",
+        "derp diagnostics",
+        "tailscale derp",
+        "openbase headscale",
+        "derp debugging",
+        "headscale serve",
+        "derp server thread",
+        "netmesh companion",
+        "netmesh-infra"
+      ],
+      "category": "net",
+      "viz": "sequence",
+      "prereqs": [
+        "net.wireguard_mesh",
+        "net.tailscale"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "db.id_design",
+      "name": "Public vs internal identifiers & key design",
+      "aliases": [
+        "public-facing ids",
+        "internal ids",
+        "uuid vs bigint",
+        "primary key design",
+        "foreign key bigint"
+      ],
+      "category": "db",
+      "viz": "prose",
+      "prereqs": [
+        "db.sql"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ml.model_hosting",
+      "name": "Self-hosted LLM serving & model conversion (Ollama, HF)",
+      "aliases": [
+        "ollama multiple requests",
+        "huggingface to ollama",
+        "autotrain advanced",
+        "sagemaker foundation model",
+        "sagemaker prompt format",
+        "jumpstart foundation models",
+        "llama 2 peft",
+        "ollama training",
+        "run llm locally free",
+        "huggingface model",
+        "hf hub"
+      ],
+      "category": "ml",
+      "viz": "prose",
+      "prereqs": [
+        "ai.llm_basics",
+        "ml.pytorch",
+        "ai.fine_tuning"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.spaced_repetition",
+      "name": "Spaced repetition algorithms (FSRS, SM-2)",
+      "aliases": [
+        "fsrs",
+        "fsrs vs sm2",
+        "spaced repetition algorithm"
+      ],
+      "category": "ai",
+      "viz": "timeline",
+      "prereqs": [
+        "ai.knowledge_tracing"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "build.systems",
+      "name": "Build systems & monorepo tooling (Bazel, Maven)",
+      "aliases": [
+        "bazel",
+        "bazel vs cmake",
+        "what is maven",
+        "incompatible_disallow_filetype",
+        "build system",
+        "bazel c++ library",
+        "bazel filetype"
+      ],
+      "category": "build",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "js.module_resolution",
+      "name": "JS package resolution & linking issues (npm link, exports)",
+      "aliases": [
+        "invalid hook call",
+        "package path not exported",
+        "duplicate react copies",
+        "package exports field",
+        "npm link without build",
+        "node nvm",
+        "npm audit fix",
+        "npm link rebuild",
+        "install npm node",
+        "npm link react",
+        "node version check",
+        "pnpm files"
+      ],
+      "category": "js",
+      "viz": "code",
+      "prereqs": [
+        "web.nextjs"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "health.fhir_interop",
+      "name": "FHIR interoperability & bulk data export",
+      "aliases": [
+        "fhir",
+        "fhir bulk export",
+        "epic bulk export",
+        "documentreference",
+        "$export",
+        "fhir ndjson",
+        "hapi fhir",
+        "fhir r4",
+        "bulk data kick-off",
+        "r4b vs r4",
+        "bulk export fhir",
+        "fhir bulk data"
+      ],
+      "category": "health",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "payments.stripe",
+      "name": "Stripe payments & promo codes",
+      "aliases": [
+        "stripe api key",
+        "stripe cli",
+        "promo codes",
+        "stripe payment",
+        "stppaymentmethodsviewcontroller",
+        "stripe key",
+        "sk_live",
+        "coding credits plan",
+        "stripe test cards",
+        "stripe ios tutorial",
+        "stripe subscription change",
+        "stripe add value"
+      ],
+      "category": "payments",
+      "viz": "sequence",
+      "prereqs": [
+        "web.http"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.langchain_langgraph",
+      "name": "LangChain & LangGraph agent frameworks",
+      "aliases": [
+        "langchain",
+        "langchain agent",
+        "langgraph human in the loop",
+        "langgraph custom dockerfile",
+        "langroid",
+        "langchain agent server",
+        "livekit to langgraph",
+        "langsmith server",
+        "langchain memory",
+        "langchain observability"
+      ],
+      "category": "ai",
+      "viz": "code",
+      "prereqs": [
+        "ai.llm_basics",
+        "ai.agent_orchestration"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.vscode_tasks",
+      "name": "VS Code tasks, launch configs & IDE automation",
+      "aliases": [
+        "tasks.json",
+        "launch.json",
+        "vscode launch config",
+        "config:reloadflags",
+        "pytest vscode coverage",
+        "vscode intellisense",
+        "pycharm debugger truncated",
+        "vscode launch json",
+        "debugpy launch json",
+        "vscode venv"
+      ],
+      "category": "infra",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "tools.boilersync_multi",
+      "name": "Boilersync templates & multi workspace tooling",
+      "aliases": [
+        "boilersync",
+        "sub-repos",
+        "boilersync template",
+        "django-react boilersync",
+        "multi-cli",
+        "install sets",
+        "pin main branch",
+        "sub-repo workspace",
+        "pypi multi",
+        "nested repos",
+        "boilersync templates",
+        "boilersync init",
+        "boilersync-skills"
+      ],
+      "category": "tools",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.worktrees",
+        "git.submodules"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "csharp.language",
+      "name": "C# language fundamentals",
+      "aliases": [
+        "c# map operator",
+        "c# delete folder",
+        "c# linq",
+        "c sharp syntax",
+        "c# operator overloading",
+        "c# implicit conversion",
+        "c# expandoobject",
+        "c# foreach xml"
+      ],
+      "category": "csharp",
+      "viz": "code",
+      "prereqs": [],
+      "source": "induced"
+    },
+    {
+      "id": "aws.kms_cmk",
+      "name": "AWS KMS & customer-managed keys (CMK)",
+      "aliases": [
+        "what is a cmk",
+        "customer managed key",
+        "aws kms",
+        "kms key policy",
+        "kms describe-key",
+        "kms key webhook",
+        "ingestion kms key"
+      ],
+      "category": "aws",
+      "viz": "prose",
+      "prereqs": [
+        "infra.aws",
+        "infra.secrets_management"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "compliance.hipaa_infra",
+      "name": "HIPAA compliance for infrastructure & data handling",
+      "aliases": [
+        "hipaa compliant",
+        "compliance stack",
+        "compliant sandbox",
+        "phi data handling",
+        "hipaa infrastructure",
+        "phi data",
+        "hipaa webapp",
+        "hipaa forensics"
+      ],
+      "category": "compliance",
+      "viz": "prose",
+      "prereqs": [
+        "infra.terraform",
+        "infra.secrets_management"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.state_management",
+      "name": "Frontend state management (Redux, selectors, Vuex)",
+      "aliases": [
+        "redux store",
+        "memoized selector",
+        "reselect",
+        "selector rerenders",
+        "zustand",
+        "redux navigation state",
+        "id in url vs redux"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "web.nextjs",
+        "react.rendering"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.zod_validation",
+      "name": "Zod schemas & runtime validation",
+      "aliases": [
+        "zod schema",
+        "zod schemas",
+        "runtime validation typescript",
+        "zod types"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "ts.types"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "devops.e2e_test_tiers",
+      "name": "E2E test tiers & VM-based installation testing",
+      "aliases": [
+        "full-flow test",
+        "e2e testing tiers",
+        "installation flow testing",
+        "smoke test tiers",
+        "e2e install test"
+      ],
+      "category": "devops",
+      "viz": "timeline",
+      "prereqs": [
+        "infra.vm_emulation",
+        "devops.ci"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.prompt_injection",
+      "name": "Prompt injection & instruction-injection testing",
+      "aliases": [
+        "instruction-injection test",
+        "prompt injection",
+        "injection test agent",
+        "instruction injection",
+        "untrusted evidence transcript"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.llm_basics",
+        "ai.sandboxing"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.email_deliverability",
+      "name": "Transactional email services & deliverability (Resend)",
+      "aliases": [
+        "resend emails",
+        "email api",
+        "email credibility score",
+        "transactional email",
+        "email deliverability",
+        "resend api key",
+        "smtp server gmail",
+        "invite email send"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "django.auth_email"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.grafana_monitoring",
+      "name": "Grafana dashboards & metrics monitoring",
+      "aliases": [
+        "grafana dashboard",
+        "grafana secret",
+        "metrics dashboard",
+        "grafana login",
+        "is grafana up",
+        "grafana dns name"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "infra.observability"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "db.olap_analytics",
+      "name": "OLAP databases & analytical aggregation",
+      "aliases": [
+        "olap database",
+        "columnar database",
+        "analytics warehouse",
+        "olap vs oltp",
+        "django olap",
+        "bigquery analytics",
+        "postgres warehouse"
+      ],
+      "category": "db",
+      "viz": "prose",
+      "prereqs": [
+        "db.sql",
+        "infra.analytics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "unix.permissions",
+      "name": "Unix file permissions & ownership boundaries",
+      "aliases": [
+        "unix permissions",
+        "permissions boundary",
+        "sudo access files",
+        "unix security groups",
+        "remove user from group",
+        "sudo group"
+      ],
+      "category": "unix",
+      "viz": "code",
+      "prereqs": [
+        "shell.tools"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "infra.nix_config",
+      "name": "Nix & declarative machine configuration",
+      "aliases": [
+        "nix store",
+        "nix mac-config",
+        "nix darwin",
+        "nix package manager",
+        "declarative dotfiles"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [
+        "shell.tools"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "aws.cloudtrail_config",
+      "name": "AWS CloudTrail, Config & audit logging",
+      "aliases": [
+        "cloudtrail",
+        "aws config rule",
+        "cloudtrail log group",
+        "confused deputy",
+        "aws sourcearn condition"
+      ],
+      "category": "aws",
+      "viz": "prose",
+      "prereqs": [
+        "infra.aws",
+        "compliance.hipaa_infra"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "aws.redshift_dlq",
+      "name": "Data warehouse loading & event retry (Redshift, DLQ/SNS)",
+      "aliases": [
+        "redshift",
+        "dlq retry",
+        "dead letter queue",
+        "sns to ecs"
+      ],
+      "category": "aws",
+      "viz": "sequence",
+      "prereqs": [
+        "infra.aws_serverless",
+        "db.olap_analytics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "health.mimic_ingestion",
+      "name": "Clinical dataset ingestion pipelines (MIMIC)",
+      "aliases": [
+        "mimic iii",
+        "physionet",
+        "mimic ingestion",
+        "clinical data ingestion",
+        "mimic-iv",
+        "omop",
+        "condition_source_concept_id",
+        "clinical data model",
+        "icu vs hosp",
+        "recon3d",
+        "cdi question",
+        "clinical database demo"
+      ],
+      "category": "health",
+      "viz": "timeline",
+      "prereqs": [
+        "infra.object_storage",
+        "db.sql"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "security.gpg_sftp_transfer",
+      "name": "Encrypted batch file transfer (GPG over SFTP, MOVEit)",
+      "aliases": [
+        "gpg encryption",
+        "moveit sftp",
+        "sftp transfer gpg",
+        "encrypted file transfer",
+        "aws transfer family",
+        "sftp batch ingestion",
+        "sftp ingestion",
+        "replay queue sqs",
+        "ingestion dlq"
+      ],
+      "category": "security",
+      "viz": "sequence",
+      "prereqs": [
+        "security.crypto_basics",
+        "infra.aws",
+        "infra.aws_serverless"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "gamedev.gamemaker_porting",
+      "name": "Game Maker style engines & porting (GML, rooms/events)",
+      "aliases": [
+        "game maker",
+        "gmk decompile",
+        "game maker studio",
+        "create event keyboard event"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [
+        "graphics.3d_engines"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "gamedev.phaser_web_games",
+      "name": "Web game frameworks (PhaserJS, pygame basics)",
+      "aliases": [
+        "phaserjs",
+        "phaser game",
+        "pygame example",
+        "space invaders phaser"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [
+        "web.nextjs"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ai.image_generation",
+      "name": "Image generation & inpainting (Stable Diffusion, DALL-E)",
+      "aliases": [
+        "inpainting",
+        "auto1111",
+        "stable diffusion webui",
+        "dall e inpainting",
+        "hires fix",
+        "inpaint masked"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [
+        "ai.llm_basics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "aws.sagemaker",
+      "name": "SageMaker model deployment & prompts",
+      "aliases": [
+        "sagemaker endpoint",
+        "inst prompt format"
+      ],
+      "category": "aws",
+      "viz": "prose",
+      "prereqs": [
+        "ml.pytorch",
+        "ai.llm_basics"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.vue_framework",
+      "name": "Vue.js framework & tooling",
+      "aliases": [
+        "vue select dropdown",
+        "vue spread syntax"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "web.nextjs"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.chrome_extensions",
+      "name": "Chrome extensions & browser APIs",
+      "aliases": [
+        "chrome extension",
+        "extension js modules",
+        "chrome extension manifest"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "web.nextjs"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "ecom.saleor_storefront",
+      "name": "E-commerce platforms & storefront SDKs (Saleor)",
+      "aliases": [
+        "saleor",
+        "saleor storefront",
+        "storefront sdk",
+        "saleor reservations"
+      ],
+      "category": "ecom",
+      "viz": "prose",
+      "prereqs": [
+        "web.nextjs",
+        "db.sql"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.geo_maps_apis",
+      "name": "Maps & geocoding APIs (Google Maps, static maps)",
+      "aliases": [
+        "google static maps",
+        "google maps url",
+        "directions api"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [
+        "web.http"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "data.census_datasets",
+      "name": "Public datasets & census/commute data",
+      "aliases": [
+        "acs census data",
+        "ctpp data",
+        "census table cells",
+        "public dataset access"
+      ],
+      "category": "data",
+      "viz": "prose",
+      "prereqs": [
+        "python.pandas"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "python.numpy",
+      "name": "NumPy arrays & numeric operations",
+      "aliases": [
+        "numpy histogram",
+        "numpy load image",
+        "numpy array ops"
+      ],
+      "category": "python",
+      "viz": "code",
+      "prereqs": [
+        "python.language"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "web.expo_react_native",
+      "name": "React Native & Expo builds",
+      "aliases": [
+        "expo go",
+        "react native callkit",
+        "custom build expo",
+        "react native xcode"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [
+        "web.nextjs",
+        "ios.build_distribution"
+      ],
+      "source": "induced"
+    },
+    {
+      "id": "db.prisma_orm",
+      "name": "Prisma & Node ORM database access",
+      "aliases": [
+        "prisma",
+        "prisma localhost",
+        "prisma schema",
+        "prisma db url"
+      ],
+      "category": "db",
+      "viz": "code",
+      "prereqs": [
+        "db.postgres_ops"
+      ],
+      "source": "induced"
+    }
+  ]
+}
