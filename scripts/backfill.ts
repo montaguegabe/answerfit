@@ -176,8 +176,8 @@ async function main() {
   );
   for (const c of taxonomy()) {
     d.prepare(
-      "INSERT OR REPLACE INTO concepts (id, name, category, viz, prereqs, contrasts, source) VALUES (?, ?, ?, ?, ?, ?, 'seed')"
-    ).run(c.id, c.name, c.category, c.viz, JSON.stringify(c.prereqs), JSON.stringify(c.contrasts ?? []));
+      "INSERT OR REPLACE INTO concepts (id, name, category, viz, prereqs, contrasts, source) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ).run(c.id, c.name, c.category, c.viz, JSON.stringify(c.prereqs), JSON.stringify(c.contrasts ?? []), (c as any).source ?? "seed");
   }
 
   console.log("Scanning history files…");
