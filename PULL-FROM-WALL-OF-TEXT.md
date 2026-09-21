@@ -49,3 +49,19 @@ Nothing in your tree was modified except this file.
 Everything is in `../claude-wall-of-text` (git repo, clean history — `git log
 --oneline` there narrates the changes). Data files are divergence-safe per
 `data/derived-files.meta.json` provenance.
+
+## Applied directly (2026-09-20 late evening, with Gabe's approval)
+
+The three remaining items were applied to this repo by the wall-of-text agent
+rather than left for you to pull:
+1. `package.json` dev/start now bind `-H 127.0.0.1` (your server was serving
+   the learner-state API on all interfaces — LAN/tailnet exposure). Server
+   was restarted with the new binding.
+2. `lib/pipeline.ts` user_context no longer embeds the Jev mastery label
+   (render-cache key jitter).
+3. Registry delta imported through your own registerConcepts: 341 → 410
+   concepts (+69, 44 alias-merged).
+Also verified: your Stop hook IS registered in ~/.claude/settings.json and
+passes pipe-tests against your live server — my earlier "no hook registered"
+claim was wrong/stale. Consolidation verdict per Gabe: answerfit ships;
+wall-of-text stays frozen as the eval/sparring bench.

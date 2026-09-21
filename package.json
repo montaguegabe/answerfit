@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3210",
+    "dev": "next dev -p 3210 -H 127.0.0.1",
     "build": "next build",
-    "start": "next start -p 3210",
+    "start": "next start -p 3210 -H 127.0.0.1",
     "init-db": "tsx scripts/init-db.ts",
     "ingest": "tsx scripts/ingest-transcripts.ts",
     "backfill": "tsx scripts/backfill.ts",

@@ -1114,7 +1114,9 @@
         "turn fallback",
         "stun turn",
         "call connectivity",
-        "webrtc stun"
+        "webrtc stun",
+        "ice failure",
+        "voip debugging"
       ],
       "category": "net",
       "viz": "sequence",
@@ -2123,7 +2125,11 @@
         "ddpm",
         "probabilistic modeling",
         "hot hands fallacy",
-        "histogram bin size"
+        "histogram bin size",
+        "diffusion model",
+        "midjourney inpainting",
+        "genie 2",
+        "denoising diffusion"
       ],
       "category": "stats",
       "viz": "prose",
@@ -2905,7 +2911,15 @@
         "nvidia spade",
         "skimage template matching",
         "pytesseract boxes",
-        "rgb-d pose estimation"
+        "rgb-d pose estimation",
+        "gan for audio",
+        "spade nvidia",
+        "3d model generator",
+        "suno",
+        "midjourney",
+        "dall e",
+        "seedream",
+        "image gan"
       ],
       "category": "ml",
       "viz": "prose",
@@ -3650,7 +3664,12 @@
         "olap vs oltp",
         "django olap",
         "bigquery analytics",
-        "postgres warehouse"
+        "postgres warehouse",
+        "analytical database",
+        "olap",
+        "bigquery provisioning",
+        "bq provisioned",
+        "bigquery badrequest"
       ],
       "category": "db",
       "viz": "prose",
@@ -3819,7 +3838,9 @@
         "stable diffusion webui",
         "dall e inpainting",
         "hires fix",
-        "inpaint masked"
+        "inpaint masked",
+        "inpainting api",
+        "hires fix blurry"
       ],
       "category": "ai",
       "viz": "prose",
@@ -4054,7 +4075,9 @@
       "name": "Merge storm (repeated rebase invalidation)",
       "aliases": [
         "merge storm",
-        "repeated rebase invalidation"
+        "repeated rebase invalidation",
+        "merge storms",
+        "rebase storm"
       ],
       "category": "discovered",
       "viz": "timeline",
@@ -4162,7 +4185,11 @@
       "id": "new.ami_baking",
       "name": "AMI baking vs boot-time self-configuration",
       "aliases": [
-        "ami baking"
+        "ami baking",
+        "rebake ami",
+        "baked ami",
+        "boot-time configuration",
+        "image baking"
       ],
       "category": "discovered",
       "viz": "timeline",
@@ -4269,7 +4296,11 @@
       "id": "new.claude_code_hooks",
       "name": "Claude Code hooks & settings.json lifecycle events",
       "aliases": [
-        "claude code hooks"
+        "claude code hooks",
+        "hooks",
+        "pretooluse hook",
+        "posttooluse hook",
+        "claude hooks"
       ],
       "category": "discovered",
       "viz": "sequence",
@@ -5774,7 +5805,11 @@
         "thread loading slow",
         "instrument latency",
         "django cache",
-        "query profiling"
+        "query profiling",
+        "django caching",
+        "cache framework",
+        "per-view cache",
+        "memcached django"
       ],
       "category": "perf",
       "viz": "timeline",
@@ -5853,7 +5888,11 @@
         "tart golden vm",
         "pristine base image",
         "untainted starting point",
-        "vm image bake"
+        "vm image bake",
+        "baked image",
+        "setup-time provisioning",
+        "prebaked ami",
+        "image vs bootstrap"
       ],
       "category": "infra",
       "viz": "prose",
@@ -5955,7 +5994,10 @@
         "split ios app repo",
         "workspace folder organization",
         "multi workspace repos",
-        "repo split"
+        "repo split",
+        "public private split",
+        "oss hygiene",
+        "monorepo split"
       ],
       "category": "repo",
       "viz": "prose",
@@ -6005,7 +6047,8 @@
         "onboarding funnel",
         "user drop off",
         "signup funnel",
-        "conversion funnel"
+        "conversion funnel",
+        "drop-off analysis"
       ],
       "category": "analytics",
       "viz": "prose",
@@ -6123,7 +6166,11 @@
         "deprecation warning",
         "backwards compatible command",
         "breaking cli change",
-        "compat shim"
+        "compat shim",
+        "backwards compatibility",
+        "api deprecation",
+        "breaking change",
+        "backcompat"
       ],
       "category": "api",
       "viz": "prose",
@@ -6672,7 +6719,11 @@
         "thumb zone",
         "mobile touch layout",
         "thumb zone buttons",
-        "responsive game ui"
+        "responsive game ui",
+        "mobile reachability",
+        "bottom nav layout",
+        "one-handed ui",
+        "thumb friendly ui"
       ],
       "category": "web",
       "viz": "prose",
@@ -6720,7 +6771,11 @@
         "imessage automation",
         "whatsapp agent send",
         "approved contacts messaging",
-        "agent send imessage"
+        "agent send imessage",
+        "send imessage",
+        "messages app scripting",
+        "applescript imessage",
+        "imessage permissions"
       ],
       "category": "ai",
       "viz": "sequence",
@@ -6915,6 +6970,1152 @@
         "concurrency.race_condition",
         "new.optimistic_concurrency_control",
         "ai.agent_orchestration"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "concurrency.atomicity",
+      "name": "Atomic operations",
+      "aliases": [
+        "atomic operation",
+        "atomicity",
+        "atomic write",
+        "compare and swap",
+        "compare-and-swap",
+        "cas operation"
+      ],
+      "category": "concurrency",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "concurrency.deadlock",
+      "name": "Deadlock",
+      "aliases": [
+        "deadlock",
+        "deadlocks",
+        "lock ordering",
+        "circular wait"
+      ],
+      "category": "concurrency",
+      "viz": "sequence",
+      "prereqs": [
+        "concurrency.mutex"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "db.indexes",
+      "name": "Database indexes",
+      "aliases": [
+        "database index",
+        "db index",
+        "btree index",
+        "covering index",
+        "query plan",
+        "explain analyze"
+      ],
+      "category": "databases",
+      "viz": "prose",
+      "prereqs": [
+        "db.sql"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.prompt_caching",
+      "name": "Prompt caching",
+      "aliases": [
+        "prompt caching",
+        "prompt cache",
+        "cache read tokens",
+        "cached prefix",
+        "kv cache"
+      ],
+      "category": "ai",
+      "viz": "timeline",
+      "prereqs": [
+        "ai.tokens_context"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.force_push",
+      "name": "Force-pushing shared branches",
+      "aliases": [
+        "force push",
+        "git push --force",
+        "push -f",
+        "force-push shared branch",
+        "force push --force-with-lease"
+      ],
+      "category": "extracted",
+      "viz": "git_dag",
+      "prereqs": [
+        "git.basics",
+        "git.dag"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.cache_key_prefix_invalidation",
+      "name": "Exact-prefix cache keys & invalidation",
+      "aliases": [
+        "cache key prefix",
+        "prefix invalidation",
+        "exact prefix match",
+        "prefix cache key",
+        "cache invalidation by prefix",
+        "cache key prefix invalidation"
+      ],
+      "category": "extracted",
+      "viz": "code",
+      "prereqs": [
+        "ai.prompt_caching"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.prompt_structure_stable_first",
+      "name": "Prompt ordering: stable content first, volatile last",
+      "aliases": [
+        "stable prefix prompt",
+        "prompt ordering",
+        "stable content first",
+        "volatile last prompt",
+        "prompt prefix stability",
+        "prompt structure stable first"
+      ],
+      "category": "extracted",
+      "viz": "code",
+      "prereqs": [
+        "new.cache_key_prefix_invalidation"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.cache_ttl_refresh",
+      "name": "Cache TTL & refresh-on-hit semantics",
+      "aliases": [
+        "cache ttl",
+        "ttl refresh",
+        "refresh on hit",
+        "sliding ttl",
+        "ttl expiry"
+      ],
+      "category": "extracted",
+      "viz": "timeline",
+      "prereqs": [
+        "ai.prompt_caching"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.cache_write_read_pricing",
+      "name": "Cache write premium vs cache-read rate",
+      "aliases": [
+        "cache write premium",
+        "cache read rate",
+        "cache write cost",
+        "cache pricing",
+        "prompt caching cost"
+      ],
+      "category": "extracted",
+      "viz": "prose",
+      "prereqs": [
+        "ai.prompt_caching"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.merge_queue",
+      "name": "Serializing integration via a merge queue",
+      "aliases": [
+        "merge queue",
+        "merge train",
+        "mergify queue",
+        "github merge queue",
+        "queued merges"
+      ],
+      "category": "extracted",
+      "viz": "sequence",
+      "prereqs": [
+        "git.rebase",
+        "git.merge"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.ecs_health_checks",
+      "name": "ECS container health checks & memory limits",
+      "aliases": [
+        "ecs health check",
+        "container health check",
+        "ecs memory limit",
+        "task health check",
+        "ecs container limits"
+      ],
+      "category": "extracted",
+      "viz": "prose",
+      "prereqs": [
+        "infra.aws",
+        "infra.docker"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.path_mtu_blackhole",
+      "name": "Path-MTU blackhole",
+      "aliases": [
+        "pmtu blackhole",
+        "path mtu",
+        "mtu blackhole",
+        "pmtud failure",
+        "mtu issue"
+      ],
+      "category": "extracted",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "new.rtp_media_transport",
+      "name": "RTP voice media transport",
+      "aliases": [
+        "rtp stream",
+        "voice media transport",
+        "rtp media",
+        "rtp packets"
+      ],
+      "category": "extracted",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "new.udp_vs_tcp_transport",
+      "name": "UDP vs TCP behavior under packet loss",
+      "aliases": [
+        "udp vs tcp",
+        "udp packet loss",
+        "tcp retransmission",
+        "udp or tcp",
+        "transport protocol choice"
+      ],
+      "category": "extracted",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "new.packet_loss_concealment",
+      "name": "Packet loss concealment as a loss signal",
+      "aliases": [
+        "packet loss concealment",
+        "loss concealment",
+        "audio concealment",
+        "concealment signal"
+      ],
+      "category": "extracted",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "new.media_liveness_watchdog",
+      "name": "Media-liveness watchdog & ICE restart",
+      "aliases": [
+        "media watchdog",
+        "ice restart",
+        "media liveness",
+        "liveness watchdog",
+        "media timeout detection"
+      ],
+      "category": "extracted",
+      "viz": "sequence",
+      "prereqs": [
+        "web.turn_ice",
+        "new.rtp_media_transport"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "new.systemd_targets",
+      "name": "Linux desktop services & systemd targets",
+      "aliases": [
+        "systemd target",
+        "graphical.target",
+        "multi-user.target",
+        "systemd units",
+        "linux desktop services"
+      ],
+      "category": "extracted",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "new.exclusive_open_flag",
+      "name": "Exclusive file open flag (wx)",
+      "aliases": [
+        "wx flag",
+        "exclusive open flag",
+        "o_excl",
+        "open wx",
+        "exclusive create"
+      ],
+      "category": "extracted",
+      "viz": "code",
+      "prereqs": [
+        "concurrency.atomicity"
+      ],
+      "source": "discovered"
+    },
+    {
+      "id": "lang.content_addressed_code",
+      "name": "Unison content-addressed code model",
+      "aliases": [
+        "unison",
+        "content-addressed code",
+        "content addressed",
+        "unison codebase",
+        "hash-based code"
+      ],
+      "category": "programming languages",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "python.ast",
+      "name": "Python AST parsing and analysis",
+      "aliases": [
+        "python ast",
+        "ast module",
+        "ast parsing",
+        "abstract syntax tree",
+        "ast.parse"
+      ],
+      "category": "python",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.transcript_mining",
+      "name": "Mining coding-agent transcripts as data",
+      "aliases": [
+        "transcript mining",
+        "agent transcripts",
+        "mining transcripts",
+        "session logs analysis",
+        "transcript data"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.taxonomy_induction",
+      "name": "Automatic taxonomy/concept induction from data",
+      "aliases": [
+        "taxonomy induction",
+        "concept induction",
+        "automatic taxonomy",
+        "taxonomy extraction",
+        "concept discovery"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.multi_agent_coordination",
+      "name": "Coordinating multiple concurrent coding agents",
+      "aliases": [
+        "multi-agent coordination",
+        "concurrent agents",
+        "agent coordination",
+        "parallel coding agents",
+        "multi agent"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "data.file_format_conversion",
+      "name": "Bulk data conversion to JSONL/CSV/Parquet",
+      "aliases": [
+        "jsonl conversion",
+        "csv to parquet",
+        "file format conversion",
+        "bulk data conversion",
+        "convert to jsonl"
+      ],
+      "category": "data",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "data.google_takeout",
+      "name": "Google activity/search history data access",
+      "aliases": [
+        "google takeout",
+        "takeout",
+        "google activity export",
+        "search history export",
+        "myactivity data"
+      ],
+      "category": "data",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.chrome_devtools_protocol",
+      "name": "Chrome remote debugging / DevTools protocol",
+      "aliases": [
+        "chrome devtools protocol",
+        "remote debugging",
+        "chrome debugger",
+        "devtools protocol"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "perf.profiling_diagnosis",
+      "name": "Profiling & latency diagnosis of slow endpoints",
+      "aliases": [
+        "profiling",
+        "slow endpoint",
+        "latency diagnosis",
+        "performance debugging",
+        "perf profiling"
+      ],
+      "category": "performance",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.pagination_search",
+      "name": "Cross-page search & pagination correctness",
+      "aliases": [
+        "pagination",
+        "cross-page search",
+        "paging",
+        "page results",
+        "search pagination"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.version_drift_detection",
+      "name": "Detecting running services behind latest code",
+      "aliases": [
+        "version drift",
+        "stale deploy",
+        "outdated service",
+        "running old code",
+        "drift detection"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "js.regex_patterns",
+      "name": "Regex pattern design & maintainability",
+      "aliases": [
+        "regex",
+        "regular expression",
+        "regexp",
+        "regex pattern",
+        "pattern matching"
+      ],
+      "category": "js",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.llm_judge_evals",
+      "name": "Side-by-side comparative evaluation of AI implementations",
+      "aliases": [
+        "llm judge",
+        "llm evals",
+        "side-by-side eval",
+        "comparative evaluation",
+        "model comparison"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.frontend_layout_debugging",
+      "name": "Debugging CSS line-wrapping/layout via browser console",
+      "aliases": [
+        "css debugging",
+        "layout debugging",
+        "line wrapping",
+        "text overflow",
+        "browser console css"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "aws.ssm_remote_access",
+      "name": "AWS SSM remote access and IAM permission grants",
+      "aliases": [
+        "aws ssm",
+        "ssm session",
+        "session manager",
+        "ssm access",
+        "iam ssm permissions"
+      ],
+      "category": "aws",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.push_notification_triggers",
+      "name": "Event-driven notification triggers vs polling",
+      "aliases": [
+        "push notifications",
+        "event-driven notifications",
+        "notification triggers",
+        "push vs polling",
+        "event triggers"
+      ],
+      "category": "infra",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.agent_env_hooks",
+      "name": "Agent environment hooks & session IDs",
+      "aliases": [
+        "agent hooks",
+        "environment hooks",
+        "session id",
+        "session hooks",
+        "agent env"
+      ],
+      "category": "ai",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.tool_polling_flag_files",
+      "name": "Long-poll waiting via flag files in agent tool calls",
+      "aliases": [
+        "flag files",
+        "long poll",
+        "polling flag",
+        "wait file",
+        "tool polling"
+      ],
+      "category": "ai",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.competitor_agent_platforms",
+      "name": "Comparative analysis of agent orchestration platforms",
+      "aliases": [
+        "agent platforms",
+        "agent orchestration",
+        "competitor agents",
+        "agent frameworks",
+        "platform comparison"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "product.onboarding_ux",
+      "name": "Onboarding flow UX design & field testing",
+      "aliases": [
+        "onboarding ux",
+        "onboarding flow",
+        "user onboarding",
+        "first-run experience",
+        "signup flow"
+      ],
+      "category": "product",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "devops.runbook_docs",
+      "name": "Runbook & deploy documentation maintenance",
+      "aliases": [
+        "runbook",
+        "deploy docs",
+        "ops docs",
+        "deployment guide",
+        "runbook maintenance"
+      ],
+      "category": "devops",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "audio.call_audio_diagnostics",
+      "name": "Voice call audio artifact diagnosis",
+      "aliases": [
+        "audio artifacts",
+        "call audio",
+        "voice quality",
+        "audio glitch",
+        "crackling audio"
+      ],
+      "category": "audio",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.tts_tag_rendering",
+      "name": "Voice/TTS markup tag handling in clients",
+      "aliases": [
+        "tts tags",
+        "voice markup",
+        "ssml",
+        "tts rendering",
+        "speech tags"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "github.repo_visibility_access",
+      "name": "GitHub repo visibility & access control",
+      "aliases": [
+        "repo visibility",
+        "private repo",
+        "github access",
+        "repo permissions",
+        "github collaborators"
+      ],
+      "category": "devops",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.whatsapp_automation",
+      "name": "WhatsApp messaging automation via CLI/agents",
+      "aliases": [
+        "whatsapp automation",
+        "whatsapp bot",
+        "whatsapp cli",
+        "send whatsapp message",
+        "whatsapp agent"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.email_automation",
+      "name": "Agent-driven email drafting and sending",
+      "aliases": [
+        "email automation",
+        "email drafting",
+        "send email agent",
+        "auto email",
+        "agent email"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.tabbed_workspace_ui",
+      "name": "Tabbed workspace / split-pane UI architecture",
+      "aliases": [
+        "tabbed ui",
+        "split pane",
+        "workspace tabs",
+        "tab layout",
+        "multi-pane ui"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.url_state_routing",
+      "name": "Mapping app/workspace state to URLs",
+      "aliases": [
+        "url state",
+        "deep linking",
+        "url routing",
+        "shareable urls",
+        "state in url"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "text.fuzzy_matching",
+      "name": "Fuzzy string matching for search",
+      "aliases": [
+        "fuzzy matching",
+        "fuzzy search",
+        "approximate match",
+        "string similarity",
+        "levenshtein"
+      ],
+      "category": "text",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.health_checks",
+      "name": "Service health checks and status modeling",
+      "aliases": [
+        "health check",
+        "healthcheck",
+        "service status",
+        "liveness probe",
+        "status endpoint"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.collab_sharing_model",
+      "name": "External sharing and live-collaboration design",
+      "aliases": [
+        "sharing model",
+        "external sharing",
+        "live collaboration",
+        "collab editing",
+        "share links"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.tagging_systems",
+      "name": "Tagging and metadata for content items",
+      "aliases": [
+        "tagging",
+        "tags",
+        "content tags",
+        "metadata tagging",
+        "labels"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.agent_timeouts_loops",
+      "name": "Agent run lifetimes, timeouts, and loops",
+      "aliases": [
+        "agent timeout",
+        "infinite loop",
+        "run lifetime",
+        "agent stuck",
+        "max iterations",
+        "loop guard"
+      ],
+      "category": "ai",
+      "viz": "timeline",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "db.sort_index_recency",
+      "name": "Indexing and sorting by last-interaction time",
+      "aliases": [
+        "sort by last interaction",
+        "recency index",
+        "order by updated_at",
+        "last activity sort",
+        "index on timestamp"
+      ],
+      "category": "db",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.calendar_automation",
+      "name": "Agent-driven calendar access and scheduling",
+      "aliases": [
+        "calendar access",
+        "agent scheduling",
+        "auto schedule",
+        "calendar api",
+        "meeting automation"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.ball_physics",
+      "name": "Ball physics & collision tuning",
+      "aliases": [
+        "ball physics",
+        "bounce physics",
+        "collision tuning",
+        "ball collision",
+        "restitution"
+      ],
+      "category": "gamedev",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "gamedev.level_modeling_from_scan",
+      "name": "Modeling environments from 3D scans / reference OBJ",
+      "aliases": [
+        "3d scan to level",
+        "reference obj",
+        "photogrammetry level",
+        "modeling from scan",
+        "scan-based environment"
+      ],
+      "category": "gamedev",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "macos.notification_delivery",
+      "name": "macOS notification delivery & permissions",
+      "aliases": [
+        "macos notifications",
+        "notification permissions",
+        "notification center",
+        "banner notifications",
+        "osascript notification"
+      ],
+      "category": "macos",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.wildcard_subdomain_routing",
+      "name": "Per-account wildcard subdomain routing",
+      "aliases": [
+        "wildcard subdomain",
+        "*.domain routing",
+        "per-account subdomain",
+        "wildcard dns",
+        "subdomain routing"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "infra.service_migration",
+      "name": "Migrating services between hosts with data merge",
+      "aliases": [
+        "service migration",
+        "host migration",
+        "data merge migration",
+        "migrate server"
+      ],
+      "category": "infra",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "android.play_store_release",
+      "name": "Google Play Store release preparation",
+      "aliases": [
+        "play store release",
+        "google play publish",
+        "aab upload",
+        "play console",
+        "android release"
+      ],
+      "category": "android",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.env_var_config",
+      "name": "Environment variable configuration & renaming",
+      "aliases": [
+        "env vars",
+        "environment variables",
+        ".env config",
+        "rename env var",
+        "dotenv"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.lan_multiplayer_sync",
+      "name": "LAN multi-device shared state server",
+      "aliases": [
+        "lan multiplayer",
+        "shared state server",
+        "local network sync",
+        "multi-device sync",
+        "websocket lan"
+      ],
+      "category": "web",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.canvas_score_viz",
+      "name": "Custom score visualization rendering (canvas/SVG geometry)",
+      "aliases": [
+        "canvas score chart",
+        "svg score viz",
+        "custom score rendering",
+        "canvas geometry",
+        "score visualization"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.client_state_persistence",
+      "name": "Client-side state persistence across refresh",
+      "aliases": [
+        "localstorage persistence",
+        "state across refresh",
+        "client state persistence",
+        "persist on reload",
+        "sessionstorage"
+      ],
+      "category": "web",
+      "viz": "code",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "macos.firewall_config",
+      "name": "macOS firewall configuration",
+      "aliases": [
+        "macos firewall",
+        "application firewall",
+        "socketfilterfw",
+        "mac firewall settings",
+        "pf firewall"
+      ],
+      "category": "macos",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.skill_portability",
+      "name": "Agent skill portability and personal data hygiene",
+      "aliases": [
+        "skill portability",
+        "portable agent skills",
+        "personal data hygiene",
+        "shareable skills",
+        "skill sanitization"
+      ],
+      "category": "ai",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "ai.field_testing_harness",
+      "name": "Agent field-testing harness (record/transcribe/notify)",
+      "aliases": [
+        "field testing harness",
+        "record and transcribe",
+        "agent test harness",
+        "session recording",
+        "test notifications"
+      ],
+      "category": "ai",
+      "viz": "sequence",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "data.crm_data_pipeline",
+      "name": "CRM data ingestion and querying (leads, events, attendees)",
+      "aliases": [
+        "crm pipeline",
+        "leads ingestion",
+        "crm data import",
+        "event attendees data",
+        "crm etl"
+      ],
+      "category": "data",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "web.session_auth_debugging",
+      "name": "Web session/sign-in state debugging",
+      "aliases": [
+        "session debugging",
+        "sign-in state bug",
+        "auth cookies",
+        "login session issue",
+        "session persistence bug"
+      ],
+      "category": "web",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "net.dynamic_ip_access",
+      "name": "Dynamic IP / remote access breakage",
+      "aliases": [
+        "dynamic ip",
+        "ip changed",
+        "ddns",
+        "remote access broke",
+        "dynamic dns"
+      ],
+      "category": "net",
+      "viz": "prose",
+      "prereqs": [],
+      "source": "discovered"
+    },
+    {
+      "id": "new.kv_cache_causal_attention",
+      "name": "KV cache & causal attention dependency",
+      "aliases": [
+        "kv cache causal attention"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "ai.llm_basics"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.cache_control_breakpoints",
+      "name": "Anthropic cache_control breakpoints",
+      "aliases": [
+        "anthropic cache_control breakpoints",
+        "cache control breakpoints"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "ai.prompt_caching",
+        "new.prompt_structure_stable_first"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.hidden_prefix_ordering",
+      "name": "Hidden prefix content (tools → system → messages)",
+      "aliases": [
+        "hidden prefix content",
+        "hidden prefix ordering"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "ai.structured_output",
+        "new.cache_key_prefix_invalidation"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.canonical_serialization",
+      "name": "Canonical/deterministic serialization for byte-stable prompts",
+      "aliases": [
+        "canonical serialization"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "new.cache_key_prefix_invalidation"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.cache_usage_verification",
+      "name": "Verifying cache hits via usage fields",
+      "aliases": [
+        "cache usage verification"
+      ],
+      "category": "discovered",
+      "viz": "code",
+      "prereqs": [
+        "ai.prompt_caching"
+      ],
+      "source": "promoted"
+    },
+    {
+      "id": "new.min_cacheable_length",
+      "name": "Minimum cacheable prefix length thresholds",
+      "aliases": [
+        "min cacheable length"
+      ],
+      "category": "discovered",
+      "viz": "prose",
+      "prereqs": [
+        "ai.tokens_context",
+        "ai.prompt_caching"
       ],
       "source": "promoted"
     }

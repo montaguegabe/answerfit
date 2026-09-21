@@ -412,7 +412,9 @@ export async function personalize(
         representation:
           verdict === "reminder" ? "reminder" : b.plan?.representation ?? b.decision.representation,
         depth: b.plan?.depth ?? b.decision.depth,
-        user_context: `mastery=${b.state.mastery} (${b.jev?.mastery_level ?? "n/a"}); recent evidence: ${b.provenance
+        // No Jev-derived labels here: this string enters the render cache key,
+        // and label wobble at unchanged state busts the cache (wall-of-text fix).
+        user_context: `mastery=${b.state.mastery}; recent evidence: ${b.provenance
           .map((p) => `${p.source}:"${p.text}"`)
           .slice(0, 2)
           .join("; ")}`,
