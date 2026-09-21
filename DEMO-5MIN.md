@@ -5,13 +5,13 @@ https://answerfit.bighelp.ai/
 **One answer, fitted to what each reader already knows.**
 
 > Companion to [DEMO-RUNBOOK.md](DEMO-RUNBOOK.md) (operational pre-flight lives there).
-> Pre-flight: confirm the live site shows your three readers and warm samples; if not, run the same beats on [localhost:3210](http://localhost:3210).
+> The app runs locally (`npm run dev`, port 3210); answerfit.bighelp.ai is the public landing page — use it only for the opener.
 
 ---
 
 ## Beat 0 — Fire the chat FIRST (0:00, silent)
 
-Before you say a word: open [answerfit.bighelp.ai/chat](https://answerfit.bighelp.ai/chat) and ask something real, e.g.
+Before you say a word: open [localhost:3210/chat](http://localhost:3210/chat) and ask something real, e.g.
 
 > *"Why does prompt caching break when I edit the top of my system prompt?"*
 
@@ -20,7 +20,7 @@ takes ~2 minutes. It cooks while you do beats 1–3; you return to it as the fin
 
 ## Beat 1 — The pitch (0:15)
 
-On [answerfit.bighelp.ai](https://answerfit.bighelp.ai/), say:
+On [answerfit.bighelp.ai](https://answerfit.bighelp.ai/) (the landing page), say:
 
 > "Claude and Codex hand every developer the **same wall of text**. A beginner
 > drowns; an expert skims three paragraphs re-explaining `rebase` to find the
@@ -30,7 +30,7 @@ On [answerfit.bighelp.ai](https://answerfit.bighelp.ai/), say:
 
 ## Beat 2 — One answer, three readers (0:45)
 
-On [answerfit.bighelp.ai](https://answerfit.bighelp.ai/): **Git merge storm** sample → **⇆ Compare all** → **Personalize** (cached, fast).
+On [localhost:3210](http://localhost:3210): **Git merge storm** sample → **⇆ Compare all** → **Personalize** (cached, fast).
 
 Point at the three columns, same source text, colored differently:
 
@@ -57,7 +57,7 @@ Same page, my column:
 
 ## Beat 4 — FINALE: live chat, answers born fitted (1:30)
 
-Back to [answerfit.bighelp.ai/chat](https://answerfit.bighelp.ai/chat) — the answer you fired in Beat 0 has been streaming and folding.
+Back to [localhost:3210/chat](http://localhost:3210/chat) — the answer you fired in Beat 0 has been streaming and folding.
 
 > "Everything so far re-rendered an *existing* answer. Chat mode goes further —
 > the answer is **born fitted**. Watch the pipeline: it streamed the draft,
@@ -76,7 +76,7 @@ explanation is there if I want it — it just doesn't cost me attention by defau
 > *⚡ 2 gaps: TOCTOU* — and silence means I knew everything. The model of me
 > gets sharper every time I work."
 
-Show the **Captured** strip on [answerfit.bighelp.ai](https://answerfit.bighelp.ai/) (or a real terminal if one is staged).
+Show the **Captured** strip on [localhost:3210](http://localhost:3210) (or a real terminal if one is staged).
 
 ## Closer (0:15)
 
@@ -91,5 +91,5 @@ Show the **Captured** strip on [answerfit.bighelp.ai](https://answerfit.bighelp.
 
 - **Chat is slow/stuck** → beats 1–3 are fully cached and carry the demo;
   narrate chat over the partial stream ("you can see it judging concepts live").
-- **Network/API dies** → every sample × reader is cache-warm on [localhost:3210](http://localhost:3210); nothing in beats 2–3 needs the network.
+- **Network/API dies** → every sample × reader is cache-warm locally; nothing in beats 2–3 needs the network.
 - **Wrong feedback state** (rehearsed "already knew") → see runbook §6 to reset.
