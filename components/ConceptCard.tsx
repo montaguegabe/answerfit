@@ -83,7 +83,10 @@ export function ConceptCard({ block, userId }: { block: any; userId: string }) {
             </div>
           )}
           {plan?.rationale && (
-            <div className="plan-rationale">plan: {plan.rationale}</div>
+            <details className="plan-rationale">
+              <summary>why this treatment</summary>
+              {plan.rationale}
+            </details>
           )}
           {provenance?.length > 0 && (
             <div className="provenance">

@@ -153,3 +153,9 @@ pre.codeblock {
 .hedge-line { color: var(--muted); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 40%; }
 .plan-rationale { color: var(--muted); font-size: 11px; margin-top: 8px; font-family: var(--mono); }
 .caveats { border: 1px solid rgba(248,81,73,.4); border-radius: 8px; padding: 10px 12px; margin-top: 10px; }
+
+/* Chat: raw draft folded behind a disclosure; plan rationale as a toggle */
+.draft-fold { margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 8px; }
+.draft-fold > summary { cursor: pointer; color: var(--muted); font-size: 12px; font-family: var(--mono); }
+.draft-fold[open] > summary { margin-bottom: 8px; }
+.plan-rationale > summary { cursor: pointer; }

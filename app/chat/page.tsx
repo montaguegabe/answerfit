@@ -194,12 +194,14 @@ const VERDICT_KIND: Record<string, string> = {
 };
 
 function AssistantTurn({ content, fit, userId }: { content: string; fit?: Fit; userId: string }) {
-  // Finished: identical rendering vocabulary to paste mode.
+  // Finished: the fitted cards ARE the answer (the raw draft is intermediate
+  // representation, folded behind a disclosure — showing both in full was the
+  // product's own redundancy sin).
   if (fit?.result) {
     const r = fit.result;
+    const words = content.trim().split(/\s+/).length;
     return (
       <div className="bubble assistant fitted">
-        <div className="source-answer chat-answer" dangerouslySetInnerHTML={{ __html: markedAnswer(content, r) }} />
         <div className="blocks">
           {r.blocks.map((b: any) => (
             <ConceptCard key={b.concept.id} block={b} userId={userId} />
@@ -213,6 +215,10 @@ function AssistantTurn({ content, fit, userId }: { content: string; fit?: Fit; u
             ))}
           </div>
         )}
+        <details className="draft-fold">
+          <summary>unfitted draft — what you’d normally get ({words} words)</summary>
+          <div className="source-answer chat-answer" dangerouslySetInnerHTML={{ __html: markedAnswer(content, r) }} />
+        </details>
       </div>
     );
   }

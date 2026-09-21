@@ -8118,6 +8118,19 @@
         "ai.prompt_caching"
       ],
       "source": "promoted"
+    },
+    {
+      "id": "new.test_data_pollution",
+      "name": "Test data polluting production evidence",
+      "aliases": [
+        "test data pollution"
+      ],
+      "category": "discovered",
+      "viz": "timeline",
+      "prereqs": [
+        "ai.transcript_mining"
+      ],
+      "source": "promoted"
     }
   ]
 }
