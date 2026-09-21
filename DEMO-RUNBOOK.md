@@ -4,21 +4,22 @@
 
 | | |
 |---|---|
-| **Local app** | http://localhost:3210 (main) · http://localhost:3210/chat (chat mode) |
-| **Live site** | https://answerfit.bighelp.ai |
-| **Repo** | https://github.com/montaguegabe/answerfit |
-| **Sundai** | https://www.sundai.club/projects/29533e39-75fb-47f1-908e-b0a6779111ad |
+| **App (compare view)** | [localhost:3210](http://localhost:3210) |
+| **App (live chat)** | [localhost:3210/chat](http://localhost:3210/chat) |
+| **Marketing site** (opener only — not the app) | [answerfit.bighelp.ai](https://answerfit.bighelp.ai) |
+| **Repo** | [github.com/montaguegabe/answerfit](https://github.com/montaguegabe/answerfit) |
+| **Sundai** | [sundai.club project page](https://www.sundai.club/projects/29533e39-75fb-47f1-908e-b0a6779111ad) |
 
 ---
 
 ## 0 · Pre-flight (do this ~5 min before)
 
-- [ ] **Dev server up** → `npm run dev` (port **3210**). Confirm http://localhost:3210 loads.
+- [ ] **Dev server up** → `npm run dev` (port **3210**). Confirm [localhost:3210](http://localhost:3210) loads.
 - [ ] **Keys present** → `.env` has `ANTHROPIC_API_KEY` + `JEV_API_KEY` (`cp ~/Developer/.env .env` if missing).
 - [ ] **Warm the cache** → click **Personalize** once on the Git merge storm sample so the first live run isn't the demo. Repeat runs of the same answer are near-instant (SQLite `model_cache`).
 - [ ] **Readers seeded** → the Reader row shows three chips: **Senior git expert**, **Junior frontend dev**, **Gabe (real history)**. If not: `npm run seed-personas`.
 - [ ] **Clean feedback state** → if you rehearsed the "Already knew this" moment, that feedback persists in SQLite. Re-seed or clear it so the live state-change lands fresh (see §6).
-- [ ] **Browser** → one tab on `localhost:3210`, zoom ~110%, close the console. Have the **live site** (answerfit.bighelp.ai) in a second tab as the opener.
+- [ ] **Browser** → tabs on [localhost:3210](http://localhost:3210) and [localhost:3210/chat](http://localhost:3210/chat), zoom ~110%, close the console. Optional third tab: the [marketing site](https://answerfit.bighelp.ai) as the opener.
 - [ ] **Network** → Jev (`api.typesafe.ai`) + Anthropic reachable. No VPN weirdness.
 
 > Everything in `data/`, `reports/`, and the DB is gitignored — safe to screen-share the repo.
@@ -31,7 +32,7 @@
 >
 > **AnswerFit re-renders any AI answer for the person reading it.** The jargon you already know collapses out of the way; the parts that are new to you bloom into explanations you'll actually get. It knows what you know from evidence you already generate — your search history and your own Claude Code & Codex transcripts."
 
-*(Optional opener: show **answerfit.bighelp.ai**, scroll the animated pipeline diagram, then switch to the live app.)*
+*(Optional opener: show the [marketing site](https://answerfit.bighelp.ai), scroll the animated pipeline diagram, then switch to the local app.)*
 
 ---
 
@@ -85,7 +86,7 @@ When you hit Personalize, the app literally prints the pipeline:
 
 ## 5 · Optional B-sides (if there's time / questions)
 
-- **Chat mode** — `localhost:3210/chat`: answers arrive **already fitted** as you chat. Reader presets: *Junior frontend dev* / *Senior git expert*. Placeholder: *"Ask anything — the answer gets fitted to what you already know."*
+- **Chat mode** — [localhost:3210/chat](http://localhost:3210/chat): answers arrive **already fitted** as you chat. Reader presets: *Junior frontend dev* / *Senior git expert*. Placeholder: *"Ask anything — the answer gets fitted to what you already know."*
 - **Real Claude Code samples** — swap in `Why the API browns out…`, `The zombie voice call…`, or `openbase-coder provision…` (mined from real transcripts) to show it's not just the synthetic git example.
 - **Live capture loop** — a Claude Code **Stop hook** feeds every real session back in. The **Captured** strip shows recent captures (`⚡n` = gaps, `✓` = all-known); click one to open its fitted rendering. *(Needs the dev server running; fails silent otherwise.)*
 - **How it knows you** — search/watch history + your own Claude Code & Codex transcripts (Jev-judged), "didn't-land" remedial-search signals, and one-tap feedback.
